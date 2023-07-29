@@ -1,0 +1,11 @@
+git init - Khởi tạo một kho lưu trữ Git mới.
+git add - Thêm các tệp vào danh sách theo dõi.
+git commit - Lưu các thay đổi thành một bản ghi.
+git status - Xem trạng thái của kho lưu trữ.
+git log - Xem lịch sử của các bản ghi.
+git branch - Tạo một nhánh mới.
+git checkout - Chuyển sang một nhánh.
+git merge - Kết hợp các thay đổi từ một nhánh sang một nhánh khác.
+git pull - Tải xuống và kết hợp các thay đổi từ một kho lưu trữ từ xa.
+git push - Đẩy các thay đổi lên một kho lưu trữ từ xa.
+git clone - Sao chép một kho lưu trữ từ xa sang máy cục bộ.
