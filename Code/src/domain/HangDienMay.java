@@ -1,19 +1,19 @@
+package domain;
 import java.util.Date;
 
 public class HangDienMay extends HangHoa {
     private Date thoiGianBH;
-    private int congSuat;
+    private String congSuat;
 
     HangDienMay(String maHang, String tenHang, int soLuongTon, int donGia, Date thoiGianBH, int congSuat) {
         super(maHang, tenHang, soLuongTon, donGia);
         this.thoiGianBH = thoiGianBH;
-        this.congSuat = congSuat;
+        this.congSuat = congSuat+"W";
     }
 
     @Override
-    public void tinhVAT() {
-        double tinhVAT = 0.1 * (double) this.donGia;
-        System.out.println(">>>> VAT của Hang Dien May: " + tinhVAT);
+    public double tinhVAT() {
+        return 0.1 * donGia;
     }
 
     public Date getThoiGianBH() {
@@ -24,11 +24,11 @@ public class HangDienMay extends HangHoa {
         this.thoiGianBH = thoiGianBH;
     }
 
-    public int getCongSuat() {
+    public String getCongSuat() {
         return congSuat;
     }
 
     public void setCongSuat(int congSuat) {
-        this.congSuat = congSuat;
+        this.congSuat = congSuat+"W";
     }
 }

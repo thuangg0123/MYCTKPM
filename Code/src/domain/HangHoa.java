@@ -1,3 +1,4 @@
+package domain;
 public abstract class HangHoa {
     protected String maHang;
     protected String tenHang;
@@ -11,5 +12,5 @@ public abstract class HangHoa {
         this.donGia = donGia;
     }
 
-    abstract void tinhVAT();
+    abstract double tinhVAT();
 }

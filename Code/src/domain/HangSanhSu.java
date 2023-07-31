@@ -1,3 +1,4 @@
+package domain;
 import java.util.Date;
 
 public class HangSanhSu extends HangHoa {
@@ -11,9 +12,8 @@ public class HangSanhSu extends HangHoa {
     }
 
     @Override
-    void tinhVAT() {
-        double tinhVAT = 0.1 * (double) this.donGia;
-        System.out.println(">>>> VAT của Hang Dien May: " + tinhVAT);
+    double tinhVAT() {
+        return 0.1 * donGia;
     }
 
     public Date getNgayNhapKho() {
