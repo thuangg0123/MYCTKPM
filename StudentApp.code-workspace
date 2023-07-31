@@ -1,0 +1,17 @@
+{
+	"folders": [
+		{
+			"path": "../Documents/Zalo Received Files/StudentApp"
+		}
+	],
+	"settings": {
+		"java.project.sourcePaths": [
+			"src"
+		],
+		"java.project.outputPath": "bin",
+		"java.project.referencedLibraries": [
+			"lib/**/*.jar"
+		],
+		"java.dependency.packagePresentation": "hierarchical"
+	}
+}
