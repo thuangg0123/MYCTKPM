@@ -1,13 +1,11 @@
 import java.util.Date;
-import java.util.Scanner;
 
 public class HangThucPham extends HangHoa {
     private Date ngaySX;
     private Date ngayHetHan;
     private String nhaCungCap;
 
-    public HangThucPham(int maHang, String tenHang, int soLuongTon, int donGia, Date ngaySX,
-            Date ngayHetHan, String nhaCungCap) {
+    HangThucPham(String maHang, String tenHang, int soLuongTon, int donGia, Date ngaySX, Date ngayHetHan, String nhaCungCap) {
         super(maHang, tenHang, soLuongTon, donGia);
         this.ngaySX = ngaySX;
         this.ngayHetHan = ngayHetHan;
@@ -15,23 +13,32 @@ public class HangThucPham extends HangHoa {
     }
 
     @Override
-    public void tinhVAT(int maHang, String tenHang, int soLuongTon, int donGia) {
-        Scanner scanner = new Scanner(System.in);
-        System.out.print("Nhập mã hàng: ");
-        maHang = scanner.nextInt();
-        System.out.print("Nhập tên hàng: ");
-
-        scanner.nextLine();
-        tenHang = scanner.nextLine();
-
-        System.out.print("Nhập số lượng tồn: ");
-        soLuongTon = scanner.nextInt();
-
-        System.out.print("Nhập đơn giá: ");
-        donGia = scanner.nextInt();
-
-        double tinhVAT = 0.05 * (double) donGia;
-
+    public void tinhVAT() {
+        double tinhVAT = 0.05 * (double) this.donGia;
         System.out.println(">>>> VAT của Hang Dien May: " + tinhVAT);
+    }
+
+    public Date getNgaySX() {
+        return ngaySX;
+    }
+
+    public void setNgaySX(Date ngaySX) {
+        this.ngaySX = ngaySX;
+    }
+
+    public Date getNgayHetHan() {
+        return ngayHetHan;
+    }
+
+    public void setNgayHetHan(Date ngayHetHan) {
+        this.ngayHetHan = ngayHetHan;
+    }
+
+    public String getNhaCungCap() {
+        return nhaCungCap;
+    }
+
+    public void setNhaCungCap(String nhaCungCap) {
+        this.nhaCungCap = nhaCungCap;
     }
 }
