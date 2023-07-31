@@ -2,9 +2,9 @@ package domain;
 import java.util.Date;
 
 public class HangThucPham extends HangHoa {
-    private Date ngaySX;
-    private Date ngayHetHan;
-    private String nhaCungCap;
+    protected Date ngaySX;
+    protected Date ngayHetHan;
+    protected String nhaCungCap;
 
     HangThucPham(String maHang, String tenHang, int soLuongTon, int donGia, Date ngaySX, Date ngayHetHan, String nhaCungCap) {
         super(maHang, tenHang, soLuongTon, donGia);

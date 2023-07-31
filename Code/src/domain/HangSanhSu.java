@@ -2,8 +2,8 @@ package domain;
 import java.util.Date;
 
 public class HangSanhSu extends HangHoa {
-    private Date ngayNhapKho;
-    private String nhaSanXuat;
+    protected Date ngayNhapKho;
+    protected String nhaSanXuat;
 
     public HangSanhSu(String maHang, String tenHang, int soLuongTon, int donGia, Date ngayNhapKho, String nhaSanXuat) {
         super(maHang, tenHang, soLuongTon, donGia);

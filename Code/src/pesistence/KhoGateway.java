@@ -3,7 +3,7 @@ package pesistence;
 import java.util.List;
 import domain.HangHoa;
 
-public interface KhoGataway {
+public interface KhoGateway {
     void themHang(int loaiHang, HangHoa hanghoa);
     void capnhatHang(int loaiHang, HangHoa hanghoa);
     void xoaHang(String maHang);

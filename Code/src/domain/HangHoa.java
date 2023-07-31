@@ -13,4 +13,20 @@ public abstract class HangHoa {
     }
 
     abstract double tinhVAT();
+
+    public String getMaHang() {
+        return maHang;
+    }
+
+    public String getTenHang() {
+        return tenHang;
+    }
+
+    public int getSoLuongTon() {
+        return soLuongTon;
+    }
+
+    public double getDonGia() {
+        return donGia;
+    }
 }
