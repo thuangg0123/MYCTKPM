@@ -9,17 +9,35 @@ import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
+import domain.*;
+import presentation.*;
+
 public class LoaiHangHoa extends JFrame{
     private JButton thucphamButton, dienmayButton, sanhsuButton;
     private JPanel panel;
+    private HangHoa hangHoa;
+    private int loaiHangHoa;
+    /*
+     0: Hàng thực phẩm
+     1: Hàng điện máy
+     2: Hàng sành sứ
+     */
 
-    public LoaiHangHoa(QuanLyKhoGUI viewRemote) {
+    public HangHoa getHangHoa() {
+        return hangHoa;
+    }
+
+    public int getLoaiHangHoa() {
+        return loaiHangHoa;
+    }
+
+    public LoaiHangHoa(QuanLyKhoGUI viewRemote, NguoiQuanLy modelRemote, QuanLyKhoController controllerRemote) {
         panel = new JPanel(new GridLayout(0,3,10,10));
         thucphamButton = new JButton("Thực phẩm");
         thucphamButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                new HangThucPhamGUI(viewRemote, 0).setVisible(true);
+                new HangThucPhamGUI(viewRemote, modelRemote, controllerRemote, 0).setVisible(true);
                 dispose();
             }
         });
@@ -28,7 +46,7 @@ public class LoaiHangHoa extends JFrame{
         dienmayButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                new HangDienMayGUI(viewRemote, 0).setVisible(true);
+                new HangDienMayGUI(viewRemote, modelRemote, controllerRemote, 0).setVisible(true);
                 dispose();
             }
         });
@@ -37,7 +55,7 @@ public class LoaiHangHoa extends JFrame{
         sanhsuButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                new HangSanhSuGUI(viewRemote, 0).setVisible(true);
+                new HangSanhSuGUI(viewRemote, modelRemote, controllerRemote, 0).setVisible(true);
                 dispose();
             }
         });
@@ -51,6 +69,5 @@ public class LoaiHangHoa extends JFrame{
         setDefaultCloseOperation(LoaiHangHoa.EXIT_ON_CLOSE);
         setLayout(new BorderLayout());
         add(panel);
-        setVisible(true);
     }
 }

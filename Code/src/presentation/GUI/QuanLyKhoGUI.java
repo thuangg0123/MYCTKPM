@@ -6,20 +6,17 @@ import java.awt.Label;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.List;
-
 import javax.swing.JButton;
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.JTextField;
 import javax.swing.table.DefaultTableModel;
-
-import domain.HangHoa;
-import domain.NguoiQuanLy;
-import domain.NguoiQuanLyImpl;
-import presentation.QuanLyKhoController;
-import presentation.Subscriber;
+import domain.*;
+import presentation.*;
+import presentation.Command.*;
 
 //View
 public class QuanLyKhoGUI extends JFrame implements Subscriber{
@@ -46,6 +43,7 @@ public class QuanLyKhoGUI extends JFrame implements Subscriber{
         setLayout(new BorderLayout());
 
         modelRemote = new NguoiQuanLyImpl();
+        modelRemote.subscribe(this);
         controllerRemote = new QuanLyKhoController();
 
         tableModel = new DefaultTableModel();
@@ -61,6 +59,8 @@ public class QuanLyKhoGUI extends JFrame implements Subscriber{
         tableModel.addColumn("Ngày nhập kho");
         tableModel.addColumn("Nhà sản suất");
         table = new JTable(tableModel);
+        table.setDefaultEditor(Object.class, null);
+
         JScrollPane scrollPane = new JScrollPane(table);
         add(scrollPane, BorderLayout.CENTER);
 
@@ -71,8 +71,23 @@ public class QuanLyKhoGUI extends JFrame implements Subscriber{
                 themHangHoa();
             }
         });
+
         capnhatButton = new JButton("Cập nhật");
+        capnhatButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                capnhatHangGUI(table.getSelectedRow());
+            }
+        });
+
         xoaButton = new JButton("Xóa");
+        xoaButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                xoaHangHoaGUI(table.getSelectedRow());
+            }
+        });
+
         timkiemButton = new JButton("Tìm kiếm");
         timkiemButton.addActionListener(new ActionListener() {
             @Override
@@ -95,7 +110,7 @@ public class QuanLyKhoGUI extends JFrame implements Subscriber{
         add(functionPanel, BorderLayout.EAST);
         xemDSHangHoa();
     }
-
+    
     @Override
     public void update(List<HangHoa> hanghoaList) {
         while(tableModel.getRowCount() != 0) {
@@ -109,15 +124,85 @@ public class QuanLyKhoGUI extends JFrame implements Subscriber{
     }
 
     void xemDSHangHoa() {
-        update(modelRemote.xemTTAllHH());
+        modelRemote.xemTTAllHH();
     }
     
     void themHangHoa() {
-        new LoaiHangHoa(this).setVisible(true);
+        new LoaiHangHoa(this, modelRemote, controllerRemote).setVisible(true);
+    }
+
+    void capnhatHangGUI(int rowIndex) {
+        String maHang;
+        HangHoa hanghoa;
+        if( rowIndex == -1) {
+            maHang = JOptionPane.showInputDialog(null, "Nhập số mã hàng hóa cần xóa");
+            if(maHang != null) {
+                hanghoa = getDuLieu(maHang);
+                capnhatHang(hanghoa);
+            }
+        } else{
+            maHang = tableModel.getValueAt(rowIndex, 0).toString();
+            hanghoa = getDuLieu(maHang);
+            capnhatHang(hanghoa);
+        }
+    }
+
+    void capnhatHang(HangHoa hanghoa) {
+        if(hanghoa.getNhaCungCap() != null) {
+            HangThucPhamGUI temp = new HangThucPhamGUI(this, modelRemote, controllerRemote, 1);
+            temp.setMaHang(hanghoa.getMaHang());
+            temp.getTenHangTextField().setText(hanghoa.getTenHang());
+            temp.getSlTonTextField().setText(Integer.toString(hanghoa.getSoLuongTon()));
+            temp.getDonGiaTextField().setText(Double.toString(hanghoa.getDonGia()));
+            temp.getNgaySXTextField().setText(hanghoa.getNgaySX().toString());
+            temp.getNgayHetHanTextField().setText(hanghoa.getNgayHetHan().toString());
+            temp.getNhaCungCapTextField().setText(hanghoa.getNhaCungCap());
+            temp.setVisible(true);
+        } else if(hanghoa.getCongSuat() != null) {
+            HangDienMayGUI temp = new HangDienMayGUI(this, modelRemote, controllerRemote, 1);
+            temp.setMaHang(hanghoa.getMaHang());
+            temp.getTenHangTextField().setText(hanghoa.getTenHang());
+            temp.getSlTonTextField().setText(Integer.toString(hanghoa.getSoLuongTon()));
+            temp.getDonGiaTextField().setText(Double.toString(hanghoa.getDonGia()));
+            temp.getTgBaoHanhTextField().setText(hanghoa.getThoiGianBH().toString());
+            temp.getCongSuatTextField().setText(hanghoa.getCongSuat());
+            temp.setVisible(true);
+        } else if(hanghoa.getNhaSanXuat() != null) {
+            HangSanhSuGUI temp = new HangSanhSuGUI(this, modelRemote, controllerRemote, 1);
+            temp.setMaHang(hanghoa.getMaHang());
+            temp.getTenHangTextField().setText(hanghoa.getTenHang());
+            temp.getSlTonTextField().setText(Integer.toString(hanghoa.getSoLuongTon()));
+            temp.getDonGiaTextField().setText(Double.toString(hanghoa.getDonGia()));
+            temp.getNgayNhapKhoTextField().setText(hanghoa.getNgayNhapKho().toString());
+            temp.getNhaSXTextField().setText(hanghoa.getNhaSanXuat());
+            temp.setVisible(true);
+        }
+    }
+
+    void xoaHangHoaGUI(int rowIndex) {
+        String maHang;
+        if( rowIndex == -1) {
+            maHang = JOptionPane.showInputDialog(null, "Nhập số mã hàng hóa cần xóa");
+            if(maHang != null) {
+                xoaHangHoa(maHang);
+            }
+        } else{
+            maHang = tableModel.getValueAt(rowIndex, 0).toString();
+            xoaHangHoa(maHang);
+        }
+    }
+
+    void xoaHangHoa(String maHang) {
+        Command xoaHang = new Xoa(modelRemote, maHang);
+        controllerRemote.execute(xoaHang);
     }
 
     void timTTHH() {
-        update(modelRemote.timTTHH(tuKhoaTextField.getText()));
+        Command timKiem = new TimKiem(modelRemote, tuKhoaTextField.getText());
+        controllerRemote.execute(timKiem);
     }
 
+    public HangHoa getDuLieu(String maHang) {
+        return modelRemote.getDuLieu(maHang);
+    }
 }

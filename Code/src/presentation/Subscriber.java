@@ -4,7 +4,5 @@ import java.util.List;
 import domain.HangHoa;
 
 public interface Subscriber {
-
     void update(List<HangHoa> hanghoaList);
-
 }

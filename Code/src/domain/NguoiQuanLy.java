@@ -1,13 +1,12 @@
 package domain;
 
-import java.util.List;
-
 //Model
-public interface NguoiQuanLy {
+public interface NguoiQuanLy extends Publisher{
     void themHang(int loaiHang, HangHoa hanghoa);
     void capnhatHang(int loaiHang, HangHoa hanghoa);
     void xoaHang(String maHang);
-    void xemTTHH(String maHang); 
-    List<HangHoa> xemTTAllHH(); 
-    List<HangHoa> timTTHH(String thongtin); 
+    void xemTTAllHH(); 
+    HangHoa getDuLieu(String maHang);
+    void timTTHH(String thongtin); 
+    double tinhVAT(HangHoa hanghoa);
 }

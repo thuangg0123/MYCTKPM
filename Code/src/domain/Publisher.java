@@ -4,20 +4,10 @@ import java.util.LinkedList;
 import java.util.List;
 import presentation.Subscriber;
 
-public class Publisher {
-    private List<Subscriber> subscribers = new LinkedList<Subscriber>();
-    
-	public void subscribe(Subscriber subscriber) {
-        subscribers.add(subscriber); 
-    }
+public interface Publisher {
+    List<Subscriber> subscribers = new LinkedList<Subscriber>();
 
-	public void unsubscribe(Subscriber subscriber) {
-        subscribers.remove(subscriber); 
-    }
-
-	public void notifySubscribers(List<HangHoa> hanghoaList) {
-		for(Subscriber s: subscribers) {
-            s.update(hanghoaList);
-	    }
-    }
+	void subscribe(Subscriber subscriber);
+	void unsubscribe(Subscriber subscriber);
+	void notifySubscribers();
 }

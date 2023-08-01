@@ -32,13 +32,12 @@ public class KhoDAOImpl implements KhoDAO{
     }
 
     @Override
-    public void xemTTHH(String maHang) {
-        khoGatewayRemote.xemTTHH(maHang);
-    }
-
-    @Override
     public void xoaHang(String maHang) {
         khoGatewayRemote.xoaHang(maHang);
     }
     
+    @Override
+    public HangHoa getDuLieu(String maHang) {
+        return khoGatewayRemote.getDuLieu(maHang);
+    }
 }

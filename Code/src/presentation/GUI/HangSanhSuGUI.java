@@ -12,20 +12,22 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
-import domain.HangHoa;
-import domain.HangSanhSu;
+import domain.*;
+import presentation.*;
+import presentation.Command.*;
 
 public class HangSanhSuGUI extends JFrame{
     private JTextField maHangTextField, tenHangTextField, slTonTextField, donGiaTextField, ngayNhapKhoTextField, nhaSXTextField;
     private JButton luuButton, huyButton;
     private int choice;
+    private String maHang;
 
     /*
      Yêu cầu:
      0: Thêm mới hàng hóa
      1: Cập nhật lại thông tin hàng hóa
      */
-    public HangSanhSuGUI(QuanLyKhoGUI viewRemote, int choice) {
+    public HangSanhSuGUI(QuanLyKhoGUI viewRemote, NguoiQuanLy modelRemote, QuanLyKhoController controllerRemote, int choice) {
         this.choice = choice;
         JPanel inputPanel;
         if (choice == 0) {
@@ -45,7 +47,8 @@ public class HangSanhSuGUI extends JFrame{
         luuButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                viewRemote.getModelRemote().themHang(3, luuThongTin());
+                Command themHH = new Them(modelRemote, 3, luuThongTin());
+                controllerRemote.execute(themHH);
                 dispose();
             }
         });
@@ -83,7 +86,6 @@ public class HangSanhSuGUI extends JFrame{
         setDefaultCloseOperation(HangSanhSuGUI.EXIT_ON_CLOSE);
         setLayout(new BorderLayout());
         add(inputPanel);
-        setVisible(true);
     }
 
     private HangHoa luuThongTin() {
@@ -93,10 +95,31 @@ public class HangSanhSuGUI extends JFrame{
         Date ngayNhapKho = java.sql.Date.valueOf(ngayNhapKhoTextField.getText());
         String nhaSX = nhaSXTextField.getText();
         if (choice == 0) {
-            String maHang = maHangTextField.getText();
-            return (HangHoa)new HangSanhSu(maHang, tenHang, slTon, donGia, ngayNhapKho, nhaSX);
-        } else{
-            return (HangHoa)new HangSanhSu(tenHang, slTon, donGia, ngayNhapKho, nhaSX);
+            maHang = maHangTextField.getText();
         }
+        return (HangHoa)new HangSanhSu(maHang, tenHang, slTon, donGia, ngayNhapKho, nhaSX);
+
+    }
+    public JTextField getMaHangTextField() {
+        return maHangTextField;
+    }
+    public JTextField getTenHangTextField() {
+        return tenHangTextField;
+    }
+    public JTextField getSlTonTextField() {
+        return slTonTextField;
+    }
+    public JTextField getDonGiaTextField() {
+        return donGiaTextField;
+    }
+    public JTextField getNgayNhapKhoTextField() {
+        return ngayNhapKhoTextField;
+    }
+    public JTextField getNhaSXTextField() {
+        return nhaSXTextField;
+    }
+
+    public void setMaHang(String maHang) {
+        this.maHang = maHang;
     }
 }
