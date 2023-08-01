@@ -6,7 +6,7 @@ public class HangThucPham extends HangHoa {
     private Date ngayHetHan;
     private String nhaCungCap;
 
-    HangThucPham(String maHang, String tenHang, int soLuongTon, int donGia, Date ngaySX, Date ngayHetHan, String nhaCungCap) {
+    public HangThucPham(String maHang, String tenHang, int soLuongTon, int donGia, Date ngaySX, Date ngayHetHan, String nhaCungCap) {
         super(maHang, tenHang, soLuongTon, donGia);
         this.ngaySX = ngaySX;
         this.ngayHetHan = ngayHetHan;

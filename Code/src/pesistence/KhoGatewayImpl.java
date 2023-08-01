@@ -18,7 +18,7 @@ import domain.HangThucPham;
 public class KhoGatewayImpl implements KhoGateway{
     private Connection connection;
 
-    KhoGatewayImpl() {
+    public KhoGatewayImpl() {
         String DB_NAME = "jdbc_db";
         String DB_URL = "jdbc:mysql://localhost:3306/";
         String USER_NAME = "root";
@@ -128,13 +128,13 @@ public class KhoGatewayImpl implements KhoGateway{
         try (Statement statement = connection.createStatement()) {
             ResultSet resultSet = statement.executeQuery(sql);
             while (resultSet.next()) {
-                String maHang = resultSet.getString("MaHangHoa");
-                String tenHang = resultSet.getString("TenHangHoa");
-                int slTonKho = resultSet.getInt("slTonKho");
-                Double donGia = resultSet.getDouble("DonGia");
-                Date NgaySX = resultSet.getDate("NgaySX");
-                Date NgayHetHan = resultSet.getDate("NgayHetHan");
-                String NhaCungCap = resultSet.getString("NhaCungCap");
+                // String maHang = resultSet.getString("MaHangHoa");
+                // String tenHang = resultSet.getString("TenHangHoa");
+                // int slTonKho = resultSet.getInt("slTonKho");
+                // Double donGia = resultSet.getDouble("DonGia");
+                // Date NgaySX = resultSet.getDate("NgaySX");
+                // Date NgayHetHan = resultSet.getDate("NgayHetHan");
+                // String NhaCungCap = resultSet.getString("NhaCungCap");
             }
         } catch (SQLException e) {
             e.printStackTrace();

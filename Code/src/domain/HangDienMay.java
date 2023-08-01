@@ -6,7 +6,7 @@ public class HangDienMay extends HangHoa {
     private Date thoiGianBH;
     private String congSuat;
 
-    HangDienMay(String maHang, String tenHang, int soLuongTon, int donGia, Date thoiGianBH, int congSuat) {
+    public HangDienMay(String maHang, String tenHang, int soLuongTon, int donGia, Date thoiGianBH, int congSuat) {
         super(maHang, tenHang, soLuongTon, donGia);
         this.thoiGianBH = thoiGianBH;
         this.congSuat = congSuat + "W";

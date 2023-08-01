@@ -8,7 +8,7 @@ public abstract class HangHoa {
     protected int soLuongTon;
     protected double donGia;
 
-    HangHoa(String maHang, String tenHang, int soLuongTon, double donGia) {
+    public HangHoa(String maHang, String tenHang, int soLuongTon, double donGia) {
         this.maHang = maHang;
         this.tenHang = tenHang;
         this.soLuongTon = soLuongTon;

@@ -1,11 +1,60 @@
 package presentation;
 
+import java.awt.BorderLayout;
+import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 
+import javax.swing.JButton;
 import javax.swing.JFrame;
+import javax.swing.JPanel;
+import javax.swing.JScrollPane;
+import javax.swing.JTable;
+import javax.swing.JTextField;
+import javax.swing.table.DefaultTableModel;
+
+import domain.NguoiQuanLy;
 
 //View
 public class QuanLyKhoGUI extends JFrame implements Subscriber, java.awt.event.ActionListener{
+    private QuanLyKhoController controllerRemote;
+    private NguoiQuanLy modelRemote;
+    private DefaultTableModel tableModel;
+    private JTable table;
+    private JButton themButton, capnhatButton, xoaButton, timkiemButton;
+    private JTextField tuKhoaTextField;
+
+
+    public QuanLyKhoGUI() {
+        setTitle("Quản lý hàng hóa trong kho");
+        setSize(1024, 400);
+        setLocation(448, 340);
+        setDefaultCloseOperation(EXIT_ON_CLOSE);
+        setLayout(new BorderLayout());
+
+        tableModel = new DefaultTableModel();
+        tableModel.addColumn("Mã hàng hóa");
+        tableModel.addColumn("Tên hàng hóa");
+        tableModel.addColumn("Số lượng tồn");
+        tableModel.addColumn("Đơn giá");
+        tableModel.addColumn("Ngày sản suất");
+        tableModel.addColumn("Ngày hết hạn");
+        tableModel.addColumn("Nhà cung cấp");
+        tableModel.addColumn("Thời gian BH");
+        tableModel.addColumn("Ngày nhập kho");
+        tableModel.addColumn("Nhà sản suất");
+        table = new JTable(tableModel);
+        JScrollPane scrollPane = new JScrollPane(table);
+        add(scrollPane, BorderLayout.CENTER);
+
+        JPanel functionPanel = new JPanel(new GridLayout(2, 3));
+        functionPanel.add(themButton);
+        functionPanel.add(capnhatButton);
+        functionPanel.add(xoaButton);
+        functionPanel.add(tuKhoaTextField);
+        functionPanel.add(timkiemButton);
+        add(functionPanel, BorderLayout.SOUTH);
+        
+    }
 
     @Override
     public void update() {
