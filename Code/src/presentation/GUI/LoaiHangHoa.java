@@ -23,14 +23,6 @@ public class LoaiHangHoa extends JFrame{
      2: Hàng sành sứ
      */
 
-    public HangHoa getHangHoa() {
-        return hangHoa;
-    }
-
-    public int getLoaiHangHoa() {
-        return loaiHangHoa;
-    }
-
     public LoaiHangHoa(QuanLyKhoGUI viewRemote, NguoiQuanLy modelRemote, QuanLyKhoController controllerRemote) {
         panel = new JPanel(new GridLayout(0,3,10,10));
         thucphamButton = new JButton("Thực phẩm");
@@ -70,4 +62,13 @@ public class LoaiHangHoa extends JFrame{
         setLayout(new BorderLayout());
         add(panel);
     }
+
+    public HangHoa getHangHoa() {
+        return hangHoa;
+    }
+
+    public int getLoaiHangHoa() {
+        return loaiHangHoa;
+    }
+
 }

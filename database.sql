@@ -9,7 +9,7 @@ CREATE TABLE HangHoa (
     NgaySX date,
     NgayHetHan date,
     NhaCungCap VARCHAR(100),
-	ThoiGianBH date,
+	ThoiGianBH VARCHAR(20),
     CongSuat VARCHAR(20),
 	NgayNhapKho date,
     NhaSX VARCHAR(100)
@@ -21,9 +21,9 @@ INSERT INTO hanghoa (MaHangHoa, TenHangHoa, slTonKho, DonGia, NgaySX, NgayHetHan
 VALUES ('tp002', 'Hàng thực phẩm', 3, 100, '2023-01-01', '2023-01-02', 'Nhà cung cấp hàng thực phẩm');
 
 INSERT INTO hanghoa (MaHangHoa, TenHangHoa, slTonKho, DonGia, ThoiGianBH, CongSuat) 
-VALUES ('dm001', 'Hàng điện máy', 5, 100, '2023-01-01', '50W');
+VALUES ('dm001', 'Hàng điện máy', 5, 100, '20 tháng', '50W');
 INSERT INTO hanghoa (MaHangHoa, TenHangHoa, slTonKho, DonGia, ThoiGianBH, CongSuat) 
-VALUES ('dm002', 'Hàng điện máy', 4, 100, '2023-01-01', '20W');
+VALUES ('dm002', 'Hàng điện máy', 4, 100, '30 tháng', '20W');
 
 INSERT INTO hanghoa (MaHangHoa, TenHangHoa, slTonKho, DonGia, NgayNhapKho, NhaSX) 
 VALUES ('ss001', 'Hàng sành sứ', 5, 100, '2023-01-01', 'Nhà sản suất hàng sành sứ');

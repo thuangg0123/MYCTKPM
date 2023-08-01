@@ -71,7 +71,7 @@ public class KhoGatewayImpl implements KhoGateway{
             statement.setInt(2, hanghoa.getSoLuongTon());
             statement.setDouble(3, hanghoa.getDonGia());
             if (loai2) {
-                statement.setDate(4,new Date(hanghoa.getThoiGianBH().getTime()));
+                statement.setString(4,hanghoa.getThoiGianBH());
                 statement.setString(5, hanghoa.getCongSuat());
             } else{
                 statement.setDate(4,new Date(hanghoa.getNgayNhapKho().getTime()));
@@ -135,7 +135,7 @@ public class KhoGatewayImpl implements KhoGateway{
             statement.setInt(3, hanghoa.getSoLuongTon());
             statement.setDouble(4, hanghoa.getDonGia());
             if (loai2) {
-                statement.setDate(5,new Date(hanghoa.getThoiGianBH().getTime()));
+                statement.setString(5,hanghoa.getThoiGianBH());
                 statement.setString(6, hanghoa.getCongSuat());
             } else{
                 statement.setDate(5,new Date(hanghoa.getNgayNhapKho().getTime()));
@@ -187,7 +187,7 @@ public class KhoGatewayImpl implements KhoGateway{
                 Date NgaySX = resultSet.getDate("NgaySX");
                 Date NgayHetHan = resultSet.getDate("NgayHetHan");
                 String NhaCungCap = resultSet.getString("NhaCungCap");
-                Date ThoiGianBH = resultSet.getDate("ThoiGianBH");
+                String ThoiGianBH = resultSet.getString("ThoiGianBH");
                 String CongSuat = resultSet.getString("CongSuat");
                 Date NgayNhapKho = resultSet.getDate("NgayNhapKho");
                 String NhaSX = resultSet.getString("NhaSX");
@@ -242,7 +242,7 @@ public class KhoGatewayImpl implements KhoGateway{
                 Date NgaySX = resultSet.getDate("NgaySX");
                 Date NgayHetHan = resultSet.getDate("NgayHetHan");
                 String NhaCungCap = resultSet.getString("NhaCungCap");
-                Date ThoiGianBH = resultSet.getDate("ThoiGianBH");
+                String ThoiGianBH = resultSet.getString("ThoiGianBH");
                 String CongSuat = resultSet.getString("CongSuat");
                 Date NgayNhapKho = resultSet.getDate("NgayNhapKho");
                 String NhaSX = resultSet.getString("NhaSX");
@@ -263,6 +263,6 @@ public class KhoGatewayImpl implements KhoGateway{
             System.out.println(e.getMessage());
             return null;
         }
-        return hanghoa;
+        return null;
     }
 }

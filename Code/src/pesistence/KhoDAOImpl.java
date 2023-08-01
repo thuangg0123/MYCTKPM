@@ -15,7 +15,7 @@ public class KhoDAOImpl implements KhoDAO{
     public void capnhatHang(int loaiHang, HangHoa hanghoa) {
         khoGatewayRemote.capnhatHang(loaiHang, hanghoa);
     }
-
+        
     @Override
     public void themHang(int loaiHang, HangHoa hanghoa) {
         khoGatewayRemote.themHang(loaiHang, hanghoa);

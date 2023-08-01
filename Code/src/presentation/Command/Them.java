@@ -12,6 +12,7 @@ public class Them extends Command{
         this.loaiHang = loaiHang;
         this.hanghoa = hanghoa;
     }
+    
     @Override
     public void execute() {
         modelRemote.themHang(loaiHang, hanghoa);

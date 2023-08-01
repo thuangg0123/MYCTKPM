@@ -1,19 +1,11 @@
 package domain;
 
-import java.util.Date;
-
 public class HangDienMay extends HangHoa {
-    private Date thoiGianBH;
+    private String thoiGianBH;
     private String congSuat;
 
-    public HangDienMay(String maHang, String tenHang, int soLuongTon, double donGia, Date thoiGianBH, String congSuat) {
+    public HangDienMay(String maHang, String tenHang, int soLuongTon, double donGia, String thoiGianBH, String congSuat) {
         super(maHang, tenHang, soLuongTon, donGia);
-        this.thoiGianBH = thoiGianBH;
-        this.congSuat = congSuat;
-    }
-    
-    public HangDienMay(String tenHang, int soLuongTon, double donGia, Date thoiGianBH, String congSuat) {
-        super(tenHang, soLuongTon, donGia);
         this.thoiGianBH = thoiGianBH;
         this.congSuat = congSuat;
     }
@@ -24,13 +16,13 @@ public class HangDienMay extends HangHoa {
     }
 
     @Override
-    public Date getThoiGianBH() {
+    public String getThoiGianBH() {
         return thoiGianBH;
     }
 
     @Override
-    public void setThoiGianBH(Date thoiGianBH) {
-        this.thoiGianBH = thoiGianBH;
+    public void setThoiGianBH(Double thoiGianBH) {
+        this.thoiGianBH = thoiGianBH + "tháng";
     }
 
     @Override
@@ -40,6 +32,6 @@ public class HangDienMay extends HangHoa {
 
     @Override
     public void setCongSuat(int congSuat) {
-        this.congSuat = congSuat+"W";
+        this.congSuat = congSuat+"KW";
     }
 }

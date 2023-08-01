@@ -39,11 +39,11 @@ public abstract class HangHoa {
         return donGia;
     }
     
-    public Date getThoiGianBH() {
+    public String getThoiGianBH() {
         return null;
     }
 
-    public void setThoiGianBH(Date date) {
+    public void setThoiGianBH(Double d) {
     }
 
     public String getCongSuat() {

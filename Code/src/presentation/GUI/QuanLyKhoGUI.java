@@ -123,15 +123,15 @@ public class QuanLyKhoGUI extends JFrame implements Subscriber{
         }
     }
 
-    void xemDSHangHoa() {
+    public void xemDSHangHoa() {
         modelRemote.xemTTAllHH();
     }
     
-    void themHangHoa() {
+    public void themHangHoa() {
         new LoaiHangHoa(this, modelRemote, controllerRemote).setVisible(true);
     }
 
-    void capnhatHangGUI(int rowIndex) {
+    public void capnhatHangGUI(int rowIndex) {
         String maHang;
         HangHoa hanghoa;
         if( rowIndex == -1) {
@@ -147,7 +147,7 @@ public class QuanLyKhoGUI extends JFrame implements Subscriber{
         }
     }
 
-    void capnhatHang(HangHoa hanghoa) {
+    public void capnhatHang(HangHoa hanghoa) {
         if(hanghoa.getNhaCungCap() != null) {
             HangThucPhamGUI temp = new HangThucPhamGUI(this, modelRemote, controllerRemote, 1);
             temp.setMaHang(hanghoa.getMaHang());
@@ -179,7 +179,7 @@ public class QuanLyKhoGUI extends JFrame implements Subscriber{
         }
     }
 
-    void xoaHangHoaGUI(int rowIndex) {
+    public void xoaHangHoaGUI(int rowIndex) {
         String maHang;
         if( rowIndex == -1) {
             maHang = JOptionPane.showInputDialog(null, "Nhập số mã hàng hóa cần xóa");
@@ -192,12 +192,12 @@ public class QuanLyKhoGUI extends JFrame implements Subscriber{
         }
     }
 
-    void xoaHangHoa(String maHang) {
+    public void xoaHangHoa(String maHang) {
         Command xoaHang = new Xoa(modelRemote, maHang);
         controllerRemote.execute(xoaHang);
     }
 
-    void timTTHH() {
+    public void timTTHH() {
         Command timKiem = new TimKiem(modelRemote, tuKhoaTextField.getText());
         controllerRemote.execute(timKiem);
     }

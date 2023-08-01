@@ -4,11 +4,11 @@ import java.awt.BorderLayout;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.Date;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
@@ -47,9 +47,15 @@ public class HangDienMayGUI extends JFrame{
         luuButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                Command themHH = new Them(modelRemote, 2, luuThongTin());
-                controllerRemote.execute(themHH);
-                dispose();
+                if(checkException(modelRemote)) {
+                    if(choice == 0) {
+                        themHangHoa(modelRemote, controllerRemote);
+                        dispose();
+                    } else if (choice == 1) {
+                        capnhatHangHoa(modelRemote, controllerRemote);
+                        dispose();
+                    }
+                }
             }
         });
         huyButton.addActionListener(new ActionListener() {
@@ -88,11 +94,84 @@ public class HangDienMayGUI extends JFrame{
         add(inputPanel);
     }
 
+    public void themHangHoa(NguoiQuanLy modelRemote, QuanLyKhoController controllerRemote) {
+        Command themHH = new Them(modelRemote, 2, luuThongTin());
+        controllerRemote.execute(themHH);
+    }
+
+    public void capnhatHangHoa(NguoiQuanLy modelRemote, QuanLyKhoController controllerRemote) {
+        Command capnhatHang = new CapNhat(modelRemote,2, luuThongTin());
+        controllerRemote.execute(capnhatHang);
+    }
+
+    public boolean checkException(NguoiQuanLy modelRemote) {
+        if(choice == 0) {
+            if(maHangTextField.getText() == null || maHangTextField.getText().length() > 5) {
+                JOptionPane.showMessageDialog(this, "Mã hàng hóa là chuỗi 5 kí tự bất kì", "Thông báo", JOptionPane.INFORMATION_MESSAGE);
+                return false;
+            }else if(modelRemote.getDuLieu(maHangTextField.getText()) != null) {
+                JOptionPane.showMessageDialog(this, "Mã hàng hóa vừa nhập đã tồn tại", "Thông báo", JOptionPane.INFORMATION_MESSAGE);
+                return false;
+            }
+        }
+
+        if(tenHangTextField.getText() == null) {
+            JOptionPane.showMessageDialog(this, "Tên hàng hóa không được để trống", "Thông báo", JOptionPane.INFORMATION_MESSAGE);
+            return false;
+        }
+        
+        try {
+            int slTon = Integer.parseInt(slTonTextField.getText());
+            if(slTon < 0) {
+                JOptionPane.showMessageDialog(this, "Số lượng tồn kho phải lớn hơn hoặc bằng 0", "Thông báo", JOptionPane.INFORMATION_MESSAGE);
+                return false;
+            }
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(this, "Số lượng tồn kho phải là số nguyên", "Thông báo", JOptionPane.INFORMATION_MESSAGE);
+            return false;
+        }   
+
+        try {
+            Double donGia = Double.parseDouble(donGiaTextField.getText());
+            if(donGia < 0) {
+                JOptionPane.showMessageDialog(this, "Giá thành phải là số lớn hơn 0", "Thông báo", JOptionPane.INFORMATION_MESSAGE);
+                return false;
+            }
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(this, "Giá thành phải là số", "Thông báo", JOptionPane.INFORMATION_MESSAGE);
+            return false;
+        }   
+
+        try {
+            Double tgBaoHanh = Double.parseDouble(tgBaoHanhTextField.getText());
+            if(tgBaoHanh < 0) {
+                JOptionPane.showMessageDialog(this, "Thời gian bảo hành phải lớn hơn hoặc bằng 0 (tháng)", "Thông báo", JOptionPane.INFORMATION_MESSAGE);
+                return false;
+            }
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(this, "Thời gian bảo hành phải là số", "Thông báo", JOptionPane.INFORMATION_MESSAGE);
+            return false;
+        } 
+
+        try {
+            int congSuat = Integer.parseInt(congSuatTextField.getText());
+            if(congSuat < 0) {
+                JOptionPane.showMessageDialog(this, "Công suất phải lớn hơn hoặc bằng 0", "Thông báo", JOptionPane.INFORMATION_MESSAGE);
+                return false;
+            }
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(this, "Công suất tồn kho phải là số nguyên", "Thông báo", JOptionPane.INFORMATION_MESSAGE);
+            return false;
+        }
+        
+        return true;
+    }
+
     private HangHoa luuThongTin() {
         String tenHang = tenHangTextField.getText();
         int slTon = Integer.parseInt(slTonTextField.getText());
         double donGia = Double.parseDouble(donGiaTextField.getText());
-        Date tgBaoHanh = java.sql.Date.valueOf(tgBaoHanhTextField.getText());
+        String tgBaoHanh = tgBaoHanhTextField.getText();
         String congSuat = congSuatTextField.getText();
         if(choice == 0) {
             maHang = maHangTextField.getText();
