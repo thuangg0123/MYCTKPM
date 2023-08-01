@@ -1,4 +1,7 @@
 package domain;
+
+import java.util.Date;
+
 public abstract class HangHoa {
     protected String maHang;
     protected String tenHang;
@@ -28,5 +31,13 @@ public abstract class HangHoa {
 
     public double getDonGia() {
         return donGia;
+    }
+
+    public Date getThoiGianBH(HangDienMay hangDienMay) {
+        return hangDienMay.getThoiGianBH();
+    }
+
+    public String getCongSuat(HangDienMay hangDienMay) {
+        return hangDienMay.getCongSuat();
     }
 }

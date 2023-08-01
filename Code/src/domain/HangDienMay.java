@@ -1,14 +1,15 @@
 package domain;
+
 import java.util.Date;
 
 public class HangDienMay extends HangHoa {
-    private Date thoiGianBH;
-    private String congSuat;
+    protected Date thoiGianBH;
+    protected String congSuat;
 
     HangDienMay(String maHang, String tenHang, int soLuongTon, int donGia, Date thoiGianBH, int congSuat) {
         super(maHang, tenHang, soLuongTon, donGia);
         this.thoiGianBH = thoiGianBH;
-        this.congSuat = congSuat+"W";
+        this.congSuat = congSuat + "W";
     }
 
     @Override
@@ -29,6 +30,6 @@ public class HangDienMay extends HangHoa {
     }
 
     public void setCongSuat(int congSuat) {
-        this.congSuat = congSuat+"W";
+        this.congSuat = congSuat + "W";
     }
 }
