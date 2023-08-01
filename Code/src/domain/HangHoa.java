@@ -32,12 +32,53 @@ public abstract class HangHoa {
     public double getDonGia() {
         return donGia;
     }
-
-    public Date getThoiGianBH(HangDienMay hangDienMay) {
-        return hangDienMay.getThoiGianBH();
+    
+    public Date getThoiGianBH() {
+        return null;
     }
 
-    public String getCongSuat(HangDienMay hangDienMay) {
-        return hangDienMay.getCongSuat();
+    public void setThoiGianBH(Date date) {
+    }
+
+    public String getCongSuat() {
+        return null;
+    }
+
+    public void setCongSuat(String string) {
+    }
+    
+    public Date getNgayNhapKho() {
+        return null;
+    }
+
+    public void setNgayNhapKho(Date date) {
+    }
+
+    public String getNhaSanXuat() {
+        return null;
+    }
+
+    public void setNhaSanXuat(String string) {
+    }
+
+    public Date getNgaySX() {
+        return null;
+    }
+
+    public void setNgaySX(Date date) {
+    }
+
+    public Date getNgayHetHan() {
+        return null;
+    }
+
+    public void setNgayHetHan(Date date) {
+    }
+
+    public String getNhaCungCap() {
+        return null;
+    }
+
+    public void setNhaCungCap(String string) {
     }
 }

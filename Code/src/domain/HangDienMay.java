@@ -3,8 +3,8 @@ package domain;
 import java.util.Date;
 
 public class HangDienMay extends HangHoa {
-    protected Date thoiGianBH;
-    protected String congSuat;
+    private Date thoiGianBH;
+    private String congSuat;
 
     HangDienMay(String maHang, String tenHang, int soLuongTon, int donGia, Date thoiGianBH, int congSuat) {
         super(maHang, tenHang, soLuongTon, donGia);
@@ -17,19 +17,23 @@ public class HangDienMay extends HangHoa {
         return 0.1 * donGia;
     }
 
+    @Override
     public Date getThoiGianBH() {
         return thoiGianBH;
     }
 
+    @Override
     public void setThoiGianBH(Date thoiGianBH) {
         this.thoiGianBH = thoiGianBH;
     }
 
+    @Override
     public String getCongSuat() {
         return congSuat;
     }
 
-    public void setCongSuat(int congSuat) {
-        this.congSuat = congSuat + "W";
+    @Override
+    public void setCongSuat(String congSuat) {
+        this.congSuat = congSuat;
     }
 }

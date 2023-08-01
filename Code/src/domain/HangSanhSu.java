@@ -2,8 +2,8 @@ package domain;
 import java.util.Date;
 
 public class HangSanhSu extends HangHoa {
-    protected Date ngayNhapKho;
-    protected String nhaSanXuat;
+    private Date ngayNhapKho;
+    private String nhaSanXuat;
 
     public HangSanhSu(String maHang, String tenHang, int soLuongTon, int donGia, Date ngayNhapKho, String nhaSanXuat) {
         super(maHang, tenHang, soLuongTon, donGia);
@@ -16,18 +16,22 @@ public class HangSanhSu extends HangHoa {
         return 0.1 * donGia;
     }
 
+    @Override
     public Date getNgayNhapKho() {
         return ngayNhapKho;
     }
 
+    @Override
     public void setNgayNhapKho(Date ngayNhapKho) {
         this.ngayNhapKho = ngayNhapKho;
     }
 
+    @Override
     public String getNhaSanXuat() {
         return nhaSanXuat;
     }
-
+    
+    @Override
     public void setNhaSanXuat(String nhaSanXuat) {
         this.nhaSanXuat = nhaSanXuat;
     }
