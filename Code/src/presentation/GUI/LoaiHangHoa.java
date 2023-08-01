@@ -2,32 +2,53 @@ package presentation.GUI;
 
 import java.awt.BorderLayout;
 import java.awt.GridLayout;
-import java.awt.Label;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
 public class LoaiHangHoa extends JFrame{
-    JButton thucphamButton, dienmayButton, sanhsuButton;
-    JPanel panel;
+    private JButton thucphamButton, dienmayButton, sanhsuButton;
+    private JPanel panel;
 
-    public LoaiHangHoa() {
-
-        panel = new JPanel(new GridLayout(0,5,10,10));
+    public LoaiHangHoa(QuanLyKhoGUI viewRemote) {
+        panel = new JPanel(new GridLayout(0,3,10,10));
         thucphamButton = new JButton("Thực phẩm");
-        dienmayButton = new JButton("Điện  máy");
+        thucphamButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                new HangThucPhamGUI(viewRemote, 0).setVisible(true);
+                dispose();
+            }
+        });
+
+        dienmayButton = new JButton("Điện máy");
+        dienmayButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                new HangDienMayGUI(viewRemote, 0).setVisible(true);
+                dispose();
+            }
+        });
+
         sanhsuButton = new JButton("Sành sứ");
-        panel.add(new Label());
+        sanhsuButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                new HangSanhSuGUI(viewRemote, 0).setVisible(true);
+                dispose();
+            }
+        });
         panel.add(thucphamButton);
         panel.add(dienmayButton);
         panel.add(sanhsuButton);
-        panel.add(new Label());
 
         setTitle("Chọn loại hàng hóa");
         setSize(500, 100);
         setLocation(760, 390);    
-        setDefaultCloseOperation(EXIT_ON_CLOSE);
+        setDefaultCloseOperation(LoaiHangHoa.EXIT_ON_CLOSE);
         setLayout(new BorderLayout());
         add(panel);
         setVisible(true);

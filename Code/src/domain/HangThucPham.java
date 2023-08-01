@@ -13,6 +13,13 @@ public class HangThucPham extends HangHoa {
         this.nhaCungCap = nhaCungCap;
     }
 
+    public HangThucPham(String tenHang, int soLuongTon, Double donGia, Date ngaySX, Date ngayHetHan, String nhaCungCap) {
+        super(tenHang, soLuongTon, donGia);
+        this.ngaySX = ngaySX;
+        this.ngayHetHan = ngayHetHan;
+        this.nhaCungCap = nhaCungCap;
+    }
+
     @Override
     public double tinhVAT() {
         return 0.05 * donGia;

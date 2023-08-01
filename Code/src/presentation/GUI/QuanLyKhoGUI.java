@@ -24,6 +24,12 @@ import presentation.Subscriber;
 //View
 public class QuanLyKhoGUI extends JFrame implements Subscriber{
     private QuanLyKhoController controllerRemote;
+    private NguoiQuanLy modelRemote;
+    private DefaultTableModel tableModel;
+    private JTable table;
+    private JButton themButton, capnhatButton, xoaButton, timkiemButton;
+    private JTextField tuKhoaTextField;
+
     public QuanLyKhoController getControllerRemote() {
         return controllerRemote;
     }
@@ -31,13 +37,6 @@ public class QuanLyKhoGUI extends JFrame implements Subscriber{
     public NguoiQuanLy getModelRemote() {
         return modelRemote;
     }
-
-    private NguoiQuanLy modelRemote;
-    private DefaultTableModel tableModel;
-    private JTable table;
-    private JButton themButton, capnhatButton, xoaButton, timkiemButton;
-    private JTextField tuKhoaTextField;
-
 
     public QuanLyKhoGUI() {
         setTitle("Quản lý hàng hóa trong kho");
@@ -66,6 +65,12 @@ public class QuanLyKhoGUI extends JFrame implements Subscriber{
         add(scrollPane, BorderLayout.CENTER);
 
         themButton = new JButton("Thêm");
+        themButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                themHangHoa();
+            }
+        });
         capnhatButton = new JButton("Cập nhật");
         xoaButton = new JButton("Xóa");
         timkiemButton = new JButton("Tìm kiếm");
@@ -107,8 +112,8 @@ public class QuanLyKhoGUI extends JFrame implements Subscriber{
         update(modelRemote.xemTTAllHH());
     }
     
-    void themHanghoa() {
-        modelRemote.themHang(ABORT, null);
+    void themHangHoa() {
+        new LoaiHangHoa(this).setVisible(true);
     }
 
     void timTTHH() {

@@ -11,6 +11,12 @@ public class HangSanhSu extends HangHoa {
         this.nhaSanXuat = nhaSanXuat;
     }
 
+    public HangSanhSu(String tenHang, int soLuongTon, Double donGia, Date ngayNhapKho, String nhaSanXuat) {
+        super(tenHang, soLuongTon, donGia);
+        this.ngayNhapKho = ngayNhapKho;
+        this.nhaSanXuat = nhaSanXuat;
+    }
+
     @Override
     double tinhVAT() {
         return 0.1 * donGia;

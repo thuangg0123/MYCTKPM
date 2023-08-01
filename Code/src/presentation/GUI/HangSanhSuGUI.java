@@ -4,6 +4,7 @@ import java.awt.BorderLayout;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.sql.Date;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -11,12 +12,27 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
-public class HangSanhSuGUI extends JFrame{
-    JTextField maHangTextField, tenHangTextField, slTonTextField, donGiaTextField, ngayNhapKhoTextField, nhaSXTextField;
-    JButton luuButton, huyButton;
+import domain.HangHoa;
+import domain.HangSanhSu;
 
-    public HangSanhSuGUI() {
-        JPanel inputPanel = new JPanel(new GridLayout(9, 2));
+public class HangSanhSuGUI extends JFrame{
+    private JTextField maHangTextField, tenHangTextField, slTonTextField, donGiaTextField, ngayNhapKhoTextField, nhaSXTextField;
+    private JButton luuButton, huyButton;
+    private int choice;
+
+    /*
+     Yêu cầu:
+     0: Thêm mới hàng hóa
+     1: Cập nhật lại thông tin hàng hóa
+     */
+    public HangSanhSuGUI(QuanLyKhoGUI viewRemote, int choice) {
+        this.choice = choice;
+        JPanel inputPanel;
+        if (choice == 0) {
+            inputPanel = new JPanel(new GridLayout(9, 2));
+        } else {
+            inputPanel = new JPanel(new GridLayout(8, 2));
+        }
         maHangTextField = new JTextField();
         tenHangTextField = new JTextField();
         slTonTextField = new JTextField();
@@ -29,7 +45,8 @@ public class HangSanhSuGUI extends JFrame{
         luuButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-
+                viewRemote.getModelRemote().themHang(3, luuThongTin());
+                dispose();
             }
         });
         huyButton.addActionListener(new ActionListener() {
@@ -41,8 +58,10 @@ public class HangSanhSuGUI extends JFrame{
 
         inputPanel.add(new JLabel());
         inputPanel.add(new JLabel());
-        inputPanel.add(new JLabel("Mã hàng hóa:"));
-        inputPanel.add(maHangTextField);
+        if(choice == 0) {
+            inputPanel.add(new JLabel("Mã hàng hóa:"));
+            inputPanel.add(maHangTextField);
+        }
         inputPanel.add(new JLabel("Tên hàng hóa:"));
         inputPanel.add(tenHangTextField);
         inputPanel.add(new JLabel("Số lượng tồn kho:"));
@@ -61,9 +80,23 @@ public class HangSanhSuGUI extends JFrame{
         setTitle("Hàng sành sứ");
         setSize(600, 300);
         setLocation(660, 390);    
-        setDefaultCloseOperation(EXIT_ON_CLOSE);
+        setDefaultCloseOperation(HangSanhSuGUI.EXIT_ON_CLOSE);
         setLayout(new BorderLayout());
         add(inputPanel);
         setVisible(true);
+    }
+
+    private HangHoa luuThongTin() {
+        String tenHang = tenHangTextField.getText();
+        int slTon = Integer.parseInt(slTonTextField.getText());
+        double donGia = Double.parseDouble(donGiaTextField.getText());
+        Date ngayNhapKho = java.sql.Date.valueOf(ngayNhapKhoTextField.getText());
+        String nhaSX = nhaSXTextField.getText();
+        if (choice == 0) {
+            String maHang = maHangTextField.getText();
+            return (HangHoa)new HangSanhSu(maHang, tenHang, slTon, donGia, ngayNhapKho, nhaSX);
+        } else{
+            return (HangHoa)new HangSanhSu(tenHang, slTon, donGia, ngayNhapKho, nhaSX);
+        }
     }
 }

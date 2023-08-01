@@ -9,7 +9,13 @@ public class HangDienMay extends HangHoa {
     public HangDienMay(String maHang, String tenHang, int soLuongTon, double donGia, Date thoiGianBH, String congSuat) {
         super(maHang, tenHang, soLuongTon, donGia);
         this.thoiGianBH = thoiGianBH;
-        this.congSuat = congSuat + "W";
+        this.congSuat = congSuat;
+    }
+    
+    public HangDienMay(String tenHang, int soLuongTon, double donGia, Date thoiGianBH, String congSuat) {
+        super(tenHang, soLuongTon, donGia);
+        this.thoiGianBH = thoiGianBH;
+        this.congSuat = congSuat;
     }
 
     @Override

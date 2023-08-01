@@ -44,11 +44,12 @@ public class KhoGatewayImpl implements KhoGateway{
                 themHangLoai1(sql, (HangThucPham)hanghoa);
                 break;
             case 2: 
-                sql = "INSERT INTO hanghoa (MaHangHoa, TenHangHoa, slTonKho, DonGia, NgayNhapKho, NhaSX) VALUES (?, ?, ?, ?, ?, ?);";
+                sql = "INSERT INTO hanghoa (MaHangHoa, TenHangHoa, slTonKho, DonGia, ThoiGianBH, CongSuat) VALUES (?, ?, ?, ?, ?, ?);";
                 themHangLoai23(true, sql, hanghoa);
                 break;
+
             case 3: 
-                sql = "INSERT INTO hanghoa (MaHangHoa, TenHangHoa, slTonKho, DonGia, ThoiGianBH, CongSuat) VALUES (?, ?, ?, ?, ?, ?);";
+                sql = "INSERT INTO hanghoa (MaHangHoa, TenHangHoa, slTonKho, DonGia, NgayNhapKho, NhaSX) VALUES (?, ?, ?, ?, ?, ?);";
                 themHangLoai23(false, sql, hanghoa);
                 break;
 
@@ -82,13 +83,13 @@ public class KhoGatewayImpl implements KhoGateway{
             statement.setInt(3, hanghoa.getSoLuongTon());
             statement.setDouble(4, hanghoa.getDonGia());
             if (loai2) {
-                HangSanhSu temp = (HangSanhSu)hanghoa;
-                statement.setDate(5,new Date(temp.getNgayNhapKho().getTime()));
-                statement.setString(6, temp.getNhaSanXuat());
-            } else{
                 HangDienMay temp = (HangDienMay)hanghoa;
                 statement.setDate(5,new Date(temp.getThoiGianBH().getTime()));
                 statement.setString(6, temp.getCongSuat());
+            } else{
+                HangSanhSu temp = (HangSanhSu)hanghoa;
+                statement.setDate(5,new Date(temp.getNgayNhapKho().getTime()));
+                statement.setString(6, temp.getNhaSanXuat());
             }
 
             if (statement.executeUpdate() > 0) {

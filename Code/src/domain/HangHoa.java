@@ -15,6 +15,12 @@ public abstract class HangHoa {
         this.donGia = donGia;
     }
 
+    public HangHoa(String tenHang, int soLuongTon, double donGia) {
+        this.tenHang = tenHang;
+        this.soLuongTon = soLuongTon;
+        this.donGia = donGia;
+    }
+
     abstract double tinhVAT();
 
     public String getMaHang() {
