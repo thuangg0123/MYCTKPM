@@ -7,39 +7,44 @@ import pesistence.KhoDAOImpl;
 import pesistence.KhoGatewayImpl;
 
 public class NguoiQuanLyImpl extends Publisher implements NguoiQuanLy {
-    private KhoDAO KhoRemote;
+    private KhoDAO khoRemote;
 
     public NguoiQuanLyImpl() {
-        KhoRemote = new KhoDAOImpl(new KhoGatewayImpl());
+        khoRemote = new KhoDAOImpl(new KhoGatewayImpl());
     }
 
     @Override
     public void themHang(int loaiHang, HangHoa hanghoa) {
-        KhoRemote.themHang(loaiHang, hanghoa);
+        khoRemote.themHang(loaiHang, hanghoa);
+        notifySubscribers(xemTTAllHH());
     }
 
     @Override
     public void capnhatHang(int loaiHang, HangHoa hanghoa) {
-        KhoRemote.capnhatHang(loaiHang, hanghoa);
+        khoRemote.capnhatHang(loaiHang, hanghoa);
+        notifySubscribers(xemTTAllHH());
     }
 
     @Override
     public void xoaHang(String maHang) {
-        KhoRemote.xoaHang(maHang);
+        khoRemote.xoaHang(maHang);
+        notifySubscribers(xemTTAllHH());
     }
 
     @Override
     public void xemTTHH(String maHang) {
-        KhoRemote.xemTTAllHH();
+        khoRemote.xemTTAllHH();
+        notifySubscribers(xemTTAllHH());
+
     }
 
     @Override
     public List<HangHoa> xemTTAllHH() {
-        return KhoRemote.xemTTAllHH();
+        return khoRemote.xemTTAllHH();
     }
 
     @Override
-    public void timTTHH(String thongtin) {
-        KhoRemote.timTTHH(thongtin);
+    public List<HangHoa> timTTHH(String thongtin) {
+        return khoRemote.timTTHH(thongtin);
     }
 }

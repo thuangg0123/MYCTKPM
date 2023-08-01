@@ -44,7 +44,7 @@ public abstract class HangHoa {
         return null;
     }
 
-    public void setCongSuat(String string) {
+    public void setCongSuat(int i) {
     }
     
     public Date getNgayNhapKho() {

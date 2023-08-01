@@ -102,7 +102,7 @@ public class KhoGatewayImpl implements KhoGateway{
     }
 
     @Override
-    public void timTTHH(String thongtin) {
+    public List<HangHoa> timTTHH(String thongtin) {
         String sql = "call TimKiem('"+thongtin+"')";
         try (Statement statement = connection.createStatement()) {
             int rowsInserted = statement.executeUpdate(sql);
@@ -113,33 +113,55 @@ public class KhoGatewayImpl implements KhoGateway{
             }
                 
             ResultSet resultSet = statement.executeQuery(sql);
-            while (resultSet.next()) {
-                System.out.println(resultSet.getString("MaHangHoa"));
-            }
+            return kqTruySuat(resultSet);
         } catch (SQLException e) {
             e.printStackTrace();
+            return null;
         }
     }
 
     @Override
     public List<HangHoa> xemTTAllHH() {
-        List<HangHoa> hanghoaList = new ArrayList<>();
         String sql = "SELECT * FROM hanghoa";
         try (Statement statement = connection.createStatement()) {
             ResultSet resultSet = statement.executeQuery(sql);
-            while (resultSet.next()) {
-                // String maHang = resultSet.getString("MaHangHoa");
-                // String tenHang = resultSet.getString("TenHangHoa");
-                // int slTonKho = resultSet.getInt("slTonKho");
-                // Double donGia = resultSet.getDouble("DonGia");
-                // Date NgaySX = resultSet.getDate("NgaySX");
-                // Date NgayHetHan = resultSet.getDate("NgayHetHan");
-                // String NhaCungCap = resultSet.getString("NhaCungCap");
-            }
+            
+            return kqTruySuat(resultSet);
         } catch (SQLException e) {
             e.printStackTrace();
+            return null;
         }
-        return hanghoaList;
+    }
+
+    private List<HangHoa> kqTruySuat(ResultSet resultSet) {
+        List<HangHoa> hanghoaList = new ArrayList<>();
+        try {
+            while (resultSet.next()) {
+                String maHang = resultSet.getString("MaHangHoa");
+                String tenHang = resultSet.getString("TenHangHoa");
+                int slTonKho = resultSet.getInt("slTonKho");
+                Double DonGia = resultSet.getDouble("DonGia");
+                Date NgaySX = resultSet.getDate("NgaySX");
+                Date NgayHetHan = resultSet.getDate("NgayHetHan");
+                String NhaCungCap = resultSet.getString("NhaCungCap");
+                Date ThoiGianBH = resultSet.getDate("ThoiGianBH");
+                String CongSuat = resultSet.getString("CongSuat");
+                Date NgayNhapKho = resultSet.getDate("NgayNhapKho");
+                String NhaSX = resultSet.getString("NhaSX");
+                
+                if(NhaCungCap != null && !NhaCungCap.isEmpty()) {
+                    hanghoaList.add(new HangThucPham(maHang, tenHang, slTonKho, DonGia, NgaySX, NgayHetHan, NhaCungCap));
+                } else if(CongSuat != null && !CongSuat.isEmpty()) {
+                    hanghoaList.add(new HangDienMay(maHang, tenHang, slTonKho, DonGia, ThoiGianBH, CongSuat));
+                } else if(NhaSX != null && !NhaSX.isEmpty()) {
+                    hanghoaList.add(new HangSanhSu(maHang, tenHang, slTonKho, DonGia, NgayNhapKho, NhaSX));
+                }
+            }
+            return hanghoaList;
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return null;
+        }
     }
 
     @Override

@@ -1,9 +1,11 @@
-package presentation;
+package presentation.GUI;
 
 import java.awt.BorderLayout;
 import java.awt.GridLayout;
 import java.awt.Label;
 import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.util.List;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -13,11 +15,23 @@ import javax.swing.JTable;
 import javax.swing.JTextField;
 import javax.swing.table.DefaultTableModel;
 
+import domain.HangHoa;
 import domain.NguoiQuanLy;
+import domain.NguoiQuanLyImpl;
+import presentation.QuanLyKhoController;
+import presentation.Subscriber;
 
 //View
-public class QuanLyKhoGUI extends JFrame implements Subscriber, java.awt.event.ActionListener{
+public class QuanLyKhoGUI extends JFrame implements Subscriber{
     private QuanLyKhoController controllerRemote;
+    public QuanLyKhoController getControllerRemote() {
+        return controllerRemote;
+    }
+
+    public NguoiQuanLy getModelRemote() {
+        return modelRemote;
+    }
+
     private NguoiQuanLy modelRemote;
     private DefaultTableModel tableModel;
     private JTable table;
@@ -28,9 +42,12 @@ public class QuanLyKhoGUI extends JFrame implements Subscriber, java.awt.event.A
     public QuanLyKhoGUI() {
         setTitle("Quản lý hàng hóa trong kho");
         setSize(1280, 400);
-        setLocation(448, 340);
+        setLocation(320, 340);
         setDefaultCloseOperation(EXIT_ON_CLOSE);
         setLayout(new BorderLayout());
+
+        modelRemote = new NguoiQuanLyImpl();
+        controllerRemote = new QuanLyKhoController();
 
         tableModel = new DefaultTableModel();
         tableModel.addColumn("Mã hàng hóa");
@@ -41,6 +58,7 @@ public class QuanLyKhoGUI extends JFrame implements Subscriber, java.awt.event.A
         tableModel.addColumn("Ngày hết hạn");
         tableModel.addColumn("Nhà cung cấp");
         tableModel.addColumn("Thời gian BH");
+        tableModel.addColumn("Công suất");
         tableModel.addColumn("Ngày nhập kho");
         tableModel.addColumn("Nhà sản suất");
         table = new JTable(tableModel);
@@ -51,6 +69,12 @@ public class QuanLyKhoGUI extends JFrame implements Subscriber, java.awt.event.A
         capnhatButton = new JButton("Cập nhật");
         xoaButton = new JButton("Xóa");
         timkiemButton = new JButton("Tìm kiếm");
+        timkiemButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                timTTHH();
+            }
+        });
         tuKhoaTextField = new JTextField();
 
         JPanel functionPanel = new JPanel(new GridLayout(7, 0, 0, 10));
@@ -64,16 +88,31 @@ public class QuanLyKhoGUI extends JFrame implements Subscriber, java.awt.event.A
         functionPanel.add(xoaButton);
 
         add(functionPanel, BorderLayout.EAST);
+        xemDSHangHoa();
     }
 
     @Override
-    public void update() {
-        
+    public void update(List<HangHoa> hanghoaList) {
+        while(tableModel.getRowCount() != 0) {
+            tableModel.removeRow(0);
+        }
+        for (HangHoa hangHoa : hanghoaList) {
+            Object[] rowData = { hangHoa.getMaHang(), hangHoa.getTenHang(), hangHoa.getSoLuongTon(), hangHoa.getDonGia(), hangHoa.getNgaySX(), hangHoa.getNgayHetHan(),
+            hangHoa.getNhaCungCap(), hangHoa.getThoiGianBH(), hangHoa.getCongSuat(), hangHoa.getNgayNhapKho(), hangHoa.getNhaSanXuat()};
+            tableModel.addRow(rowData); 
+        }
     }
 
-    @Override
-    public void actionPerformed(ActionEvent e) {
-        
+    void xemDSHangHoa() {
+        update(modelRemote.xemTTAllHH());
     }
     
+    void themHanghoa() {
+        modelRemote.themHang(ABORT, null);
+    }
+
+    void timTTHH() {
+        update(modelRemote.timTTHH(tuKhoaTextField.getText()));
+    }
+
 }

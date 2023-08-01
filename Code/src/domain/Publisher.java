@@ -15,7 +15,9 @@ public class Publisher {
         subscribers.remove(subscriber); 
     }
 
-	public void notifySubscribers() {
-		for(Subscriber s: subscribers) s.update();
-	}
+	public void notifySubscribers(List<HangHoa> hanghoaList) {
+		for(Subscriber s: subscribers) {
+            s.update(hanghoaList);
+	    }
+    }
 }

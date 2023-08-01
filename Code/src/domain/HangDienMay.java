@@ -6,7 +6,7 @@ public class HangDienMay extends HangHoa {
     private Date thoiGianBH;
     private String congSuat;
 
-    public HangDienMay(String maHang, String tenHang, int soLuongTon, int donGia, Date thoiGianBH, int congSuat) {
+    public HangDienMay(String maHang, String tenHang, int soLuongTon, double donGia, Date thoiGianBH, String congSuat) {
         super(maHang, tenHang, soLuongTon, donGia);
         this.thoiGianBH = thoiGianBH;
         this.congSuat = congSuat + "W";
@@ -33,7 +33,7 @@ public class HangDienMay extends HangHoa {
     }
 
     @Override
-    public void setCongSuat(String congSuat) {
-        this.congSuat = congSuat;
+    public void setCongSuat(int congSuat) {
+        this.congSuat = congSuat+"W";
     }
 }

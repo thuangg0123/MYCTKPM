@@ -22,8 +22,8 @@ public class KhoDAOImpl implements KhoDAO{
     }
 
     @Override
-    public void timTTHH(String thongtin) {
-        khoGatewayRemote.timTTHH(thongtin);
+    public List<HangHoa> timTTHH(String thongtin) {
+        return khoGatewayRemote.timTTHH(thongtin);
     }
 
     @Override

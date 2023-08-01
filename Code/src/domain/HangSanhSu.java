@@ -5,7 +5,7 @@ public class HangSanhSu extends HangHoa {
     private Date ngayNhapKho;
     private String nhaSanXuat;
 
-    public HangSanhSu(String maHang, String tenHang, int soLuongTon, int donGia, Date ngayNhapKho, String nhaSanXuat) {
+    public HangSanhSu(String maHang, String tenHang, int soLuongTon, Double donGia, Date ngayNhapKho, String nhaSanXuat) {
         super(maHang, tenHang, soLuongTon, donGia);
         this.ngayNhapKho = ngayNhapKho;
         this.nhaSanXuat = nhaSanXuat;

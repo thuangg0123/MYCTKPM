@@ -1,6 +1,6 @@
 package presentation;
 
-//Controller
+//Controller - CommandProsser
 public class QuanLyKhoController {
     
 }

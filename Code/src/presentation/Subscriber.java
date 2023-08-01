@@ -1,7 +1,10 @@
 package presentation;
 
+import java.util.List;
+import domain.HangHoa;
+
 public interface Subscriber {
 
-    void update();
+    void update(List<HangHoa> hanghoaList);
 
 }

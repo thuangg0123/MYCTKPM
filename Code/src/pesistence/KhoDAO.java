@@ -9,5 +9,5 @@ public interface KhoDAO {
     void xoaHang(String maHang);
     void xemTTHH(String maHang); 
     List<HangHoa> xemTTAllHH(); 
-    void timTTHH(String thongtin); 
+    List<HangHoa> timTTHH(String thongtin); 
 }
