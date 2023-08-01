@@ -2,6 +2,7 @@ package presentation;
 
 import java.awt.BorderLayout;
 import java.awt.GridLayout;
+import java.awt.Label;
 import java.awt.event.ActionEvent;
 
 import javax.swing.JButton;
@@ -26,7 +27,7 @@ public class QuanLyKhoGUI extends JFrame implements Subscriber, java.awt.event.A
 
     public QuanLyKhoGUI() {
         setTitle("Quản lý hàng hóa trong kho");
-        setSize(1024, 400);
+        setSize(1280, 400);
         setLocation(448, 340);
         setDefaultCloseOperation(EXIT_ON_CLOSE);
         setLayout(new BorderLayout());
@@ -46,14 +47,23 @@ public class QuanLyKhoGUI extends JFrame implements Subscriber, java.awt.event.A
         JScrollPane scrollPane = new JScrollPane(table);
         add(scrollPane, BorderLayout.CENTER);
 
-        JPanel functionPanel = new JPanel(new GridLayout(2, 3));
+        themButton = new JButton("Thêm");
+        capnhatButton = new JButton("Cập nhật");
+        xoaButton = new JButton("Xóa");
+        timkiemButton = new JButton("Tìm kiếm");
+        tuKhoaTextField = new JTextField();
+
+        JPanel functionPanel = new JPanel(new GridLayout(7, 0, 0, 10));
+
+        functionPanel.add(tuKhoaTextField);
+        functionPanel.add(timkiemButton);
+        functionPanel.add(new Label());
+
         functionPanel.add(themButton);
         functionPanel.add(capnhatButton);
         functionPanel.add(xoaButton);
-        functionPanel.add(tuKhoaTextField);
-        functionPanel.add(timkiemButton);
-        add(functionPanel, BorderLayout.SOUTH);
-        
+
+        add(functionPanel, BorderLayout.EAST);
     }
 
     @Override
