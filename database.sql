@@ -1,57 +1,33 @@
-CREATE DATABASE jdbc_db;
-USE jdbc_db;
+CREATE DATABASE ltudvj;
+USE ltudvj;
 
-CREATE TABLE HangHoa (
-    MaHangHoa varchar(5) PRIMARY KEY,
-    TenHangHoa VARCHAR(50) NOT NULL,
-    slTonKho INT,
-    DonGia INT,
-    NgaySX date,
-    NgayHetHan date,
-    NhaCungCap VARCHAR(100),
-	ThoiGianBH VARCHAR(20),
-    CongSuat VARCHAR(20),
-	NgayNhapKho date,
-    NhaSX VARCHAR(100)
+CREATE TABLE SinhVien (
+    maSV varchar(10) PRIMARY KEY,
+    tenSV VARCHAR(50) NOT NULL,
+    nganh VARCHAR(50) NOT NULL,
+    lop VARCHAR(20) NOT NULL,
+	khoa VARCHAR(20),
+	bac VARCHAR(20),
+    danghoc boolean
 );
 
-INSERT INTO hanghoa (MaHangHoa, TenHangHoa, slTonKho, DonGia, NgaySX, NgayHetHan, NhaCungCap) 
-VALUES ('tp001', 'Hàng thực phẩm', 5, 100, '2023-01-01', '2023-01-02', 'Nhà cung cấp hàng thực phẩm');
-INSERT INTO hanghoa (MaHangHoa, TenHangHoa, slTonKho, DonGia, NgaySX, NgayHetHan, NhaCungCap) 
-VALUES ('tp002', 'Hàng thực phẩm', 3, 100, '2023-01-01', '2023-01-02', 'Nhà cung cấp hàng thực phẩm');
 
-INSERT INTO hanghoa (MaHangHoa, TenHangHoa, slTonKho, DonGia, ThoiGianBH, CongSuat) 
-VALUES ('dm001', 'Hàng điện máy', 5, 100, '20 tháng', '50W');
-INSERT INTO hanghoa (MaHangHoa, TenHangHoa, slTonKho, DonGia, ThoiGianBH, CongSuat) 
-VALUES ('dm002', 'Hàng điện máy', 4, 100, '30 tháng', '20W');
 
-INSERT INTO hanghoa (MaHangHoa, TenHangHoa, slTonKho, DonGia, NgayNhapKho, NhaSX) 
-VALUES ('ss001', 'Hàng sành sứ', 5, 100, '2023-01-01', 'Nhà sản suất hàng sành sứ');
-INSERT INTO hanghoa (MaHangHoa, TenHangHoa, slTonKho, DonGia, NgayNhapKho, NhaSX) 
-VALUES ('ss002', 'Hàng sành sứ', 6, 100, '2023-01-01', 'Nhà sản suất hàng sành sứ');
+INSERT INTO SinhVien (maSV, tenSV, nganh, lop, khoa, bac, danghoc) 
+VALUES ('sv0001', 'Sinh Viên 01', 'Kĩ thuật phần mềm', 'K15DCPM07', 'Công nghệ thông tin', 'Đại học', true);
+INSERT INTO SinhVien (maSV, tenSV, nganh, lop, khoa, bac, danghoc) 
+VALUES ('sv0002', 'Sinh Viên 02', 'Kĩ thuật phần mềm', 'K15DCPM07', 'Công nghệ thông tin', 'Đại học', true);
 
-SELECT * FROM jdbc_db.hanghoa;
+INSERT INTO SinhVien (maSV, tenSV, nganh, lop, khoa, bac, danghoc) 
+VALUES ('sv0003', 'Sinh Viên 03', 'Kĩ thuật phần mềm', 'K15DCPM07', 'Công nghệ thông tin', 'Đại học', false);
+INSERT INTO SinhVien (maSV, tenSV, nganh, lop, khoa, bac, danghoc) 
+VALUES ('sv0004', 'Sinh Viên 04', 'Kĩ thuật phần mềm', 'K15DCPM07', 'Công nghệ thông tin', 'Đại học', true);
+INSERT INTO SinhVien (maSV, tenSV, nganh, lop, khoa, bac, danghoc) 
+VALUES ('sv0005', 'Sinh Viên 05', 'Kĩ thuật phần mềm', 'K15DCPM07', 'Công nghệ thông tin', 'Đại học', false);
 
--- chức năng tìm kiếm
-DELIMITER $$
-CREATE PROCEDURE TimKiem(
-	tuKhoa VARCHAR(50))
-BEGIN
-    SELECT *
-    FROM HangHoa
-    WHERE 
-		lower(MaHangHoa) LIKE lower(CONCAT('%', tuKhoa, '%'))
-		OR lower(TenHangHoa) LIKE lower(CONCAT('%', tuKhoa, '%'))
-		OR lower(slTonKho) LIKE lower(CONCAT('%', tuKhoa, '%'))
-		OR lower(DonGia) LIKE lower(CONCAT('%', tuKhoa, '%'))
-		OR lower(NgaySX) LIKE lower(CONCAT('%', tuKhoa, '%'))
-        OR lower(NgayHetHan) LIKE lower(CONCAT('%', tuKhoa, '%'))
-        OR lower(NhaCungCap) LIKE lower(CONCAT('%', tuKhoa, '%'))
-        OR lower(ThoiGianBH) LIKE lower(CONCAT('%', tuKhoa, '%'))
-        OR lower(CongSuat) LIKE lower(CONCAT('%', tuKhoa, '%'))
-        OR lower(NgayNhapKho) LIKE lower(CONCAT('%', tuKhoa, '%'))
-        OR lower(NhaSX) LIKE lower(CONCAT('%', tuKhoa, '%'));
-END$$
-DELIMITER ;
+UPDATE sinhvien SET tenSV = 'Sinh Viên 06', nganh = 'Kĩ thuật phần mềm', lop = 'K15DCPM07', khoa = 'Công nghệ thông tin', bac = 'Đại học', danghoc = false WHERE maSV = 'sv0004';
 
-call TimKiem('01');
+SELECT * FROM SinhVien;
+SELECT * FROM SinhVien WHERE maSV = 'sv0003';
+
+
