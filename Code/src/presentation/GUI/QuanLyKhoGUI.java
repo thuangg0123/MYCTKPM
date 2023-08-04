@@ -19,7 +19,7 @@ import presentation.*;
 import presentation.Command.*;
 
 //View
-public class QuanLyKhoGUI extends JFrame implements Subscriber{
+public class QuanLyKhoGUI extends JFrame implements Subscriber {
     private QuanLyKhoController controllerRemote;
     private NguoiQuanLy modelRemote;
     private DefaultTableModel tableModel;
@@ -38,7 +38,7 @@ public class QuanLyKhoGUI extends JFrame implements Subscriber{
     public QuanLyKhoGUI() {
         setTitle("Quản lý hàng hóa trong kho");
         setSize(1280, 400);
-        setLocation(320, 340);
+        setLocation(1, 1);
         setDefaultCloseOperation(EXIT_ON_CLOSE);
         setLayout(new BorderLayout());
 
@@ -95,6 +95,30 @@ public class QuanLyKhoGUI extends JFrame implements Subscriber{
                 timTTHH();
             }
         });
+
+        JButton sapXepMaHangButton = new JButton("Sắp xếp theo mã");
+        sapXepMaHangButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                sapXepSanPhamTheoTieuChi("maHang");
+            }
+        });
+
+        JButton sapXepSoLuongTonButton = new JButton("Sắp xếp theo tồn kho");
+        sapXepSoLuongTonButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                sapXepSanPhamTheoTieuChi("soLuongTon");
+            }
+        });
+
+        JButton xuatFileButton = new JButton("Xuất file .txt");
+        xuatFileButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                xuatFileTxt();
+            }
+        });
         tuKhoaTextField = new JTextField();
 
         JPanel functionPanel = new JPanel(new GridLayout(7, 0, 0, 10));
@@ -106,27 +130,32 @@ public class QuanLyKhoGUI extends JFrame implements Subscriber{
         functionPanel.add(themButton);
         functionPanel.add(capnhatButton);
         functionPanel.add(xoaButton);
+        functionPanel.add(sapXepMaHangButton);
+        functionPanel.add(xuatFileButton);
+        functionPanel.add(sapXepSoLuongTonButton);
 
         add(functionPanel, BorderLayout.EAST);
         xemDSHangHoa();
     }
-    
+
     @Override
     public void update(List<HangHoa> hanghoaList) {
-        while(tableModel.getRowCount() != 0) {
+        while (tableModel.getRowCount() != 0) {
             tableModel.removeRow(0);
         }
         for (HangHoa hangHoa : hanghoaList) {
-            Object[] rowData = { hangHoa.getMaHang(), hangHoa.getTenHang(), hangHoa.getSoLuongTon(), hangHoa.getDonGia(), hangHoa.getNgaySX(), hangHoa.getNgayHetHan(),
-            hangHoa.getNhaCungCap(), hangHoa.getThoiGianBH(), hangHoa.getCongSuat(), hangHoa.getNgayNhapKho(), hangHoa.getNhaSanXuat()};
-            tableModel.addRow(rowData); 
+            Object[] rowData = { hangHoa.getMaHang(), hangHoa.getTenHang(), hangHoa.getSoLuongTon(),
+                    hangHoa.getDonGia(), hangHoa.getNgaySX(), hangHoa.getNgayHetHan(),
+                    hangHoa.getNhaCungCap(), hangHoa.getThoiGianBH(), hangHoa.getCongSuat(), hangHoa.getNgayNhapKho(),
+                    hangHoa.getNhaSanXuat() };
+            tableModel.addRow(rowData);
         }
     }
 
     public void xemDSHangHoa() {
         modelRemote.xemTTAllHH();
     }
-    
+
     public void themHangHoa() {
         new LoaiHangHoa(this, modelRemote, controllerRemote).setVisible(true);
     }
@@ -134,13 +163,13 @@ public class QuanLyKhoGUI extends JFrame implements Subscriber{
     public void capnhatHangGUI(int rowIndex) {
         String maHang;
         HangHoa hanghoa;
-        if( rowIndex == -1) {
+        if (rowIndex == -1) {
             maHang = JOptionPane.showInputDialog(null, "Nhập số mã hàng hóa cần xóa");
-            if(maHang != null) {
+            if (maHang != null) {
                 hanghoa = getDuLieu(maHang);
                 capnhatHang(hanghoa);
             }
-        } else{
+        } else {
             maHang = tableModel.getValueAt(rowIndex, 0).toString();
             hanghoa = getDuLieu(maHang);
             capnhatHang(hanghoa);
@@ -148,7 +177,7 @@ public class QuanLyKhoGUI extends JFrame implements Subscriber{
     }
 
     public void capnhatHang(HangHoa hanghoa) {
-        if(hanghoa.getNhaCungCap() != null) {
+        if (hanghoa.getNhaCungCap() != null) {
             HangThucPhamGUI temp = new HangThucPhamGUI(this, modelRemote, controllerRemote, 1);
             temp.setMaHang(hanghoa.getMaHang());
             temp.getTenHangTextField().setText(hanghoa.getTenHang());
@@ -158,7 +187,7 @@ public class QuanLyKhoGUI extends JFrame implements Subscriber{
             temp.getNgayHetHanTextField().setText(hanghoa.getNgayHetHan().toString());
             temp.getNhaCungCapTextField().setText(hanghoa.getNhaCungCap());
             temp.setVisible(true);
-        } else if(hanghoa.getCongSuat() != null) {
+        } else if (hanghoa.getCongSuat() != null) {
             HangDienMayGUI temp = new HangDienMayGUI(this, modelRemote, controllerRemote, 1);
             temp.setMaHang(hanghoa.getMaHang());
             temp.getTenHangTextField().setText(hanghoa.getTenHang());
@@ -167,7 +196,7 @@ public class QuanLyKhoGUI extends JFrame implements Subscriber{
             temp.getTgBaoHanhTextField().setText(hanghoa.getThoiGianBH().toString());
             temp.getCongSuatTextField().setText(hanghoa.getCongSuat());
             temp.setVisible(true);
-        } else if(hanghoa.getNhaSanXuat() != null) {
+        } else if (hanghoa.getNhaSanXuat() != null) {
             HangSanhSuGUI temp = new HangSanhSuGUI(this, modelRemote, controllerRemote, 1);
             temp.setMaHang(hanghoa.getMaHang());
             temp.getTenHangTextField().setText(hanghoa.getTenHang());
@@ -181,12 +210,12 @@ public class QuanLyKhoGUI extends JFrame implements Subscriber{
 
     public void xoaHangHoaGUI(int rowIndex) {
         String maHang;
-        if( rowIndex == -1) {
+        if (rowIndex == -1) {
             maHang = JOptionPane.showInputDialog(null, "Nhập số mã hàng hóa cần xóa");
-            if(maHang != null) {
+            if (maHang != null) {
                 xoaHangHoa(maHang);
             }
-        } else{
+        } else {
             maHang = tableModel.getValueAt(rowIndex, 0).toString();
             xoaHangHoa(maHang);
         }
@@ -204,5 +233,13 @@ public class QuanLyKhoGUI extends JFrame implements Subscriber{
 
     public HangHoa getDuLieu(String maHang) {
         return modelRemote.getDuLieu(maHang);
+    }
+
+    public void sapXepSanPhamTheoTieuChi(String tieuchisapxep) {
+        modelRemote.sapXepSanPham(tieuchisapxep);
+    }
+
+    public void xuatFileTxt() {
+        modelRemote.xuatFileTxt();
     }
 }
