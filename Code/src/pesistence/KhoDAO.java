@@ -13,4 +13,5 @@ public interface KhoDAO {
     int tongHangThucPham();
     int tongHangDienMay();
     int tongHangSanhSu();
+    List<HangHoa> xemDSHetHan(); 
 }

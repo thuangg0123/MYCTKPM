@@ -55,4 +55,10 @@ public class KhoDAOImpl implements KhoDAO{
     public int tongHangSanhSu() {
         return khoGatewayRemote.tongHangSanhSu();
     }
+
+    @Override
+    public List<HangHoa> xemDSHetHan() {
+        return khoGatewayRemote.xemDSHetHan();
+    }
+    
 }

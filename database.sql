@@ -16,9 +16,9 @@ CREATE TABLE HangHoa (
 );
 
 INSERT INTO hanghoa (MaHangHoa, TenHangHoa, slTonKho, DonGia, NgaySX, NgayHetHan, NhaCungCap) 
-VALUES ('tp001', 'Hàng thực phẩm', 5, 100, '2023-01-01', '2023-01-02', 'Nhà cung cấp hàng thực phẩm');
+VALUES ('tp001', 'Hàng thực phẩm', 5, 100, '2023-01-01', '2023-08-20', 'Nhà cung cấp hàng thực phẩm');
 INSERT INTO hanghoa (MaHangHoa, TenHangHoa, slTonKho, DonGia, NgaySX, NgayHetHan, NhaCungCap) 
-VALUES ('tp002', 'Hàng thực phẩm', 3, 100, '2023-01-01', '2023-01-02', 'Nhà cung cấp hàng thực phẩm');
+VALUES ('tp002', 'Hàng thực phẩm', 3, 100, '2023-01-01', '2023-08-10', 'Nhà cung cấp hàng thực phẩm');
 
 INSERT INTO hanghoa (MaHangHoa, TenHangHoa, slTonKho, DonGia, ThoiGianBH, CongSuat) 
 VALUES ('dm001', 'Hàng điện máy', 5, 100, '20 tháng', '50 kW');
@@ -86,3 +86,17 @@ BEGIN
 		NgayNhapKho is not null;
 END$$
 DELIMITER ;
+
+DELIMITER $$
+CREATE PROCEDURE SapHetHan()
+BEGIN
+    SELECT *
+    FROM HangHoa
+    WHERE 
+		datediff(hanghoa.NgayHetHan, CURDATE()) <= 7;
+END$$
+DELIMITER ;
+call SapHetHan();
+
+    SELECT datediff(hanghoa.NgayHetHan, CURDATE())
+    FROM HangHoa;

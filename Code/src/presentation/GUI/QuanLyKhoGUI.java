@@ -25,7 +25,7 @@ public class QuanLyKhoGUI extends JFrame implements Subscriber{
     private NguoiQuanLy modelRemote;
     private DefaultTableModel tableModel;
     private JTable table;
-    private JButton themButton, capnhatButton, xoaButton, timkiemButton;
+    private JButton themButton, capnhatButton, xoaButton, timkiemButton, hethanButton, xemAllButton;
     private JTextField tuKhoaTextField;
     private JLabel tongTonKhoTP, tongTonKhoDM, tongTonKhoSS; 
 
@@ -99,12 +99,30 @@ public class QuanLyKhoGUI extends JFrame implements Subscriber{
         });
         tuKhoaTextField = new JTextField();
 
-        JPanel functionPanel = new JPanel(new GridLayout(7, 0, 0, 10));
+        hethanButton = new JButton("Hàng sắp hết hạn");
+        hethanButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                xemDSHetHan();
+            }
+        });
+        
+        xemAllButton = new JButton("Xem danh sách hàng hóa");
+        xemAllButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                xemDSHangHoa();
+            }
+        });
+
+        JPanel functionPanel = new JPanel(new GridLayout(8, 0, 0, 10));
 
         functionPanel.add(tuKhoaTextField);
         functionPanel.add(timkiemButton);
         functionPanel.add(new Label());
 
+        functionPanel.add(xemAllButton);
+        functionPanel.add(hethanButton);
         functionPanel.add(themButton);
         functionPanel.add(capnhatButton);
         functionPanel.add(xoaButton);
@@ -131,6 +149,7 @@ public class QuanLyKhoGUI extends JFrame implements Subscriber{
         inforPanel.add(new Label());
         add(inforPanel, BorderLayout.SOUTH);
         xemDSHangHoa();
+        loadTongTonKho();
     }
     
     @Override
@@ -143,7 +162,13 @@ public class QuanLyKhoGUI extends JFrame implements Subscriber{
             hangHoa.getNhaCungCap(), hangHoa.getThoiGianBH(), hangHoa.getCongSuat(), hangHoa.getNgayNhapKho(), hangHoa.getNhaSanXuat()};
             tableModel.addRow(rowData); 
         }
-        loadTongTonKho();   
+    }
+
+    @Override
+    public void update(String[] tongTonKho) {
+        tongTonKhoTP.setText(tongTonKho[0]);
+        tongTonKhoDM.setText(tongTonKho[1]);
+        tongTonKhoSS.setText(tongTonKho[2]);
     }
 
     public void xemDSHangHoa() {
@@ -232,20 +257,10 @@ public class QuanLyKhoGUI extends JFrame implements Subscriber{
     }
 
     private void loadTongTonKho() {
-        tongTonKhoTP.setText(Integer.toString(tongHangThucPham()));
-        tongTonKhoDM.setText(Integer.toString(tongHangDienMay()));
-        tongTonKhoSS.setText(Integer.toString(tongHangSanhSu()));
+        modelRemote.tongTonKho();
     }
 
-    public int tongHangThucPham() {
-        return modelRemote.tongHangThucPham();
-    }
-
-    public int tongHangDienMay() {
-        return modelRemote.tongHangDienMay();
-    }
-
-    public int tongHangSanhSu() {
-        return modelRemote.tongHangSanhSu();
+    void xemDSHetHan() {
+        modelRemote.xemDSHetHan();
     }
 }

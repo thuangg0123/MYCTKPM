@@ -316,4 +316,16 @@ public class KhoGatewayImpl implements KhoGateway{
         }
         return 0;
     }
+
+    @Override
+    public List<HangHoa> xemDSHetHan() {
+                String sql = "call SapHetHan()";
+        try (Statement statement = connection.createStatement()) { 
+            ResultSet resultSet = statement.executeQuery(sql);
+            return kqTruySuat(resultSet);
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
 }

@@ -10,6 +10,7 @@ import presentation.Subscriber;
 public class NguoiQuanLyImpl implements NguoiQuanLy {
     private KhoDAO khoRemote;
     private List<HangHoa> hanghoaList;
+    private String[] tongTonKho = new String[3];
 
     public NguoiQuanLyImpl() {
         khoRemote = new KhoDAOImpl(new KhoGatewayImpl());
@@ -18,18 +19,21 @@ public class NguoiQuanLyImpl implements NguoiQuanLy {
     @Override
     public void themHang(int loaiHang, HangHoa hanghoa) {
         khoRemote.themHang(loaiHang, hanghoa);
+        tongTonKho();
         xemTTAllHH();
     }
 
     @Override
     public void capnhatHang(int loaiHang, HangHoa hanghoa) {
         khoRemote.capnhatHang(loaiHang, hanghoa);
+        tongTonKho();
         xemTTAllHH();
     }
 
     @Override
     public void xoaHang(String maHang) {
         khoRemote.xoaHang(maHang);
+        tongTonKho();
         xemTTAllHH();
     }
 
@@ -60,6 +64,7 @@ public class NguoiQuanLyImpl implements NguoiQuanLy {
     public void notifySubscribers() {
 		for(Subscriber s: subscribers) {
             s.update(hanghoaList);
+            s.update(tongTonKho);
 	    }
     }
 
@@ -74,17 +79,28 @@ public class NguoiQuanLyImpl implements NguoiQuanLy {
     }
 
     @Override
-    public int tongHangThucPham() {
-        return khoRemote.tongHangThucPham();
+    public void tongTonKho() {
+        tongHangThucPham();
+        tongHangDienMay();
+        tongHangSanhSu();
+        notifySubscribers();
+    }
+
+    public void tongHangThucPham() {
+        tongTonKho[0] = Integer.toString(khoRemote.tongHangThucPham()) ;
+    }
+
+    public void tongHangDienMay() {
+        tongTonKho[1] = Integer.toString(khoRemote.tongHangDienMay()) ;
+    }
+
+    public void tongHangSanhSu() {
+        tongTonKho[2] = Integer.toString(khoRemote.tongHangSanhSu()) ;
     }
 
     @Override
-    public int tongHangDienMay() {
-        return khoRemote.tongHangDienMay();
-    }
-
-    @Override
-    public int tongHangSanhSu() {
-        return khoRemote.tongHangSanhSu();
+    public void xemDSHetHan() {
+        hanghoaList = khoRemote.xemDSHetHan();
+        notifySubscribers();        
     }
 }

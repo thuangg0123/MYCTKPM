@@ -13,4 +13,5 @@ public interface KhoGateway {
     int tongHangThucPham();
     int tongHangDienMay();
     int tongHangSanhSu();
+    List<HangHoa> xemDSHetHan(); 
 }
