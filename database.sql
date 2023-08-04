@@ -21,9 +21,14 @@ INSERT INTO hanghoa (MaHangHoa, TenHangHoa, slTonKho, DonGia, NgaySX, NgayHetHan
 VALUES ('tp002', 'Hàng thực phẩm', 3, 100, '2023-01-01', '2023-08-10', 'Nhà cung cấp hàng thực phẩm');
 
 INSERT INTO hanghoa (MaHangHoa, TenHangHoa, slTonKho, DonGia, ThoiGianBH, CongSuat) 
+VALUES ('dm001', 'Hàng điện máy', 5, 100, '20 tháng', '50W');
+INSERT INTO hanghoa (MaHangHoa, TenHangHoa, slTonKho, DonGia, ThoiGianBH, CongSuat) 
+VALUES ('dm002', 'Hàng điện máy', 4, 100, '30 tháng', '20W');
+=======
 VALUES ('dm001', 'Hàng điện máy', 5, 100, '20 tháng', '50 kW');
 INSERT INTO hanghoa (MaHangHoa, TenHangHoa, slTonKho, DonGia, ThoiGianBH, CongSuat) 
 VALUES ('dm002', 'Hàng điện máy', 4, 100, '30 tháng', '20 kW');
+>>>>>>> d574994a20f7bea2a7cc908c8a4912ac59aa7bad
 
 INSERT INTO hanghoa (MaHangHoa, TenHangHoa, slTonKho, DonGia, NgayNhapKho, NhaSX) 
 VALUES ('ss001', 'Hàng sành sứ', 5, 100, '2023-01-01', 'Nhà sản suất hàng sành sứ');

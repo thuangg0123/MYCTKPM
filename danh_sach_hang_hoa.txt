@@ -1,0 +1,5 @@
+dm001	Hàng ?i?n máy 111	10	100.0	null	null	null	1.0 tháng	100.0 kW	null	null
+dm002	Hàng ?i?n máy	4	100.0	null	null	null	30 tháng	20W	null	null
+ss002	Hàng sành s?	6	100.0	null	null	null	null	null	2023-01-01	Nhà s?n su?t hàng sành s?
+tp001	Hàng th?c ph?m	5	100.0	2023-01-01	2023-01-02	Nhà cung c?p hàng th?c ph?m	null	null	null	null
+tp002	Hàng th?c ph?m	3	100.0	2023-01-01	2023-01-02	Nhà cung c?p hàng th?c ph?m	null	null	null	null
