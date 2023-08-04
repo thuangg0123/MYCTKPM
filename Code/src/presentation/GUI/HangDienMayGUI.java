@@ -77,7 +77,7 @@ public class HangDienMayGUI extends JFrame{
         inputPanel.add(slTonTextField);
         inputPanel.add(new JLabel("Đơn giá:"));
         inputPanel.add(donGiaTextField);
-        inputPanel.add(new JLabel("Thời gian bảo hành:"));
+        inputPanel.add(new JLabel("Thời gian bảo hành (tháng):"));
         inputPanel.add(tgBaoHanhTextField);
         inputPanel.add(new JLabel("Công suất:"));
         inputPanel.add(congSuatTextField);
@@ -154,13 +154,13 @@ public class HangDienMayGUI extends JFrame{
         } 
 
         try {
-            int congSuat = Integer.parseInt(congSuatTextField.getText());
+            Double congSuat = Double.parseDouble(congSuatTextField.getText());
             if(congSuat < 0) {
                 JOptionPane.showMessageDialog(this, "Công suất phải lớn hơn hoặc bằng 0", "Thông báo", JOptionPane.INFORMATION_MESSAGE);
                 return false;
             }
         } catch (Exception e) {
-            JOptionPane.showMessageDialog(this, "Công suất tồn kho phải là số nguyên", "Thông báo", JOptionPane.INFORMATION_MESSAGE);
+            JOptionPane.showMessageDialog(this, "Công suất phải là số", "Thông báo", JOptionPane.INFORMATION_MESSAGE);
             return false;
         }
         
@@ -171,8 +171,8 @@ public class HangDienMayGUI extends JFrame{
         String tenHang = tenHangTextField.getText();
         int slTon = Integer.parseInt(slTonTextField.getText());
         double donGia = Double.parseDouble(donGiaTextField.getText());
-        String tgBaoHanh = tgBaoHanhTextField.getText();
-        String congSuat = congSuatTextField.getText();
+        Double tgBaoHanh = Double.parseDouble(tgBaoHanhTextField.getText());
+        Double congSuat = Double.parseDouble(congSuatTextField.getText());
         if(choice == 0) {
             maHang = maHangTextField.getText();
         }

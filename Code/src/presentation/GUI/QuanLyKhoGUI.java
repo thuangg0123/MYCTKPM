@@ -193,8 +193,10 @@ public class QuanLyKhoGUI extends JFrame implements Subscriber {
             temp.getTenHangTextField().setText(hanghoa.getTenHang());
             temp.getSlTonTextField().setText(Integer.toString(hanghoa.getSoLuongTon()));
             temp.getDonGiaTextField().setText(Double.toString(hanghoa.getDonGia()));
-            temp.getTgBaoHanhTextField().setText(hanghoa.getThoiGianBH().toString());
-            temp.getCongSuatTextField().setText(hanghoa.getCongSuat());
+            String[] tgBaoHanh = hanghoa.getThoiGianBH().split(" ");
+            temp.getTgBaoHanhTextField().setText(tgBaoHanh[0]);
+            String[] congSuat = hanghoa.getCongSuat().split(" ");
+            temp.getCongSuatTextField().setText(congSuat[0]);
             temp.setVisible(true);
         } else if (hanghoa.getNhaSanXuat() != null) {
             HangSanhSuGUI temp = new HangSanhSuGUI(this, modelRemote, controllerRemote, 1);

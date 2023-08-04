@@ -10,6 +10,12 @@ public class HangDienMay extends HangHoa {
         this.congSuat = congSuat;
     }
 
+    public HangDienMay(String maHang, String tenHang, int soLuongTon, double donGia, Double thoiGianBH, Double congSuat) {
+        super(maHang, tenHang, soLuongTon, donGia);
+        this.thoiGianBH = thoiGianBH + " tháng";
+        this.congSuat = congSuat + " kW";
+    }
+
     @Override
     public double tinhVAT() {
         return 0.1 * donGia;
@@ -21,17 +27,7 @@ public class HangDienMay extends HangHoa {
     }
 
     @Override
-    public void setThoiGianBH(Double thoiGianBH) {
-        this.thoiGianBH = thoiGianBH + "tháng";
-    }
-
-    @Override
     public String getCongSuat() {
         return congSuat;
-    }
-
-    @Override
-    public void setCongSuat(int congSuat) {
-        this.congSuat = congSuat+"KW";
     }
 }
