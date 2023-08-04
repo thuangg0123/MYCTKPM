@@ -80,9 +80,9 @@ public class KhoGatewayImpl implements KhoGateway{
             statement.setString(6, hanghoa.getMaHang());
 
             if (statement.executeUpdate() > 0) {
-                JOptionPane.showMessageDialog(null, "Thêm mặt hàng thành công", "Thông báo", JOptionPane.INFORMATION_MESSAGE);
+                JOptionPane.showMessageDialog(null, "Cập nhật mặt hàng thành công", "Thông báo", JOptionPane.INFORMATION_MESSAGE);
             } else {
-                JOptionPane.showMessageDialog(null, "Thêm mặt hàng không thành công", "Thông báo", JOptionPane.ERROR_MESSAGE);
+                JOptionPane.showMessageDialog(null, "Cập nhật mặt hàng không thành công", "Thông báo", JOptionPane.ERROR_MESSAGE);
             }
         } catch (SQLException e) {
             e.printStackTrace();
