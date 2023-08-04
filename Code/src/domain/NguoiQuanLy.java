@@ -11,4 +11,6 @@ public interface NguoiQuanLy extends Publisher{
     double tinhVAT(HangHoa hanghoa);
     void tongTonKho();
     void xemDSHetHan();
+    void sapXepSanPham(String tieuchi);
+    void xuatFileTxt();
 }

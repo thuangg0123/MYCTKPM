@@ -17,12 +17,12 @@ public class LoaiHangHoa extends JFrame{
     private JPanel panel;
     private HangHoa hangHoa;
     private int loaiHangHoa;
+    
     /*
      0: Hàng thực phẩm
      1: Hàng điện máy
      2: Hàng sành sứ
      */
-
     public LoaiHangHoa(QuanLyKhoGUI viewRemote, NguoiQuanLy modelRemote, QuanLyKhoController controllerRemote) {
         panel = new JPanel(new GridLayout(0,3,10,10));
         thucphamButton = new JButton("Thực phẩm");

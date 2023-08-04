@@ -2,7 +2,6 @@ package presentation.Command;
 
 import domain.HangHoa;
 import domain.NguoiQuanLy;
-import java.util.Collections;
 
 public class SapXep extends Command {
     private int loaiHang;

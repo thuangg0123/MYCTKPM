@@ -25,7 +25,7 @@ public class QuanLyKhoGUI extends JFrame implements Subscriber{
     private NguoiQuanLy modelRemote;
     private DefaultTableModel tableModel;
     private JTable table;
-    private JButton themButton, capnhatButton, xoaButton, timkiemButton, hethanButton, xemAllButton;
+    private JButton themButton, capnhatButton, xoaButton, timkiemButton, hethanButton, xemAllButton, xuatFileButton, sapXepButton;
     private JTextField tuKhoaTextField;
     private JLabel tongTonKhoTP, tongTonKhoDM, tongTonKhoSS; 
 
@@ -115,7 +115,23 @@ public class QuanLyKhoGUI extends JFrame implements Subscriber{
             }
         });
 
-        JPanel functionPanel = new JPanel(new GridLayout(8, 0, 0, 10));
+        sapXepButton = new JButton("Sắp xếp");
+        sapXepButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                sapXepSanPham();
+            }
+        });
+
+        xuatFileButton = new JButton("Xuất file .txt");
+        xuatFileButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                xuatFileTxt();
+            }
+        });
+
+        JPanel functionPanel = new JPanel(new GridLayout(11, 0, 0, 10));
 
         functionPanel.add(tuKhoaTextField);
         functionPanel.add(timkiemButton);
@@ -126,6 +142,8 @@ public class QuanLyKhoGUI extends JFrame implements Subscriber{
         functionPanel.add(themButton);
         functionPanel.add(capnhatButton);
         functionPanel.add(xoaButton);
+        functionPanel.add(sapXepButton);
+        functionPanel.add(xuatFileButton);
 
         add(functionPanel, BorderLayout.EAST);
 
@@ -260,7 +278,15 @@ public class QuanLyKhoGUI extends JFrame implements Subscriber{
         modelRemote.tongTonKho();
     }
 
-    void xemDSHetHan() {
+    public void xemDSHetHan() {
         modelRemote.xemDSHetHan();
+    }
+
+    public void sapXepSanPham() {
+        new LoaiSapXep(this, modelRemote).setVisible(true);;
+    }
+
+    public void xuatFileTxt() {
+        modelRemote.xuatFileTxt();
     }
 }

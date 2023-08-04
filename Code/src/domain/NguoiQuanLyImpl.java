@@ -1,6 +1,13 @@
 package domain;
 
+import java.io.BufferedWriter;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
+
+import javax.swing.JOptionPane;
 
 import pesistence.KhoDAO;
 import pesistence.KhoDAOImpl;
@@ -102,5 +109,39 @@ public class NguoiQuanLyImpl implements NguoiQuanLy {
     public void xemDSHetHan() {
         hanghoaList = khoRemote.xemDSHetHan();
         notifySubscribers();        
+    }
+
+    @Override
+    public void xuatFileTxt() {
+        String tenFile = "danh_sach_hang_hoa";
+        try (BufferedWriter writer = new BufferedWriter(new FileWriter(tenFile + ".txt"))) {
+            for (HangHoa hangHoa : hanghoaList) {
+                writer.write(hangHoa.getMaHang() + "\t" + hangHoa.getTenHang() + "\t" + hangHoa.getSoLuongTon() + "\t"
+                        + hangHoa.getDonGia() + "\t" + hangHoa.getNgaySX() + "\t" + hangHoa.getNgayHetHan() + "\t"
+                        + hangHoa.getNhaCungCap() + "\t" + hangHoa.getThoiGianBH() + "\t" + hangHoa.getCongSuat()
+                        + "\t" + hangHoa.getNgayNhapKho() + "\t" + hangHoa.getNhaSanXuat() + "\n");
+            }
+            JOptionPane.showMessageDialog(null, "Xuất file thành công!");
+        } catch (IOException e) {
+            JOptionPane.showMessageDialog(null, "Lỗi khi xuất file: " + e.getMessage(), "Lỗi",
+                    JOptionPane.ERROR_MESSAGE);
+        }
+    }
+
+    @Override
+    public void sapXepSanPham(String tieuchisapxep) {
+        Collections.sort(hanghoaList, new Comparator<HangHoa>() {
+            @Override
+            public int compare(HangHoa hh1, HangHoa hh2) {
+                if (tieuchisapxep.equals("maHang")) {
+                    return hh1.getMaHang().compareTo(hh2.getMaHang());
+                } else if (tieuchisapxep.equals("soLuongTon")) {
+                    return Integer.compare(hh1.getSoLuongTon(), hh2.getSoLuongTon());
+                } else {
+                    return hh1.getMaHang().compareTo(hh2.getMaHang());
+                }
+            }
+        });
+        notifySubscribers();
     }
 }
