@@ -110,7 +110,7 @@ public class HangSanhSuGUI extends JFrame{
             if(maHangTextField.getText() == null || maHangTextField.getText().length() > 5) {
                 JOptionPane.showMessageDialog(this, "Mã hàng hóa là chuỗi 5 kí tự bất kì", "Thông báo", JOptionPane.INFORMATION_MESSAGE);
                 return false;
-            }else if(modelRemote.getDuLieu(maHangTextField.getText()) != null) {
+            }else if(modelRemote.xemThongTin1HH(maHangTextField.getText()) != null) {
                 JOptionPane.showMessageDialog(this, "Mã hàng hóa vừa nhập đã tồn tại", "Thông báo", JOptionPane.INFORMATION_MESSAGE);
                 return false;
             }

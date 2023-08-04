@@ -37,7 +37,22 @@ public class KhoDAOImpl implements KhoDAO{
     }
     
     @Override
-    public HangHoa getDuLieu(String maHang) {
-        return khoGatewayRemote.getDuLieu(maHang);
+    public HangHoa xemThongTin1HH(String maHang) {
+        return khoGatewayRemote.xemThongTin1HH(maHang);
+    }
+
+    @Override
+    public int tongHangThucPham() {
+        return khoGatewayRemote.tongHangThucPham();
+    }
+
+    @Override
+    public int tongHangDienMay() {
+        return khoGatewayRemote.tongHangDienMay();
+    }
+
+    @Override
+    public int tongHangSanhSu() {
+        return khoGatewayRemote.tongHangSanhSu();
     }
 }

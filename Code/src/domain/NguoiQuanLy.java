@@ -6,7 +6,10 @@ public interface NguoiQuanLy extends Publisher{
     void capnhatHang(int loaiHang, HangHoa hanghoa);
     void xoaHang(String maHang);
     void xemTTAllHH(); 
-    HangHoa getDuLieu(String maHang);
+    HangHoa xemThongTin1HH(String maHang);
     void timTTHH(String thongtin); 
     double tinhVAT(HangHoa hanghoa);
+    int tongHangThucPham();
+    int tongHangDienMay();
+    int tongHangSanhSu();
 }

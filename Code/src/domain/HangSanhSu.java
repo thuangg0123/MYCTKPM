@@ -11,12 +11,6 @@ public class HangSanhSu extends HangHoa {
         this.nhaSanXuat = nhaSanXuat;
     }
 
-    public HangSanhSu(String tenHang, int soLuongTon, Double donGia, Date ngayNhapKho, String nhaSanXuat) {
-        super(tenHang, soLuongTon, donGia);
-        this.ngayNhapKho = ngayNhapKho;
-        this.nhaSanXuat = nhaSanXuat;
-    }
-
     @Override
     double tinhVAT() {
         return 0.1 * donGia;
@@ -28,17 +22,7 @@ public class HangSanhSu extends HangHoa {
     }
 
     @Override
-    public void setNgayNhapKho(Date ngayNhapKho) {
-        this.ngayNhapKho = ngayNhapKho;
-    }
-
-    @Override
     public String getNhaSanXuat() {
         return nhaSanXuat;
-    }
-    
-    @Override
-    public void setNhaSanXuat(String nhaSanXuat) {
-        this.nhaSanXuat = nhaSanXuat;
     }
 }

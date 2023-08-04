@@ -64,12 +64,27 @@ public class NguoiQuanLyImpl implements NguoiQuanLy {
     }
 
     @Override
-    public HangHoa getDuLieu(String maHang) {
-        return khoRemote.getDuLieu(maHang);
+    public HangHoa xemThongTin1HH(String maHang) {
+        return khoRemote.xemThongTin1HH(maHang);
     }
 
     @Override
     public double tinhVAT(HangHoa hanghoa) {
         return hanghoa.tinhVAT();
+    }
+
+    @Override
+    public int tongHangThucPham() {
+        return khoRemote.tongHangThucPham();
+    }
+
+    @Override
+    public int tongHangDienMay() {
+        return khoRemote.tongHangDienMay();
+    }
+
+    @Override
+    public int tongHangSanhSu() {
+        return khoRemote.tongHangSanhSu();
     }
 }

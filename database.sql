@@ -55,3 +55,34 @@ END$$
 DELIMITER ;
 
 call TimKiem('01');
+
+DELIMITER $$
+CREATE PROCEDURE TonKhoHangDM()
+BEGIN
+    SELECT sum(slTonKho) as TongTonKho
+    FROM HangHoa
+    WHERE 
+		ThoiGianBH is not null;
+END$$
+DELIMITER ;
+call TonKhoHangTP();
+
+DELIMITER $$
+CREATE PROCEDURE TonKhoHangTP()
+BEGIN
+    SELECT sum(slTonKho) as TongTonKho
+    FROM HangHoa
+    WHERE 
+		NgaySX is not null;
+END$$
+DELIMITER ;
+
+DELIMITER $$
+CREATE PROCEDURE TonKhoHangSS()
+BEGIN
+    SELECT sum(slTonKho) as TongTonKho
+    FROM HangHoa
+    WHERE 
+		NgayNhapKho is not null;
+END$$
+DELIMITER ;
