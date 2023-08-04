@@ -8,6 +8,7 @@ import java.awt.event.ActionListener;
 import java.util.List;
 import javax.swing.JButton;
 import javax.swing.JFrame;
+import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
@@ -26,6 +27,7 @@ public class QuanLyKhoGUI extends JFrame implements Subscriber {
     private JTable table;
     private JButton themButton, capnhatButton, xoaButton, timkiemButton;
     private JTextField tuKhoaTextField;
+    private JLabel tongTonKhoTP, tongTonKhoDM, tongTonKhoSS;
 
     public QuanLyKhoController getControllerRemote() {
         return controllerRemote;
@@ -135,6 +137,26 @@ public class QuanLyKhoGUI extends JFrame implements Subscriber {
         functionPanel.add(sapXepSoLuongTonButton);
 
         add(functionPanel, BorderLayout.EAST);
+
+        JPanel inforPanel = new JPanel(new GridLayout(2, 6, 10, 0));
+        tongTonKhoTP = new JLabel();
+        tongTonKhoDM = new JLabel();
+        tongTonKhoSS = new JLabel();
+
+        inforPanel.add(new Label("Hang thuc pham"));
+        inforPanel.add(tongTonKhoTP);
+        inforPanel.add(new Label("Hang dien may"));
+        inforPanel.add(tongTonKhoDM);
+        inforPanel.add(new Label("Hang sanh su"));
+        inforPanel.add(tongTonKhoSS);
+
+        inforPanel.add(new Label());
+        inforPanel.add(new Label());
+        inforPanel.add(new Label());
+        inforPanel.add(new Label());
+        inforPanel.add(new Label());
+        inforPanel.add(new Label());
+        add(inforPanel, BorderLayout.SOUTH);
         xemDSHangHoa();
     }
 
@@ -150,6 +172,7 @@ public class QuanLyKhoGUI extends JFrame implements Subscriber {
                     hangHoa.getNhaSanXuat() };
             tableModel.addRow(rowData);
         }
+        loadTongTonKho();
     }
 
     public void xemDSHangHoa() {
@@ -164,14 +187,14 @@ public class QuanLyKhoGUI extends JFrame implements Subscriber {
         String maHang;
         HangHoa hanghoa;
         if (rowIndex == -1) {
-            maHang = JOptionPane.showInputDialog(null, "Nhập số mã hàng hóa cần xóa");
+            maHang = JOptionPane.showInputDialog(null, "Nhập số mã hàng hóa cần sửa");
             if (maHang != null) {
-                hanghoa = getDuLieu(maHang);
+                hanghoa = xemThongTin1HH(maHang);
                 capnhatHang(hanghoa);
             }
         } else {
             maHang = tableModel.getValueAt(rowIndex, 0).toString();
-            hanghoa = getDuLieu(maHang);
+            hanghoa = xemThongTin1HH(maHang);
             capnhatHang(hanghoa);
         }
     }
@@ -233,8 +256,26 @@ public class QuanLyKhoGUI extends JFrame implements Subscriber {
         controllerRemote.execute(timKiem);
     }
 
-    public HangHoa getDuLieu(String maHang) {
-        return modelRemote.getDuLieu(maHang);
+    public HangHoa xemThongTin1HH(String maHang) {
+        return modelRemote.xemThongTin1HH(maHang);
+    }
+
+    private void loadTongTonKho() {
+        tongTonKhoTP.setText(Integer.toString(tongHangThucPham()));
+        tongTonKhoDM.setText(Integer.toString(tongHangDienMay()));
+        tongTonKhoSS.setText(Integer.toString(tongHangSanhSu()));
+    }
+
+    public int tongHangThucPham() {
+        return modelRemote.tongHangThucPham();
+    }
+
+    public int tongHangDienMay() {
+        return modelRemote.tongHangDienMay();
+    }
+
+    public int tongHangSanhSu() {
+        return modelRemote.tongHangSanhSu();
     }
 
     public void sapXepSanPhamTheoTieuChi(String tieuchisapxep) {

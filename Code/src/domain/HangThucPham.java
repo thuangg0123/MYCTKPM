@@ -31,27 +31,12 @@ public class HangThucPham extends HangHoa {
     }
 
     @Override
-    public void setNgaySX(Date ngaySX) {
-        this.ngaySX = ngaySX;
-    }
-
-    @Override
     public Date getNgayHetHan() {
         return ngayHetHan;
     }
 
     @Override
-    public void setNgayHetHan(Date ngayHetHan) {
-        this.ngayHetHan = ngayHetHan;
-    }
-
-    @Override
     public String getNhaCungCap() {
         return nhaCungCap;
-    }
-
-    @Override
-    public void setNhaCungCap(String nhaCungCap) {
-        this.nhaCungCap = nhaCungCap;
     }
 }

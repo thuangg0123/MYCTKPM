@@ -21,7 +21,6 @@ INSERT INTO hanghoa (MaHangHoa, TenHangHoa, slTonKho, DonGia, NgaySX, NgayHetHan
 VALUES ('tp002', 'Hàng thực phẩm', 3, 100, '2023-01-01', '2023-01-02', 'Nhà cung cấp hàng thực phẩm');
 
 INSERT INTO hanghoa (MaHangHoa, TenHangHoa, slTonKho, DonGia, ThoiGianBH, CongSuat) 
-<<<<<<< HEAD
 VALUES ('dm001', 'Hàng điện máy', 5, 100, '20 tháng', '50W');
 INSERT INTO hanghoa (MaHangHoa, TenHangHoa, slTonKho, DonGia, ThoiGianBH, CongSuat) 
 VALUES ('dm002', 'Hàng điện máy', 4, 100, '30 tháng', '20W');
@@ -61,3 +60,34 @@ END$$
 DELIMITER ;
 
 call TimKiem('01');
+
+DELIMITER $$
+CREATE PROCEDURE TonKhoHangDM()
+BEGIN
+    SELECT sum(slTonKho) as TongTonKho
+    FROM HangHoa
+    WHERE 
+		ThoiGianBH is not null;
+END$$
+DELIMITER ;
+call TonKhoHangTP();
+
+DELIMITER $$
+CREATE PROCEDURE TonKhoHangTP()
+BEGIN
+    SELECT sum(slTonKho) as TongTonKho
+    FROM HangHoa
+    WHERE 
+		NgaySX is not null;
+END$$
+DELIMITER ;
+
+DELIMITER $$
+CREATE PROCEDURE TonKhoHangSS()
+BEGIN
+    SELECT sum(slTonKho) as TongTonKho
+    FROM HangHoa
+    WHERE 
+		NgayNhapKho is not null;
+END$$
+DELIMITER ;

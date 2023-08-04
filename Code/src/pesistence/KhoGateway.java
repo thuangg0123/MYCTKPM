@@ -8,6 +8,9 @@ public interface KhoGateway {
     void capnhatHang(int loaiHang, HangHoa hanghoa);
     void xoaHang(String maHang);
     List<HangHoa> xemTTAllHH(); 
-    HangHoa getDuLieu(String maHang);
+    HangHoa xemThongTin1HH(String maHang);
     List<HangHoa> timTTHH(String thongtin); 
+    int tongHangThucPham();
+    int tongHangDienMay();
+    int tongHangSanhSu();
 }

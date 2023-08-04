@@ -2,6 +2,11 @@ package domain;
 
 //Model
 public interface NguoiQuanLy extends Publisher {
+
+    void sapXepSanPham(String tieuchisapxep);
+
+    void xuatFileTxt();
+
     void themHang(int loaiHang, HangHoa hanghoa);
 
     void capnhatHang(int loaiHang, HangHoa hanghoa);
@@ -10,13 +15,15 @@ public interface NguoiQuanLy extends Publisher {
 
     void xemTTAllHH();
 
-    HangHoa getDuLieu(String maHang);
+    HangHoa xemThongTin1HH(String maHang);
 
     void timTTHH(String thongtin);
 
     double tinhVAT(HangHoa hanghoa);
 
-    void sapXepSanPham(String tieuchisapxep);
+    int tongHangThucPham();
 
-    void xuatFileTxt();
+    int tongHangDienMay();
+
+    int tongHangSanhSu();
 }

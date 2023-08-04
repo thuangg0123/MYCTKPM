@@ -239,7 +239,7 @@ public class KhoGatewayImpl implements KhoGateway {
     }
 
     @Override
-    public HangHoa getDuLieu(String maHang) {
+    public HangHoa xemThongTin1HH(String maHang) {
         HangHoa hanghoa = null;
         try {
             Statement statement = connection.createStatement();
@@ -275,5 +275,56 @@ public class KhoGatewayImpl implements KhoGateway {
             return null;
         }
         return null;
+    }
+
+    @Override
+    public int tongHangThucPham() {
+        String sql = "call TonKhoHangTP()";
+        try (Statement statement = connection.createStatement()) { 
+            ResultSet resultSet = statement.executeQuery(sql);
+
+            while (resultSet.next()) {
+                int tongTonKho = resultSet.getInt("TongTonKho");
+                return tongTonKho;
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return 0;
+        }
+        return 0;
+    }
+
+    @Override
+    public int tongHangDienMay() {
+        String sql = "call TonKhoHangDM()";
+        try (Statement statement = connection.createStatement()) { 
+            ResultSet resultSet = statement.executeQuery(sql);
+
+            while (resultSet.next()) {
+                int tongTonKho = resultSet.getInt("TongTonKho");
+                return tongTonKho;
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return 0;
+        }
+        return 0;
+    }
+
+    @Override
+    public int tongHangSanhSu() {
+        String sql = "call TonKhoHangSS()";
+        try (Statement statement = connection.createStatement()) { 
+            ResultSet resultSet = statement.executeQuery(sql);
+
+            while (resultSet.next()) {
+                int tongTonKho = resultSet.getInt("TongTonKho");
+                return tongTonKho;
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return 0;
+        }
+        return 0;
     }
 }

@@ -43,48 +43,27 @@ public abstract class HangHoa {
         return null;
     }
 
-    public void setThoiGianBH(Double d) {
-    }
-
     public String getCongSuat() {
         return null;
-    }
-
-    public void setCongSuat(int i) {
     }
     
     public Date getNgayNhapKho() {
         return null;
     }
 
-    public void setNgayNhapKho(Date date) {
-    }
-
     public String getNhaSanXuat() {
         return null;
-    }
-
-    public void setNhaSanXuat(String string) {
     }
 
     public Date getNgaySX() {
         return null;
     }
 
-    public void setNgaySX(Date date) {
-    }
-
     public Date getNgayHetHan() {
         return null;
     }
 
-    public void setNgayHetHan(Date date) {
-    }
-
     public String getNhaCungCap() {
         return null;
-    }
-
-    public void setNhaCungCap(String string) {
     }
 }

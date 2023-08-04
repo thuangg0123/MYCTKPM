@@ -1,6 +1,7 @@
 {
     "java.project.referencedLibraries": [
         "lib/**/*.jar",
-        "c:\\Users\\Sol\\OneDrive - nhg.vn\\Desktop\\mysql-connector-j-8.1.0\\mysql-connector-j-8.1.0.jar"
+        "c:\\Users\\Sol\\OneDrive - nhg.vn\\Desktop\\mysql-connector-j-8.1.0\\mysql-connector-j-8.1.0.jar",
+        "mysql-connector-j-8.1.0/mysql-connector-j-8.1.0.jar"
     ]
 }
