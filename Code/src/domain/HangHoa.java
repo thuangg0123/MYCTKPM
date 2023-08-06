@@ -38,7 +38,7 @@ public abstract class HangHoa {
     public double getDonGia() {
         return donGia;
     }
-    
+
     public String getThoiGianBH() {
         return null;
     }
@@ -46,7 +46,7 @@ public abstract class HangHoa {
     public String getCongSuat() {
         return null;
     }
-    
+
     public Date getNgayNhapKho() {
         return null;
     }
@@ -57,6 +57,14 @@ public abstract class HangHoa {
 
     public Date getNgaySX() {
         return null;
+
+        // if (ngaySX == null) {
+        // // Return a default value or handle the case when ngaySX is null
+        // // For example, you can return the minimum possible date value as a sentinel.
+        // return new Date(Long.MIN_VALUE);
+        // } else {
+        // return ngaySX;
+        // }
     }
 
     public Date getNgayHetHan() {

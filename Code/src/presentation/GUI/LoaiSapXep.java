@@ -11,17 +11,17 @@ import javax.swing.JPanel;
 
 import domain.*;
 
-public class LoaiSapXep extends JFrame{
-    private JButton theoMaHangButton, theoSLTonButton, tempButton;
+public class LoaiSapXep extends JFrame {
+    private JButton theoMaHangButton, theoSLTonButton, theoDonGiaButton, theoTenHang, tempButton;
     private JPanel panel;
 
     /*
-     0: Hàng thực phẩm
-     1: Hàng điện máy
-     2: Hàng sành sứ
+     * 0: Hàng thực phẩm
+     * 1: Hàng điện máy
+     * 2: Hàng sành sứ
      */
     public LoaiSapXep(QuanLyKhoGUI viewRemote, NguoiQuanLy modelRemote) {
-        panel = new JPanel(new GridLayout(0,3,10,10));
+        panel = new JPanel(new GridLayout(0, 4, 10, 10));
 
         theoMaHangButton = new JButton("Sắp xếp theo mã");
         theoMaHangButton.addActionListener(new ActionListener() {
@@ -41,6 +41,24 @@ public class LoaiSapXep extends JFrame{
             }
         });
 
+        theoDonGiaButton = new JButton("Sắp xếp theo đơn giá");
+        theoDonGiaButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                modelRemote.sapXepSanPham("donGia");
+                dispose();
+            }
+        });
+
+        theoTenHang = new JButton("Sắp xếp theo tên hàng");
+        theoTenHang.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                modelRemote.sapXepSanPham("tenHang");
+                dispose();
+            }
+        });
+
         tempButton = new JButton("temp");
         tempButton.addActionListener(new ActionListener() {
             @Override
@@ -48,13 +66,16 @@ public class LoaiSapXep extends JFrame{
                 dispose();
             }
         });
+
         panel.add(theoMaHangButton);
         panel.add(theoSLTonButton);
+        panel.add(theoDonGiaButton);
+        panel.add(theoTenHang);
         panel.add(tempButton);
 
         setTitle("Chọn thể loại sắp xếp");
-        setSize(500, 100);
-        setLocation(760, 390);    
+        setSize(800, 100);
+        setLocation(200, 200);
         setDefaultCloseOperation(LoaiHangHoa.EXIT_ON_CLOSE);
         setLayout(new BorderLayout());
         add(panel);

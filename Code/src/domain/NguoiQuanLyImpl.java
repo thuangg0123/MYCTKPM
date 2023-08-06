@@ -58,21 +58,21 @@ public class NguoiQuanLyImpl implements NguoiQuanLy {
 
     @Override
     public void subscribe(Subscriber subscriber) {
-        subscribers.add(subscriber); 
+        subscribers.add(subscriber);
 
     }
 
     @Override
     public void unsubscribe(Subscriber subscriber) {
-        subscribers.remove(subscriber); 
+        subscribers.remove(subscriber);
     }
 
     @Override
     public void notifySubscribers() {
-		for(Subscriber s: subscribers) {
+        for (Subscriber s : subscribers) {
             s.update(hanghoaList);
             s.update(tongTonKho);
-	    }
+        }
     }
 
     @Override
@@ -94,21 +94,21 @@ public class NguoiQuanLyImpl implements NguoiQuanLy {
     }
 
     public void tongHangThucPham() {
-        tongTonKho[0] = Integer.toString(khoRemote.tongHangThucPham()) ;
+        tongTonKho[0] = Integer.toString(khoRemote.tongHangThucPham());
     }
 
     public void tongHangDienMay() {
-        tongTonKho[1] = Integer.toString(khoRemote.tongHangDienMay()) ;
+        tongTonKho[1] = Integer.toString(khoRemote.tongHangDienMay());
     }
 
     public void tongHangSanhSu() {
-        tongTonKho[2] = Integer.toString(khoRemote.tongHangSanhSu()) ;
+        tongTonKho[2] = Integer.toString(khoRemote.tongHangSanhSu());
     }
 
     @Override
     public void xemDSHetHan() {
         hanghoaList = khoRemote.xemDSHetHan();
-        notifySubscribers();        
+        notifySubscribers();
     }
 
     @Override
@@ -135,8 +135,12 @@ public class NguoiQuanLyImpl implements NguoiQuanLy {
             public int compare(HangHoa hh1, HangHoa hh2) {
                 if (tieuchisapxep.equals("maHang")) {
                     return hh1.getMaHang().compareTo(hh2.getMaHang());
+                } else if (tieuchisapxep.equals("tenHang")) {
+                    return hh1.getTenHang().compareTo(hh2.getTenHang());
                 } else if (tieuchisapxep.equals("soLuongTon")) {
                     return Integer.compare(hh1.getSoLuongTon(), hh2.getSoLuongTon());
+                } else if (tieuchisapxep.equals("donGia")) {
+                    return Double.compare(hh1.getDonGia(), hh2.getDonGia());
                 } else {
                     return hh1.getMaHang().compareTo(hh2.getMaHang());
                 }
