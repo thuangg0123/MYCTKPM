@@ -15,7 +15,7 @@ public class CapNhat extends Command{
 
     @Override
     public void execute() {
-        modelRemote.capnhatHang(loaiHang, hanghoa);
+        modelRemote.capnhatHH(loaiHang, hanghoa);
     }
     
 }

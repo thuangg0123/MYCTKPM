@@ -5,60 +5,60 @@ import java.util.List;
 import domain.HangHoa;
 
 public class KhoDAOImpl implements KhoDAO{
-    private KhoGateway khoGatewayRemote;
+    private KhoJDBC khoJDBCRemote;
     
-    public KhoDAOImpl(KhoGateway khoGatewayRemote) {
-        this.khoGatewayRemote = khoGatewayRemote;
+    public KhoDAOImpl(KhoJDBC khoJDBCRemote) {
+        this.khoJDBCRemote = khoJDBCRemote;
     }
 
     @Override
     public void capnhatHang(int loaiHang, HangHoa hanghoa) {
-        khoGatewayRemote.capnhatHang(loaiHang, hanghoa);
+        khoJDBCRemote.capnhatHang(loaiHang, hanghoa);
     }
         
     @Override
     public void themHang(int loaiHang, HangHoa hanghoa) {
-        khoGatewayRemote.themHang(loaiHang, hanghoa);
+        khoJDBCRemote.themHang(loaiHang, hanghoa);
     }
 
     @Override
     public List<HangHoa> timTTHH(String thongtin) {
-        return khoGatewayRemote.timTTHH(thongtin);
+        return khoJDBCRemote.timTTHH(thongtin);
     }
 
     @Override
     public List<HangHoa> xemTTAllHH() {
-        return khoGatewayRemote.xemTTAllHH();
+        return khoJDBCRemote.xemTTAllHH();
     }
 
     @Override
     public void xoaHang(String maHang) {
-        khoGatewayRemote.xoaHang(maHang);
+        khoJDBCRemote.xoaHang(maHang);
     }
     
     @Override
     public HangHoa xemThongTin1HH(String maHang) {
-        return khoGatewayRemote.xemThongTin1HH(maHang);
+        return khoJDBCRemote.xemThongTin1HH(maHang);
     }
 
     @Override
     public int tongHangThucPham() {
-        return khoGatewayRemote.tongHangThucPham();
+        return khoJDBCRemote.tongHangThucPham();
     }
 
     @Override
     public int tongHangDienMay() {
-        return khoGatewayRemote.tongHangDienMay();
+        return khoJDBCRemote.tongHangDienMay();
     }
 
     @Override
     public int tongHangSanhSu() {
-        return khoGatewayRemote.tongHangSanhSu();
+        return khoJDBCRemote.tongHangSanhSu();
     }
 
     @Override
     public List<HangHoa> xemDSHetHan() {
-        return khoGatewayRemote.xemDSHetHan();
+        return khoJDBCRemote.xemDSHetHan();
     }
     
 }

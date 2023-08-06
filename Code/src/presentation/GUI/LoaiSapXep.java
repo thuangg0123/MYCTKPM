@@ -27,7 +27,7 @@ public class LoaiSapXep extends JFrame {
         theoMaHangButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                modelRemote.sapXepSanPham("maHang");
+                modelRemote.sapXepHH("maHang");
                 dispose();
             }
         });
@@ -36,7 +36,7 @@ public class LoaiSapXep extends JFrame {
         theoSLTonButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                modelRemote.sapXepSanPham("soLuongTon");
+                modelRemote.sapXepHH("soLuongTon");
                 dispose();
             }
         });
@@ -45,7 +45,7 @@ public class LoaiSapXep extends JFrame {
         theoDonGiaButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                modelRemote.sapXepSanPham("donGia");
+                modelRemote.sapXepHH("donGia");
                 dispose();
             }
         });
@@ -54,7 +54,7 @@ public class LoaiSapXep extends JFrame {
         theoTenHang.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                modelRemote.sapXepSanPham("tenHang");
+                modelRemote.sapXepHH("tenHang");
                 dispose();
             }
         });

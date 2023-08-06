@@ -3,36 +3,36 @@ package domain;
 import java.util.Date;
 
 public abstract class HangHoa {
-    protected String maHang;
-    protected String tenHang;
-    protected int soLuongTon;
+    protected String maHH;
+    protected String tenHH;
+    protected int slTon;
     protected double donGia;
 
-    public HangHoa(String maHang, String tenHang, int soLuongTon, double donGia) {
-        this.maHang = maHang;
-        this.tenHang = tenHang;
-        this.soLuongTon = soLuongTon;
+    public HangHoa(String maHH, String tenHH, int slTon, double donGia) {
+        this.maHH = maHH;
+        this.tenHH = tenHH;
+        this.slTon = slTon;
         this.donGia = donGia;
     }
 
-    public HangHoa(String tenHang, int soLuongTon, double donGia) {
-        this.tenHang = tenHang;
-        this.soLuongTon = soLuongTon;
+    public HangHoa(String tenHH, int slTon, double donGia) {
+        this.tenHH = tenHH;
+        this.slTon = slTon;
         this.donGia = donGia;
     }
 
     abstract double tinhVAT();
 
-    public String getMaHang() {
-        return maHang;
+    public String getMaHH() {
+        return maHH;
     }
 
-    public String getTenHang() {
-        return tenHang;
+    public String getTenHH() {
+        return tenHH;
     }
 
-    public int getSoLuongTon() {
-        return soLuongTon;
+    public int getSlTon() {
+        return slTon;
     }
 
     public double getDonGia() {
@@ -47,31 +47,23 @@ public abstract class HangHoa {
         return null;
     }
 
-    public Date getNgayNhapKho() {
+    public Date getNgayNK() {
         return null;
     }
 
-    public String getNhaSanXuat() {
+    public String getNhaSX() {
         return null;
     }
 
     public Date getNgaySX() {
         return null;
-
-        // if (ngaySX == null) {
-        // // Return a default value or handle the case when ngaySX is null
-        // // For example, you can return the minimum possible date value as a sentinel.
-        // return new Date(Long.MIN_VALUE);
-        // } else {
-        // return ngaySX;
-        // }
     }
 
-    public Date getNgayHetHan() {
+    public Date getNgayHH() {
         return null;
     }
 
-    public String getNhaCungCap() {
+    public String getNhaCC() {
         return null;
     }
 }

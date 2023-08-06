@@ -12,7 +12,7 @@ public class Xoa extends Command{
 
     @Override
     public void execute() {
-        modelRemote.xoaHang(maHang);
+        modelRemote.xoaHH(maHang);
     }
     
 }

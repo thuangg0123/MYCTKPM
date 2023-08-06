@@ -2,13 +2,13 @@ package domain;
 import java.util.Date;
 
 public class HangSanhSu extends HangHoa {
-    private Date ngayNhapKho;
-    private String nhaSanXuat;
+    private Date ngayNK;
+    private String nhaSX;
 
-    public HangSanhSu(String maHang, String tenHang, int soLuongTon, Double donGia, Date ngayNhapKho, String nhaSanXuat) {
-        super(maHang, tenHang, soLuongTon, donGia);
-        this.ngayNhapKho = ngayNhapKho;
-        this.nhaSanXuat = nhaSanXuat;
+    public HangSanhSu(String maHH, String tenHH, int slTon, Double donGia, Date ngayNK, String nhaSX) {
+        super(maHH, tenHH, slTon, donGia);
+        this.ngayNK = ngayNK;
+        this.nhaSX = nhaSX;
     }
 
     @Override
@@ -17,12 +17,12 @@ public class HangSanhSu extends HangHoa {
     }
 
     @Override
-    public Date getNgayNhapKho() {
-        return ngayNhapKho;
+    public Date getNgayNK() {
+        return ngayNK;
     }
 
     @Override
-    public String getNhaSanXuat() {
-        return nhaSanXuat;
+    public String getNhaSX() {
+        return nhaSX;
     }
 }

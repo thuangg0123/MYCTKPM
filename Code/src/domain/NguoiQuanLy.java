@@ -1,16 +1,19 @@
 package domain;
 
+import java.io.IOException;
+
 //Model
 public interface NguoiQuanLy extends Publisher{
-    void themHang(int loaiHang, HangHoa hanghoa);
-    void capnhatHang(int loaiHang, HangHoa hanghoa);
-    void xoaHang(String maHang);
+    void themHH(int loaiHang, HangHoa hanghoa);
+    void capnhatHH(int loaiHang, HangHoa hanghoa);
+    void xoaHH(String maHang);
     void xemTTAllHH(); 
     HangHoa xemThongTin1HH(String maHang);
     void timTTHH(String thongtin); 
     double tinhVAT(HangHoa hanghoa);
     void tongTonKho();
     void xemDSHetHan();
-    void sapXepSanPham(String tieuchi);
-    void xuatFileTxt();
+    void sapXepHH(String tieuchi);
+    void xuatFile() throws IOException;
+    void nhapFile() throws IOException;
 }
