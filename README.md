@@ -12,3 +12,5 @@ Phần mềm có các chức năng:
 - Command Processor
 - Observer
 - DAO
+- Facade
+- Singleton

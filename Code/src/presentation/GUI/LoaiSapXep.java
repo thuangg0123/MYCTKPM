@@ -12,71 +12,57 @@ import javax.swing.JPanel;
 import domain.*;
 
 public class LoaiSapXep extends JFrame {
-    private JButton theoMaHangButton, theoSLTonButton, theoDonGiaButton, theoTenHang, tempButton;
+    private JButton theoMaHangButton, theoSLTonButton, theoDonGiaButton, theoTenHang;
     private JPanel panel;
 
-    /*
-     * 0: Hàng thực phẩm
-     * 1: Hàng điện máy
-     * 2: Hàng sành sứ
-     */
-    public LoaiSapXep(QuanLyKhoGUI viewRemote, NguoiQuanLy modelRemote) {
+    public LoaiSapXep(QuanLyKhoGUI viewRemote, Facade facadeRemote) {
         panel = new JPanel(new GridLayout(0, 4, 10, 10));
 
-        theoMaHangButton = new JButton("Sắp xếp theo mã");
+        theoMaHangButton = new JButton("Theo mã");
         theoMaHangButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                modelRemote.sapXepHH("maHang");
+                facadeRemote.sapXepHH("maHang");
                 dispose();
             }
         });
 
-        theoSLTonButton = new JButton("Sắp xếp theo tồn kho");
+        theoSLTonButton = new JButton("Theo số lượng tồn kho");
         theoSLTonButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                modelRemote.sapXepHH("soLuongTon");
+                facadeRemote.sapXepHH("soLuongTon");
                 dispose();
             }
         });
 
-        theoDonGiaButton = new JButton("Sắp xếp theo đơn giá");
+        theoDonGiaButton = new JButton("Theo đơn giá");
         theoDonGiaButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                modelRemote.sapXepHH("donGia");
+                facadeRemote.sapXepHH("donGia");
                 dispose();
             }
         });
 
-        theoTenHang = new JButton("Sắp xếp theo tên hàng");
+        theoTenHang = new JButton("Theo tên");
         theoTenHang.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                modelRemote.sapXepHH("tenHang");
-                dispose();
-            }
-        });
-
-        tempButton = new JButton("temp");
-        tempButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
+                facadeRemote.sapXepHH("tenHang");
                 dispose();
             }
         });
 
         panel.add(theoMaHangButton);
+        panel.add(theoTenHang);
         panel.add(theoSLTonButton);
         panel.add(theoDonGiaButton);
-        panel.add(theoTenHang);
-        panel.add(tempButton);
 
         setTitle("Chọn thể loại sắp xếp");
         setSize(800, 100);
-        setLocation(200, 200);
-        setDefaultCloseOperation(LoaiHangHoa.EXIT_ON_CLOSE);
+        setLocation(560, 490);
+        setDefaultCloseOperation(LoaiSapXep.DISPOSE_ON_CLOSE);
         setLayout(new BorderLayout());
         add(panel);
     }

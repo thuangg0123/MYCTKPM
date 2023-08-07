@@ -60,5 +60,9 @@ public class KhoDAOImpl implements KhoDAO{
     public List<HangHoa> xemDSHetHan() {
         return khoJDBCRemote.xemDSHetHan();
     }
-    
+
+    @Override
+    public void xoaAll() {
+        khoJDBCRemote.xoaAll();
+    }
 }

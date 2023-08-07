@@ -5,6 +5,8 @@ import java.awt.GridLayout;
 import java.awt.Label;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import java.util.List;
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -18,14 +20,21 @@ import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.JTextField;
 import javax.swing.table.DefaultTableModel;
-import domain.*;
-import presentation.*;
-import presentation.Command.*;
+
+import domain.Facade;
+import domain.HangHoa;
+import presentation.QuanLyKhoController;
+import presentation.Subscriber;
+import presentation.Command.Command;
+import presentation.Command.NhapFile;
+import presentation.Command.TimKiem;
+import presentation.Command.Xoa;
+import presentation.Command.XuatFile;
 
 //View
 public class QuanLyKhoGUI extends JFrame implements Subscriber {
     private QuanLyKhoController controllerRemote;
-    private NguoiQuanLy modelRemote;
+    private Facade facadeRemote;
     private DefaultTableModel tableModel;
     private JTable table;
     private JButton themButton, capnhatButton, xoaButton, timkiemButton, hethanButton, xemAllButton, sapXepButton;
@@ -36,34 +45,33 @@ public class QuanLyKhoGUI extends JFrame implements Subscriber {
         return controllerRemote;
     }
 
-    public NguoiQuanLy getModelRemote() {
-        return modelRemote;
-    }
-
     public QuanLyKhoGUI() {
         setTitle("Quản lý hàng hóa trong kho");
-        setSize(1280, 400);
-        setLocation(320, 340);
+        setSize(1600, 400);
+        setLocation(160, 340);
         setDefaultCloseOperation(EXIT_ON_CLOSE);
         setLayout(new BorderLayout());
 
-        modelRemote = new NguoiQuanLyImpl();
-        modelRemote.subscribe(this);
+        facadeRemote = Facade.getInstance();
+        facadeRemote.subscribe(this);
         controllerRemote = new QuanLyKhoController();
 
         JMenuBar menuBar = new JMenuBar();
-        JMenu fileMenu = new JMenu("File");
 
-        JMenuItem nhapFileItem = new JMenuItem("Nhập dữ liệu từ file excel");
-        JMenuItem xuatFileItem = new JMenuItem("Xuất dữ liệu ra file excel");
-        JMenuItem exitItem = new JMenuItem("Thoát");
-        fileMenu.add(nhapFileItem);
-        fileMenu.add(xuatFileItem);
-        fileMenu.add(exitItem);
-        menuBar.add(fileMenu);
+        JMenu nhapMenu = new JMenu("Nhập");
+        JMenuItem ghiDeItem = new JMenuItem("Ghi dè lên bảng hiện tại");
+        JMenuItem ghiThemItem = new JMenuItem("Thêm vào bảng hiện tại");
+        JMenu xuatMenu = new JMenu("Xuất");
+        JMenuItem xuatExcelItem = new JMenuItem("Xuất dữ liệu ra file Excel");
+        nhapMenu.add(ghiDeItem);
+        nhapMenu.add(ghiThemItem);
+        xuatMenu.add(xuatExcelItem);
+
+        menuBar.add(nhapMenu);
+        menuBar.add(xuatMenu);
         setJMenuBar(menuBar);
 
-        xuatFileItem.addActionListener(new ActionListener() {
+        xuatExcelItem.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 try {
@@ -74,11 +82,22 @@ public class QuanLyKhoGUI extends JFrame implements Subscriber {
             }
         });
 
-        nhapFileItem.addActionListener(new ActionListener() {
+        ghiDeItem.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 try {
-                    nhapFile();
+                    nhapFile(0);
+                } catch (Exception e1) {
+                    e1.printStackTrace();
+                }
+            }
+        });
+
+        ghiThemItem.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                try {
+                    nhapFile(1);
                 } catch (Exception e1) {
                     e1.printStackTrace();
                 }
@@ -90,6 +109,7 @@ public class QuanLyKhoGUI extends JFrame implements Subscriber {
         tableModel.addColumn("Tên hàng hóa");
         tableModel.addColumn("Số lượng tồn");
         tableModel.addColumn("Đơn giá");
+        tableModel.addColumn("Thuế VAT");
         tableModel.addColumn("Ngày sản suất");
         tableModel.addColumn("Ngày hết hạn");
         tableModel.addColumn("Nhà cung cấp");
@@ -101,6 +121,14 @@ public class QuanLyKhoGUI extends JFrame implements Subscriber {
         table.setDefaultEditor(Object.class, null);
         JScrollPane scrollPane = new JScrollPane(table);
         add(scrollPane, BorderLayout.CENTER);
+        this.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                if (e.getComponent() != table) {
+                    table.clearSelection();
+                }
+            }
+        });
 
         themButton = new JButton("Thêm");
         themButton.addActionListener(new ActionListener() {
@@ -143,7 +171,7 @@ public class QuanLyKhoGUI extends JFrame implements Subscriber {
             }
         });
 
-        xemAllButton = new JButton("Xem danh sách hàng hóa");
+        xemAllButton = new JButton("Danh sách hàng hóa");
         xemAllButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -155,11 +183,9 @@ public class QuanLyKhoGUI extends JFrame implements Subscriber {
         sapXepButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                sapXepSanPham();
+                sapXepHH();
             }
         });
-
-
 
         JPanel functionPanel = new JPanel(new GridLayout(9, 0, 0, 10));
 
@@ -176,7 +202,7 @@ public class QuanLyKhoGUI extends JFrame implements Subscriber {
 
         add(functionPanel, BorderLayout.EAST);
 
-        JPanel inforPanel = new JPanel(new GridLayout(2, 6, 10, 0));
+        JPanel inforPanel = new JPanel(new GridLayout(2, 6, 0, 0));
         tongTonKhoTP = new JLabel();
         tongTonKhoDM = new JLabel();
         tongTonKhoSS = new JLabel();
@@ -201,16 +227,19 @@ public class QuanLyKhoGUI extends JFrame implements Subscriber {
     }
 
     @Override
-    public void update(List<HangHoa> hanghoaList) {
+    public void update(List<HangHoa> dsHangHoa) {
+        if(dsHangHoa != null) {
         while (tableModel.getRowCount() != 0) {
             tableModel.removeRow(0);
         }
-        for (HangHoa hangHoa : hanghoaList) {
+        for (HangHoa hangHoa : dsHangHoa) {
+            Double VAT = tinhVAT(hangHoa);
             Object[] rowData = { hangHoa.getMaHH(), hangHoa.getTenHH(), hangHoa.getSlTon(),
-                    hangHoa.getDonGia(), hangHoa.getNgaySX(), hangHoa.getNgayHH(),
+                    hangHoa.getDonGia(), VAT, hangHoa.getNgaySX(), hangHoa.getNgayHH(),
                     hangHoa.getNhaCC(), hangHoa.getThoiGianBH(), hangHoa.getCongSuat(), hangHoa.getNgayNK(),
                     hangHoa.getNhaSX() };
             tableModel.addRow(rowData);
+        }
         }
     }
 
@@ -222,11 +251,11 @@ public class QuanLyKhoGUI extends JFrame implements Subscriber {
     }
 
     public void xemDSHangHoa() {
-        modelRemote.xemTTAllHH();
+        facadeRemote.xemTTAllHH();
     }
 
     public void themHangHoa() {
-        new LoaiHangHoa(this, modelRemote, controllerRemote).setVisible(true);
+        new LoaiHangHoa(this, controllerRemote).setVisible(true);
     }
 
     public void capnhatHangGUI(int rowIndex) {
@@ -247,7 +276,7 @@ public class QuanLyKhoGUI extends JFrame implements Subscriber {
 
     public void capnhatHang(HangHoa hanghoa) {
         if (hanghoa.getNhaCC() != null) {
-            HangThucPhamGUI temp = new HangThucPhamGUI(this, modelRemote, controllerRemote, 1);
+            HangThucPhamGUI temp = new HangThucPhamGUI(this, controllerRemote, 1);
             temp.setMaHang(hanghoa.getMaHH());
             temp.getTenHangTextField().setText(hanghoa.getTenHH());
             temp.getSlTonTextField().setText(Integer.toString(hanghoa.getSlTon()));
@@ -257,7 +286,7 @@ public class QuanLyKhoGUI extends JFrame implements Subscriber {
             temp.getNhaCungCapTextField().setText(hanghoa.getNhaCC());
             temp.setVisible(true);
         } else if (hanghoa.getCongSuat() != null) {
-            HangDienMayGUI temp = new HangDienMayGUI(this, modelRemote, controllerRemote, 1);
+            HangDienMayGUI temp = new HangDienMayGUI(this, controllerRemote, 1);
             temp.setMaHang(hanghoa.getMaHH());
             temp.getTenHangTextField().setText(hanghoa.getTenHH());
             temp.getSlTonTextField().setText(Integer.toString(hanghoa.getSlTon()));
@@ -268,7 +297,7 @@ public class QuanLyKhoGUI extends JFrame implements Subscriber {
             temp.getCongSuatTextField().setText(congSuat[0]);
             temp.setVisible(true);
         } else if (hanghoa.getNhaSX() != null) {
-            HangSanhSuGUI temp = new HangSanhSuGUI(this, modelRemote, controllerRemote, 1);
+            HangSanhSuGUI temp = new HangSanhSuGUI(this, controllerRemote, 1);
             temp.setMaHang(hanghoa.getMaHH());
             temp.getTenHangTextField().setText(hanghoa.getTenHH());
             temp.getSlTonTextField().setText(Integer.toString(hanghoa.getSlTon()));
@@ -293,37 +322,43 @@ public class QuanLyKhoGUI extends JFrame implements Subscriber {
     }
 
     public void xoaHangHoa(String maHang) {
-        Command xoaHang = new Xoa(modelRemote, maHang);
+        Command xoaHang = new Xoa(maHang);
         controllerRemote.execute(xoaHang);
     }
 
     public void timTTHH() {
-        Command timKiem = new TimKiem(modelRemote, tuKhoaTextField.getText());
+        Command timKiem = new TimKiem(tuKhoaTextField.getText());
         controllerRemote.execute(timKiem);
     }
 
     public HangHoa xemThongTin1HH(String maHang) {
-        return modelRemote.xemThongTin1HH(maHang);
+        return facadeRemote.xemThongTin1HH(maHang);
     }
 
     private void loadTongTonKho() {
-        modelRemote.tongTonKho();
+        facadeRemote.tongTonKho();
     }
 
     public void xemDSHetHan() {
-        modelRemote.xemDSHetHan();
+        facadeRemote.xemDSHetHan();
     }
 
-    public void sapXepSanPham() {
-        new LoaiSapXep(this, modelRemote).setVisible(true);
-        ;
+    public void sapXepHH() {
+        new LoaiSapXep(this, facadeRemote).setVisible(true);
     }
 
-    public void xuatFile() throws Exception {
-        modelRemote.xuatFile();
+    public void xuatFile() {
+        Command xuatFile = new XuatFile();
+        controllerRemote.execute(xuatFile);
     }
 
-    public void nhapFile() throws Exception {
-        modelRemote.nhapFile();
+    public void nhapFile(int nhuCau) {
+        Command nhapFile = new NhapFile(nhuCau);
+        controllerRemote.execute(nhapFile);
+    }
+
+    
+    public double tinhVAT(HangHoa hanghoa) {
+        return facadeRemote.tinhVAT(hanghoa);
     }
 }

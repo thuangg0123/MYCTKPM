@@ -10,8 +10,8 @@ public class KhoJDBCImpl implements KhoJDBC {
     private Connection connection;
 
     public KhoJDBCImpl() {
-        // String DB_NAME = "jdbc_db";
-        String DB_NAME = "test_db";
+        String DB_NAME = "jdbc_db";
+        // String DB_NAME = "test_db";
         String DB_URL = "jdbc:mysql://localhost:3306/";
         String USER_NAME = "root";
         String PASSWORD = "123456789";
@@ -333,4 +333,14 @@ public class KhoJDBCImpl implements KhoJDBC {
             return null;
         }
     }
+
+    @Override
+    public void xoaAll() {
+        String sql = "DELETE FROM hanghoa;";
+        try (Statement statement = connection.createStatement()) {
+            statement.executeUpdate(sql);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }    
 }

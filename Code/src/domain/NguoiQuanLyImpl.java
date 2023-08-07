@@ -2,6 +2,7 @@ package domain;
 
 import java.io.File;
 import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.sql.Date;
@@ -10,6 +11,7 @@ import java.util.Comparator;
 import java.util.List;
 
 import javax.swing.JFileChooser;
+import javax.swing.JOptionPane;
 import javax.swing.filechooser.FileNameExtensionFilter;
 
 import org.apache.poi.ss.usermodel.BorderStyle;
@@ -125,7 +127,7 @@ public class NguoiQuanLyImpl implements NguoiQuanLy {
     }
 
     @Override
-    public void xuatFile() throws IOException{
+    public void xuatFile(){
         XSSFWorkbook excelFile = new XSSFWorkbook();
 
         XSSFSheet bangTP = excelFile.createSheet("Hàng thực phẩm");
@@ -194,11 +196,21 @@ public class NguoiQuanLyImpl implements NguoiQuanLy {
         int ketqua = fileChooser.showSaveDialog(null);
         if (ketqua == JFileChooser.APPROVE_OPTION) {
             File file = fileChooser.getSelectedFile();
+
             file = new File(file.getAbsolutePath() + ".xlsx");
-            FileOutputStream out = new FileOutputStream(file);
-            excelFile.write(out);
-            out.close();
-            excelFile.close();
+            try {
+                FileOutputStream out = new FileOutputStream(file);
+                try {
+                    excelFile.write(out);
+                    out.close();
+                    excelFile.close();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            } catch (FileNotFoundException e) {
+                e.printStackTrace();
+            }
+
         }
     }
 
@@ -221,7 +233,7 @@ public class NguoiQuanLyImpl implements NguoiQuanLy {
     }
 
     @Override
-    public void nhapFile() throws IOException {
+    public void nhapFile(int nhuCau) {
         JFileChooser fileChooser = new JFileChooser();
         fileChooser.setCurrentDirectory(new File("."));
         fileChooser.setFileFilter(new FileNameExtensionFilter("Microsoft Excel", "xlsx"));
@@ -229,17 +241,23 @@ public class NguoiQuanLyImpl implements NguoiQuanLy {
         if (ketqua == JFileChooser.APPROVE_OPTION) {
             File selectedFile = fileChooser.getSelectedFile();
 
-            XSSFWorkbook  excelFile = new XSSFWorkbook(new FileInputStream(selectedFile.getAbsolutePath()));
+            try (XSSFWorkbook excelFile = new XSSFWorkbook(new FileInputStream(selectedFile.getAbsolutePath()))) {
+                XSSFSheet bangTP = excelFile.getSheetAt(0);
+                XSSFSheet bangDM = excelFile.getSheetAt(1);
+                XSSFSheet bangSS = excelFile.getSheetAt(2);
+                if(nhuCau == 0){
+                    xoaAll();
+                }
+                layDuLieuTP(bangTP);
+                layDuLieuDM(bangDM);
+                layDuLieuSS(bangSS);
+                
+                excelFile.close();
+                tongTonKho();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
 
-            XSSFSheet bangTP = excelFile.getSheetAt(0);
-            XSSFSheet bangDM = excelFile.getSheetAt(1);
-            XSSFSheet bangSS = excelFile.getSheetAt(2);
-
-            layDuLieuTP(bangTP);
-            layDuLieuDM(bangDM);
-            layDuLieuSS(bangSS);
-            excelFile.close();
-            tongTonKho();
         }
     }
 
@@ -253,11 +271,12 @@ public class NguoiQuanLyImpl implements NguoiQuanLy {
             Double donGia = row.getCell(3).getNumericCellValue();
             java.util.Date temp1 = row.getCell(5).getDateCellValue();
             Date ngaySX = new java.sql.Date(temp1.getTime());
-            java.util.Date temp2 = row.getCell(5).getDateCellValue();
+            java.util.Date temp2 = row.getCell(6).getDateCellValue();
             Date ngayHH = new java.sql.Date(temp2.getTime());
             String nhaCC = row.getCell(7).getStringCellValue();
-
-            themHH(1, new HangThucPham(maHH, tenHH, slTon, donGia, ngaySX, ngayHH, nhaCC));
+            if(checkMaHH(maHH)) {
+                themHH(1, new HangThucPham(maHH, tenHH, slTon, donGia, ngaySX, ngayHH, nhaCC));
+            }
         }
     }
 
@@ -271,8 +290,9 @@ public class NguoiQuanLyImpl implements NguoiQuanLy {
             Double donGia = row.getCell(3).getNumericCellValue();
             String ThoiGianBH = row.getCell(5).getStringCellValue();
             String CongSuat = row.getCell(6).getStringCellValue();
-            
-            themHH(2, new HangDienMay(maHH, tenHH, slTon, donGia, ThoiGianBH, CongSuat));
+            if(checkMaHH(maHH)) {
+                themHH(2, new HangDienMay(maHH, tenHH, slTon, donGia, ThoiGianBH, CongSuat));
+            }
         }
     }
 
@@ -287,8 +307,18 @@ public class NguoiQuanLyImpl implements NguoiQuanLy {
             java.util.Date temp1 = row.getCell(5).getDateCellValue();
             Date ngayNK = new java.sql.Date(temp1.getTime());
             String NhaSX = row.getCell(6).getStringCellValue();
-            
-            themHH(3, new HangSanhSu(maHH, tenHH, slTon, donGia, ngayNK, NhaSX));
+            if(checkMaHH(maHH)) {
+                themHH(3, new HangSanhSu(maHH, tenHH, slTon, donGia, ngayNK, NhaSX));
+            }
+        }
+    }
+
+    private boolean checkMaHH(String maHH) {
+        if(xemThongTin1HH(maHH) == null) {
+            return true;
+        } else{
+            JOptionPane.showMessageDialog(null, "Mã hàng hóa '" + maHH + "' đã tồn tại");
+            return false;
         }
     }
 
@@ -311,5 +341,11 @@ public class NguoiQuanLyImpl implements NguoiQuanLy {
             }
         });
         notifySubscribers();
+    }
+
+    @Override
+    public void xoaAll() {
+        khoRemote.xoaAll();
+        dsHangHoa = null;
     }
 }

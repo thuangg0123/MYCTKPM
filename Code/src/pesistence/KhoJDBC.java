@@ -14,4 +14,5 @@ public interface KhoJDBC {
     int tongHangDienMay();
     int tongHangSanhSu();
     List<HangHoa> xemDSHetHan(); 
+    void xoaAll();
 }

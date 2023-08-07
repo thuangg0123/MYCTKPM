@@ -15,22 +15,7 @@ CREATE TABLE HangHoa (
     NhaSX VARCHAR(100)
 );
 
-CREATE DATABASE test_db;
-USE test_db;
-
-CREATE TABLE HangHoa (
-    MaHangHoa varchar(5) PRIMARY KEY,
-    TenHangHoa VARCHAR(50) NOT NULL,
-    slTonKho INT,
-    DonGia INT,
-    NgaySX date,
-    NgayHetHan date,
-    NhaCungCap VARCHAR(100),
-	ThoiGianBH VARCHAR(20),
-    CongSuat VARCHAR(20),
-	NgayNhapKho date,
-    NhaSX VARCHAR(100)
-);
+DELETE FROM hanghoa;
 
 INSERT INTO hanghoa (MaHangHoa, TenHangHoa, slTonKho, DonGia, NgaySX, NgayHetHan, NhaCungCap) 
 VALUES ('tp001', 'Hàng thực phẩm', 5, 100, '2023-01-01', '2023-08-20', 'Nhà cung cấp hàng thực phẩm');
@@ -106,52 +91,5 @@ BEGIN
     FROM HangHoa
     WHERE 
 		datediff(hanghoa.NgayHetHan, CURDATE()) <= 7;
-END$$
-DELIMITER ;
-
-CREATE DATABASE test_db;
-USE test_db;
-
-CREATE TABLE HangHoa (
-    MaHangHoa varchar(5) PRIMARY KEY,
-    TenHangHoa VARCHAR(50) NOT NULL,
-    slTonKho INT,
-    DonGia INT,
-    NgaySX date,
-    NgayHetHan date,
-    NhaCungCap VARCHAR(100),
-	ThoiGianBH VARCHAR(20),
-    CongSuat VARCHAR(20),
-	NgayNhapKho date,
-    NhaSX VARCHAR(100)
-);
-
-DELIMITER $$
-CREATE PROCEDURE TonKhoHangTP()
-BEGIN
-    SELECT sum(slTonKho) as TongTonKho
-    FROM HangHoa
-    WHERE 
-		NgaySX is not null;
-END$$
-DELIMITER ;
-
-DELIMITER $$
-CREATE PROCEDURE TonKhoHangDM()
-BEGIN
-    SELECT sum(slTonKho) as TongTonKho
-    FROM HangHoa
-    WHERE 
-		ThoiGianBH is not null;
-END$$
-DELIMITER ;
-
-DELIMITER $$
-CREATE PROCEDURE TonKhoHangSS()
-BEGIN
-    SELECT sum(slTonKho) as TongTonKho
-    FROM HangHoa
-    WHERE 
-		NgayNhapKho is not null;
 END$$
 DELIMITER ;

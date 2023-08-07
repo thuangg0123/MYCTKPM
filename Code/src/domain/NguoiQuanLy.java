@@ -1,7 +1,5 @@
 package domain;
 
-import java.io.IOException;
-
 //Model
 public interface NguoiQuanLy extends Publisher{
     void themHH(int loaiHang, HangHoa hanghoa);
@@ -14,6 +12,7 @@ public interface NguoiQuanLy extends Publisher{
     void tongTonKho();
     void xemDSHetHan();
     void sapXepHH(String tieuchi);
-    void xuatFile() throws IOException;
-    void nhapFile() throws IOException;
+    void xuatFile();
+    void nhapFile(int nhuCau);
+    void xoaAll();
 }

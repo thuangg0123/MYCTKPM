@@ -1,12 +1,12 @@
 package presentation.Command;
 
-import domain.NguoiQuanLy;
+import domain.Facade;
 
 public abstract class Command {
-    protected NguoiQuanLy modelRemote;
+    protected Facade facadeRemote;
     
-    public Command(NguoiQuanLy modelRemote) {
-        this.modelRemote = modelRemote;
+    public Command() {
+        this.facadeRemote = Facade.getInstance();
     }
 
     public abstract void execute();

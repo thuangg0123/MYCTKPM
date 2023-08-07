@@ -28,13 +28,16 @@ public class HangThucPhamGUI extends JFrame{
      0: Thêm mới hàng hóa
      1: Cập nhật lại thông tin hàng hóa
      */
-    public HangThucPhamGUI(QuanLyKhoGUI viewRemote, NguoiQuanLy modelRemote, QuanLyKhoController controllerRemote, int choice) {
+    public HangThucPhamGUI(QuanLyKhoGUI viewRemote, QuanLyKhoController controllerRemote, int choice) {
         this.choice = choice;
         JPanel inputPanel;
         if(choice == 0) {
             inputPanel = new JPanel(new GridLayout(10, 2));
+            setTitle("Thêm mới thông tin hàng thực phẩm");
+
         } else {
             inputPanel = new JPanel(new GridLayout(9, 2));
+            setTitle("Cập nhật lại thông tin hàng thực phẩm");
         }
         maHangTextField = new JTextField();
         tenHangTextField = new JTextField();
@@ -49,12 +52,12 @@ public class HangThucPhamGUI extends JFrame{
         luuButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                if(checkException(modelRemote)) {
+                if(checkException()) {
                     if(choice == 0) {
-                        themHangHoa(modelRemote, controllerRemote);
+                        themHangHoa(controllerRemote);
                         dispose();
                     } else if (choice == 1) {
-                        capnhatHangHoa(modelRemote, controllerRemote);
+                        capnhatHangHoa(controllerRemote);
                         dispose();
                     }
                 }
@@ -89,21 +92,20 @@ public class HangThucPhamGUI extends JFrame{
         inputPanel.add(luuButton);
         inputPanel.add(huyButton);
         
-        setTitle("Hàng thực phẩm");
         setSize(600, 300);
         setLocation(660, 390);    
-        setDefaultCloseOperation(HangThucPhamGUI.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(HangThucPhamGUI.DISPOSE_ON_CLOSE);
         setLayout(new BorderLayout());
         add(inputPanel);
     }
     
-    public void themHangHoa(NguoiQuanLy modelRemote, QuanLyKhoController controllerRemote) {
-        Command themHH = new Them(modelRemote, 1, luuThongTin());
+    public void themHangHoa(QuanLyKhoController controllerRemote) {
+        Command themHH = new Them(1, luuThongTin());
         controllerRemote.execute(themHH);
     }
 
-    public void capnhatHangHoa(NguoiQuanLy modelRemote, QuanLyKhoController controllerRemote) {
-        Command capnhatHang = new CapNhat(modelRemote,1, luuThongTin());
+    public void capnhatHangHoa(QuanLyKhoController controllerRemote) {
+        Command capnhatHang = new CapNhat(1, luuThongTin());
         controllerRemote.execute(capnhatHang);
     }
 
@@ -121,12 +123,12 @@ public class HangThucPhamGUI extends JFrame{
 
     }
 
-    public boolean checkException(NguoiQuanLy modelRemote) {
+    public boolean checkException() {
         if(choice == 0) {
             if(maHangTextField.getText() == null || maHangTextField.getText().length() > 5) {
                 JOptionPane.showMessageDialog(this, "Mã hàng hóa là chuỗi 5 kí tự bất kì", "Thông báo", JOptionPane.INFORMATION_MESSAGE);
                 return false;
-            }else if(modelRemote.xemThongTin1HH(maHangTextField.getText()) != null) {
+            }else if(Facade.getInstance().xemThongTin1HH(maHangTextField.getText()) != null) {
                 JOptionPane.showMessageDialog(this, "Mã hàng hóa vừa nhập đã tồn tại", "Thông báo", JOptionPane.INFORMATION_MESSAGE);
                 return false;
             }

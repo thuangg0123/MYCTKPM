@@ -1,17 +1,14 @@
 package presentation.Command;
 
-import domain.NguoiQuanLy;
-
 public class SapXep extends Command {
-    private String tieuchisapxep;
+    private String tieuchi;
 
-    public SapXep(NguoiQuanLy modelRemote, String tieuchisapxep) {
-        super(modelRemote);
-        this.tieuchisapxep = tieuchisapxep;
+    public SapXep(String tieuchi) {
+        this.tieuchi = tieuchi;
     }
 
     @Override
     public void execute() {
-        modelRemote.sapXepHH(tieuchisapxep);
+        facadeRemote.sapXepHH(tieuchi);
     }
 }
