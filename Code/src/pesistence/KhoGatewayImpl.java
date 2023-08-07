@@ -12,9 +12,9 @@ public class KhoGatewayImpl implements KhoGateway{
 
     public KhoGatewayImpl() {
         String DB_NAME = "jdbc_db";
-        String DB_URL = "jdbc:mysql://localhost:3306/";
+        String DB_URL = "jdbc:mysql://127.0.0.1:3306/";
         String USER_NAME = "root";
-        String PASSWORD = "123456789";
+        String PASSWORD = "dan123456789.";
         try {
             connection = DriverManager.getConnection(DB_URL + DB_NAME, USER_NAME, PASSWORD);
         } catch (SQLException e) {
