@@ -8,7 +8,7 @@ public class HangThucPham extends HangHoa {
     private String nhaCC;
 
     public HangThucPham(String maHH, String tenHang, int slTon, Double donGia, Date ngaySX, Date ngayHH, String nhaCC) {
-        super(maHH, tenHang, slTon, donGia);
+        super(maHH, tenHang, slTon, Math.round((donGia)*100.0)/100.0);
         this.ngaySX = ngaySX;
         this.ngayHH = ngayHH;
         this.nhaCC = nhaCC;
@@ -16,7 +16,7 @@ public class HangThucPham extends HangHoa {
 
     @Override
     public double tinhVAT() {
-        return 0.05 * donGia;
+        return Math.round((0.05 * donGia)*100.0)/100.0 ;
     }
 
     @Override

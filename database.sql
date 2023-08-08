@@ -5,7 +5,7 @@ CREATE TABLE HangHoa (
     MaHangHoa varchar(5) PRIMARY KEY,
     TenHangHoa VARCHAR(50) NOT NULL,
     slTonKho INT,
-    DonGia INT,
+    DonGia double,
     NgaySX date,
     NgayHetHan date,
     NhaCungCap VARCHAR(100),

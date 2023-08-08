@@ -6,14 +6,14 @@ public class HangSanhSu extends HangHoa {
     private String nhaSX;
 
     public HangSanhSu(String maHH, String tenHH, int slTon, Double donGia, Date ngayNK, String nhaSX) {
-        super(maHH, tenHH, slTon, donGia);
+        super(maHH, tenHH, slTon, Math.round((donGia)*100.0)/100.0);
         this.ngayNK = ngayNK;
         this.nhaSX = nhaSX;
     }
 
     @Override
     double tinhVAT() {
-        return 0.1 * donGia;
+        return Math.round((0.1 * donGia)*100.0)/100.0;
     }
 
     @Override

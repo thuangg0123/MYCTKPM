@@ -344,7 +344,7 @@ public class QuanLyKhoGUI extends JFrame implements Subscriber {
     }
 
     public void sapXepHH() {
-        new LoaiSapXep(this, facadeRemote).setVisible(true);
+        new LoaiSapXep(this).setVisible(true);
     }
 
     public void xuatFile() {

@@ -15,7 +15,8 @@ public class LoaiSapXep extends JFrame {
     private JButton theoMaHangButton, theoSLTonButton, theoDonGiaButton, theoTenHang;
     private JPanel panel;
 
-    public LoaiSapXep(QuanLyKhoGUI viewRemote, Facade facadeRemote) {
+    public LoaiSapXep(QuanLyKhoGUI viewRemote) {
+        Facade facadeRemote = Facade.getInstance();
         panel = new JPanel(new GridLayout(0, 4, 10, 10));
 
         theoMaHangButton = new JButton("Theo mã");
