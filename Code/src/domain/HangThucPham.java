@@ -1,21 +1,22 @@
 package domain;
+
 import java.util.Date;
 
 public class HangThucPham extends HangHoa {
     private Date ngaySX;
-    private Date ngayHetHan;
-    private String nhaCungCap;
+    private Date ngayHH;
+    private String nhaCC;
 
-    public HangThucPham(String maHang, String tenHang, int soLuongTon, Double donGia, Date ngaySX, Date ngayHetHan, String nhaCungCap) {
-        super(maHang, tenHang, soLuongTon, donGia);
+    public HangThucPham(String maHH, String tenHang, int slTon, Double donGia, Date ngaySX, Date ngayHH, String nhaCC) {
+        super(maHH, tenHang, slTon, Math.round((donGia)*100.0)/100.0);
         this.ngaySX = ngaySX;
-        this.ngayHetHan = ngayHetHan;
-        this.nhaCungCap = nhaCungCap;
+        this.ngayHH = ngayHH;
+        this.nhaCC = nhaCC;
     }
 
     @Override
     public double tinhVAT() {
-        return 0.05 * donGia;
+        return Math.round((0.05 * donGia)*100.0)/100.0 ;
     }
 
     @Override
@@ -24,12 +25,12 @@ public class HangThucPham extends HangHoa {
     }
 
     @Override
-    public Date getNgayHetHan() {
-        return ngayHetHan;
+    public Date getNgayHH() {
+        return ngayHH;
     }
 
     @Override
-    public String getNhaCungCap() {
-        return nhaCungCap;
+    public String getNhaCC() {
+        return nhaCC;
     }
 }

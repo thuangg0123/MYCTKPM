@@ -17,24 +17,27 @@ import domain.*;
 import presentation.*;
 import presentation.Command.*;
 
-public class HangSanhSuGUI extends JFrame{
+public class HangSanhSuGUI extends JFrame {
     private JTextField maHangTextField, tenHangTextField, slTonTextField, donGiaTextField, ngayNhapKhoTextField, nhaSXTextField;
     private JButton luuButton, huyButton;
     private int choice;
     private String maHang;
 
     /*
-     Yêu cầu:
-     0: Thêm mới hàng hóa
-     1: Cập nhật lại thông tin hàng hóa
+     * Yêu cầu:
+     * 0: Thêm mới hàng hóa
+     * 1: Cập nhật lại thông tin hàng hóa
      */
-    public HangSanhSuGUI(QuanLyKhoGUI viewRemote, NguoiQuanLy modelRemote, QuanLyKhoController controllerRemote, int choice) {
+    public HangSanhSuGUI(QuanLyKhoGUI viewRemote, QuanLyKhoController controllerRemote,int choice) {
         this.choice = choice;
         JPanel inputPanel;
         if (choice == 0) {
             inputPanel = new JPanel(new GridLayout(9, 2));
+            setTitle("Thêm mới thông tin hàng sành sứ");
         } else {
             inputPanel = new JPanel(new GridLayout(8, 2));
+            setTitle("Cập nhật lại thông tin hàng sành sứ");
+
         }
         maHangTextField = new JTextField();
         tenHangTextField = new JTextField();
@@ -48,12 +51,12 @@ public class HangSanhSuGUI extends JFrame{
         luuButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                if(checkException(modelRemote)) {
-                    if(choice == 0) {
-                        themHangHoa(modelRemote, controllerRemote);
+                if (checkException()) {
+                    if (choice == 0) {
+                        themHangHoa(controllerRemote);
                         dispose();
                     } else if (choice == 1) {
-                        capnhatHangHoa(modelRemote, controllerRemote);
+                        capnhatHangHoa(controllerRemote);
                         dispose();
                     }
                 }
@@ -68,7 +71,7 @@ public class HangSanhSuGUI extends JFrame{
 
         inputPanel.add(new JLabel());
         inputPanel.add(new JLabel());
-        if(choice == 0) {
+        if (choice == 0) {
             inputPanel.add(new JLabel("Mã hàng hóa:"));
             inputPanel.add(maHangTextField);
         }
@@ -86,72 +89,79 @@ public class HangSanhSuGUI extends JFrame{
         inputPanel.add(new JLabel());
         inputPanel.add(luuButton);
         inputPanel.add(huyButton);
-        
-        setTitle("Hàng sành sứ");
+
         setSize(600, 300);
-        setLocation(660, 390);    
-        setDefaultCloseOperation(HangSanhSuGUI.EXIT_ON_CLOSE);
+        setLocation(660, 390);
+        setDefaultCloseOperation(HangSanhSuGUI.DISPOSE_ON_CLOSE);
         setLayout(new BorderLayout());
         add(inputPanel);
     }
 
-    public void themHangHoa(NguoiQuanLy modelRemote, QuanLyKhoController controllerRemote) {
-        Command themHH = new Them(modelRemote, 3, luuThongTin());
+    public void themHangHoa(QuanLyKhoController controllerRemote) {
+        Command themHH = new Them(3, luuThongTin());
         controllerRemote.execute(themHH);
     }
 
-    public void capnhatHangHoa(NguoiQuanLy modelRemote, QuanLyKhoController controllerRemote) {
-        Command capnhatHang = new CapNhat(modelRemote,3, luuThongTin());
+    public void capnhatHangHoa(QuanLyKhoController controllerRemote) {
+        Command capnhatHang = new CapNhat(3, luuThongTin());
         controllerRemote.execute(capnhatHang);
     }
 
-    public boolean checkException(NguoiQuanLy modelRemote) {
-        if(choice == 0) {
-            if(maHangTextField.getText() == null || maHangTextField.getText().length() > 5) {
-                JOptionPane.showMessageDialog(this, "Mã hàng hóa là chuỗi 5 kí tự bất kì", "Thông báo", JOptionPane.INFORMATION_MESSAGE);
+    public boolean checkException() {
+        if (choice == 0) {
+            if (maHangTextField.getText() == null || maHangTextField.getText().length() > 5) {
+                JOptionPane.showMessageDialog(this, "Mã hàng hóa là chuỗi 5 kí tự bất kì", "Thông báo",
+                        JOptionPane.INFORMATION_MESSAGE);
                 return false;
-            }else if(modelRemote.xemThongTin1HH(maHangTextField.getText()) != null) {
-                JOptionPane.showMessageDialog(this, "Mã hàng hóa vừa nhập đã tồn tại", "Thông báo", JOptionPane.INFORMATION_MESSAGE);
+            } else if (Facade.getInstance().xemThongTin1HH(maHangTextField.getText()) != null) {
+                JOptionPane.showMessageDialog(this, "Mã hàng hóa vừa nhập đã tồn tại", "Thông báo",
+                        JOptionPane.INFORMATION_MESSAGE);
                 return false;
             }
         }
-        
-        if(tenHangTextField.getText() == null) {
-            JOptionPane.showMessageDialog(this, "Tên hàng hóa không được để trống", "Thông báo", JOptionPane.INFORMATION_MESSAGE);
+
+        if (tenHangTextField.getText() == null) {
+            JOptionPane.showMessageDialog(this, "Tên hàng hóa không được để trống", "Thông báo",
+                    JOptionPane.INFORMATION_MESSAGE);
             return false;
         }
-        
+
         try {
             int slTon = Integer.parseInt(slTonTextField.getText());
-            if(slTon < 0) {
-                JOptionPane.showMessageDialog(this, "Số lượng tồn kho phải lớn hơn hoặc bằng 0", "Thông báo", JOptionPane.INFORMATION_MESSAGE);
+            if (slTon < 0) {
+                JOptionPane.showMessageDialog(this, "Số lượng tồn kho phải lớn hơn hoặc bằng 0", "Thông báo",
+                        JOptionPane.INFORMATION_MESSAGE);
                 return false;
             }
         } catch (Exception e) {
-            JOptionPane.showMessageDialog(this, "Số lượng tồn kho phải là số nguyên", "Thông báo", JOptionPane.INFORMATION_MESSAGE);
+            JOptionPane.showMessageDialog(this, "Số lượng tồn kho phải là số nguyên", "Thông báo",
+                    JOptionPane.INFORMATION_MESSAGE);
             return false;
-        }   
+        }
 
         try {
             Double donGia = Double.parseDouble(donGiaTextField.getText());
-            if(donGia < 0) {
-                JOptionPane.showMessageDialog(this, "Giá thành phải là số lớn hơn 0", "Thông báo", JOptionPane.INFORMATION_MESSAGE);
+            if (donGia < 0) {
+                JOptionPane.showMessageDialog(this, "Giá thành phải là số lớn hơn 0", "Thông báo",
+                        JOptionPane.INFORMATION_MESSAGE);
                 return false;
             }
         } catch (Exception e) {
             JOptionPane.showMessageDialog(this, "Giá thành phải là số", "Thông báo", JOptionPane.INFORMATION_MESSAGE);
             return false;
-        }   
+        }
 
         try {
             Date.valueOf(ngayNhapKhoTextField.getText());
         } catch (Exception e) {
-            JOptionPane.showMessageDialog(this, "Hàng sành sứ phải cần biết ngày nhập kho (YYYY-MM-DD)", "Thông báo", JOptionPane.INFORMATION_MESSAGE);
+            JOptionPane.showMessageDialog(this, "Hàng sành sứ phải cần biết ngày nhập kho (YYYY-MM-DD)", "Thông báo",
+                    JOptionPane.INFORMATION_MESSAGE);
             return false;
-        }   
+        }
 
-        if(nhaSXTextField.getText() == null) {
-            JOptionPane.showMessageDialog(this, "Hàng sành sứ phải cần biết nhà sản xuấ", "Thông báo", JOptionPane.INFORMATION_MESSAGE);
+        if (nhaSXTextField.getText() == null) {
+            JOptionPane.showMessageDialog(this, "Hàng sành sứ phải cần biết nhà sản xuấ", "Thông báo",
+                    JOptionPane.INFORMATION_MESSAGE);
             return false;
         }
 
@@ -167,23 +177,29 @@ public class HangSanhSuGUI extends JFrame{
         if (choice == 0) {
             maHang = maHangTextField.getText();
         }
-        return (HangHoa)new HangSanhSu(maHang, tenHang, slTon, donGia, ngayNhapKho, nhaSX);
+        return (HangHoa) new HangSanhSu(maHang, tenHang, slTon, donGia, ngayNhapKho, nhaSX);
     }
+
     public JTextField getMaHangTextField() {
         return maHangTextField;
     }
+
     public JTextField getTenHangTextField() {
         return tenHangTextField;
     }
+
     public JTextField getSlTonTextField() {
         return slTonTextField;
     }
+
     public JTextField getDonGiaTextField() {
         return donGiaTextField;
     }
+
     public JTextField getNgayNhapKhoTextField() {
         return ngayNhapKhoTextField;
     }
+
     public JTextField getNhaSXTextField() {
         return nhaSXTextField;
     }

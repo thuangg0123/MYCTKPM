@@ -23,13 +23,13 @@ public class LoaiHangHoa extends JFrame{
      1: Hàng điện máy
      2: Hàng sành sứ
      */
-    public LoaiHangHoa(QuanLyKhoGUI viewRemote, NguoiQuanLy modelRemote, QuanLyKhoController controllerRemote) {
+    public LoaiHangHoa(QuanLyKhoGUI viewRemote, QuanLyKhoController controllerRemote) {
         panel = new JPanel(new GridLayout(0,3,10,10));
         thucphamButton = new JButton("Thực phẩm");
         thucphamButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                new HangThucPhamGUI(viewRemote, modelRemote, controllerRemote, 0).setVisible(true);
+                new HangThucPhamGUI(viewRemote, controllerRemote, 0).setVisible(true);
                 dispose();
             }
         });
@@ -38,7 +38,7 @@ public class LoaiHangHoa extends JFrame{
         dienmayButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                new HangDienMayGUI(viewRemote, modelRemote, controllerRemote, 0).setVisible(true);
+                new HangDienMayGUI(viewRemote, controllerRemote, 0).setVisible(true);
                 dispose();
             }
         });
@@ -47,7 +47,7 @@ public class LoaiHangHoa extends JFrame{
         sanhsuButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                new HangSanhSuGUI(viewRemote, modelRemote, controllerRemote, 0).setVisible(true);
+                new HangSanhSuGUI(viewRemote, controllerRemote, 0).setVisible(true);
                 dispose();
             }
         });
@@ -58,7 +58,7 @@ public class LoaiHangHoa extends JFrame{
         setTitle("Chọn loại hàng hóa");
         setSize(500, 100);
         setLocation(760, 390);    
-        setDefaultCloseOperation(LoaiHangHoa.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(LoaiHangHoa.DISPOSE_ON_CLOSE);
         setLayout(new BorderLayout());
         add(panel);
     }

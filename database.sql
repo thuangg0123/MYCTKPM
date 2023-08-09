@@ -5,7 +5,7 @@ CREATE TABLE HangHoa (
     MaHangHoa varchar(5) PRIMARY KEY,
     TenHangHoa VARCHAR(50) NOT NULL,
     slTonKho INT,
-    DonGia INT,
+    DonGia double,
     NgaySX date,
     NgayHetHan date,
     NhaCungCap VARCHAR(100),
@@ -15,27 +15,22 @@ CREATE TABLE HangHoa (
     NhaSX VARCHAR(100)
 );
 
+DELETE FROM hanghoa;
+
 INSERT INTO hanghoa (MaHangHoa, TenHangHoa, slTonKho, DonGia, NgaySX, NgayHetHan, NhaCungCap) 
 VALUES ('tp001', 'Hàng thực phẩm', 5, 100, '2023-01-01', '2023-08-20', 'Nhà cung cấp hàng thực phẩm');
 INSERT INTO hanghoa (MaHangHoa, TenHangHoa, slTonKho, DonGia, NgaySX, NgayHetHan, NhaCungCap) 
 VALUES ('tp002', 'Hàng thực phẩm', 3, 100, '2023-01-01', '2023-08-10', 'Nhà cung cấp hàng thực phẩm');
 
 INSERT INTO hanghoa (MaHangHoa, TenHangHoa, slTonKho, DonGia, ThoiGianBH, CongSuat) 
-VALUES ('dm001', 'Hàng điện máy', 5, 100, '20 tháng', '50W');
-INSERT INTO hanghoa (MaHangHoa, TenHangHoa, slTonKho, DonGia, ThoiGianBH, CongSuat) 
-VALUES ('dm002', 'Hàng điện máy', 4, 100, '30 tháng', '20W');
-=======
 VALUES ('dm001', 'Hàng điện máy', 5, 100, '20 tháng', '50 kW');
 INSERT INTO hanghoa (MaHangHoa, TenHangHoa, slTonKho, DonGia, ThoiGianBH, CongSuat) 
 VALUES ('dm002', 'Hàng điện máy', 4, 100, '30 tháng', '20 kW');
->>>>>>> d574994a20f7bea2a7cc908c8a4912ac59aa7bad
 
 INSERT INTO hanghoa (MaHangHoa, TenHangHoa, slTonKho, DonGia, NgayNhapKho, NhaSX) 
 VALUES ('ss001', 'Hàng sành sứ', 5, 100, '2023-01-01', 'Nhà sản suất hàng sành sứ');
 INSERT INTO hanghoa (MaHangHoa, TenHangHoa, slTonKho, DonGia, NgayNhapKho, NhaSX) 
 VALUES ('ss002', 'Hàng sành sứ', 6, 100, '2023-01-01', 'Nhà sản suất hàng sành sứ');
-
-SELECT * FROM jdbc_db.hanghoa;
 
 -- chức năng tìm kiếm
 DELIMITER $$
@@ -59,7 +54,15 @@ BEGIN
 END$$
 DELIMITER ;
 
-call TimKiem('01');
+DELIMITER $$
+CREATE PROCEDURE TonKhoHangTP()
+BEGIN
+    SELECT sum(slTonKho) as TongTonKho
+    FROM HangHoa
+    WHERE 
+		NgaySX is not null;
+END$$
+DELIMITER ;
 
 DELIMITER $$
 CREATE PROCEDURE TonKhoHangDM()
@@ -68,17 +71,6 @@ BEGIN
     FROM HangHoa
     WHERE 
 		ThoiGianBH is not null;
-END$$
-DELIMITER ;
-call TonKhoHangTP();
-
-DELIMITER $$
-CREATE PROCEDURE TonKhoHangTP()
-BEGIN
-    SELECT sum(slTonKho) as TongTonKho
-    FROM HangHoa
-    WHERE 
-		NgaySX is not null;
 END$$
 DELIMITER ;
 
@@ -101,7 +93,3 @@ BEGIN
 		datediff(hanghoa.NgayHetHan, CURDATE()) <= 7;
 END$$
 DELIMITER ;
-call SapHetHan();
-
-    SELECT datediff(hanghoa.NgayHetHan, CURDATE())
-    FROM HangHoa;
