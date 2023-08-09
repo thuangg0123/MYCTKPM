@@ -1,0 +1,23 @@
+{
+    "java.project.referencedLibraries": [
+        "lib/**/*.jar",
+        "c:\\Users\\MY PC\\OneDrive - nhg.vn\\Desktop\\mysql-connector-j-8.1.0\\mysql-connector-j-8.1.0\\mysql-connector-j-8.1.0.jar",
+        "mysql-connector-j-8.1.0/mysql-connector-j-8.1.0.jar",
+        "c:\\Users\\Sol\\Downloads\\jar\\commons-codec-1.15.jar",
+        "c:\\Users\\Sol\\Downloads\\jar\\commons-collections4-4.4.jar",
+        "c:\\Users\\Sol\\Downloads\\jar\\commons-compress-1.21.jar",
+        "c:\\Users\\Sol\\Downloads\\jar\\commons-io-2.11.0.jar",
+        "c:\\Users\\Sol\\Downloads\\jar\\commons-math3-3.6.1.jar",
+        "c:\\Users\\Sol\\Downloads\\jar\\curvesapi-1.07.jar",
+        "c:\\Users\\Sol\\Downloads\\jar\\log4j-api-2.18.0.jar",
+        "c:\\Users\\Sol\\Downloads\\jar\\org.apache.poi-4.1.2_2.jar",
+        "c:\\Users\\Sol\\Downloads\\jar\\poi-5.2.3.jar",
+        "c:\\Users\\Sol\\Downloads\\jar\\poi-examples-5.2.3.jar",
+        "c:\\Users\\Sol\\Downloads\\jar\\poi-ooxml-5.2.3.jar",
+        "c:\\Users\\Sol\\Downloads\\jar\\poi-ooxml-lite-5.2.3.jar",
+        "c:\\Users\\Sol\\Downloads\\jar\\poi-scratchpad-5.2.3.jar",
+        "c:\\Users\\Sol\\Downloads\\jar\\SparseBitSet-1.2.jar",
+        "c:\\Users\\Sol\\Downloads\\jar\\xmlbeans-5.1.1.jar"
+    ],
+    "java.compile.nullAnalysis.mode": "automatic"
+}

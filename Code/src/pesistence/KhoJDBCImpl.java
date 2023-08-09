@@ -11,8 +11,7 @@ public class KhoJDBCImpl implements KhoJDBC {
 
     public KhoJDBCImpl() {
         String DB_NAME = "jdbc_db";
-        // String DB_NAME = "test_db";
-        String DB_URL = "jdbc:mysql://localhost:3306/";
+        String DB_URL = "jdbc:mysql://127.0.0.1:3306/";
         String USER_NAME = "root";
         String PASSWORD = "t1132456";
         try {
