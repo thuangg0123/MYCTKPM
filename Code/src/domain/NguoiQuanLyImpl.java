@@ -127,7 +127,7 @@ public class NguoiQuanLyImpl implements NguoiQuanLy {
     }
 
     @Override
-    public void xuatFile(){
+    public void xuatFile() {
         XSSFWorkbook excelFile = new XSSFWorkbook();
 
         XSSFSheet bangTP = excelFile.createSheet("Hàng thực phẩm");
@@ -137,7 +137,7 @@ public class NguoiQuanLyImpl implements NguoiQuanLy {
         styleDongDau.setFillForegroundColor(IndexedColors.GREY_25_PERCENT.getIndex());
         styleDongDau.setFillPattern(FillPatternType.SOLID_FOREGROUND);
         styleDongDau.setBorderBottom(BorderStyle.THIN);
-        
+
         Row dongDauTP = bangTP.createRow(0);
         dongDauTP = taoDuLieuCoBan(dongDauTP);
         dongDauTP.createCell(5).setCellValue("Ngày sản xuất");
@@ -156,8 +156,8 @@ public class NguoiQuanLyImpl implements NguoiQuanLy {
 
         for (int i = 0; i <= 6; i++) {
             dongDauTP.getCell(i).setCellStyle(styleDongDau);
-            if(i == 6) {
-                dongDauTP.getCell(i+1).setCellStyle(styleDongDau);
+            if (i == 6) {
+                dongDauTP.getCell(i + 1).setCellStyle(styleDongDau);
             }
             dongDauDM.getCell(i).setCellStyle(styleDongDau);
             dongDauSS.getCell(i).setCellStyle(styleDongDau);
@@ -168,7 +168,7 @@ public class NguoiQuanLyImpl implements NguoiQuanLy {
         styleNgay.setDataFormat(createHelper.createDataFormat().getFormat("dd-MM-yyyy"));
 
         for (HangHoa hanghoa : dsHangHoa) {
-            if(hanghoa instanceof HangThucPham) {
+            if (hanghoa instanceof HangThucPham) {
                 Row Row = bangTP.createRow(bangTP.getLastRowNum() + 1);
                 Row = xuatDuLieuCoBan(Row, hanghoa);
                 Row.createCell(5).setCellValue(hanghoa.getNgaySX());
@@ -176,18 +176,18 @@ public class NguoiQuanLyImpl implements NguoiQuanLy {
                 Row.createCell(6).setCellValue(hanghoa.getNgayHH());
                 Row.getCell(6).setCellStyle(styleNgay);
                 Row.createCell(7).setCellValue(hanghoa.getNhaCC());
-            } else if(hanghoa instanceof HangDienMay) {
+            } else if (hanghoa instanceof HangDienMay) {
                 Row Row = bangDM.createRow(bangDM.getLastRowNum() + 1);
                 Row = xuatDuLieuCoBan(Row, hanghoa);
                 Row.createCell(5).setCellValue(hanghoa.getThoiGianBH());
                 Row.createCell(6).setCellValue(hanghoa.getCongSuat());
-            } else if(hanghoa instanceof HangSanhSu) {
+            } else if (hanghoa instanceof HangSanhSu) {
                 Row Row = bangSS.createRow(bangSS.getLastRowNum() + 1);
                 Row = xuatDuLieuCoBan(Row, hanghoa);
                 Row.createCell(5).setCellValue(hanghoa.getNgayNK());
                 Row.getCell(5).setCellStyle(styleNgay);
                 Row.createCell(6).setCellValue(hanghoa.getNhaSX());
-            } 
+            }
         }
 
         JFileChooser fileChooser = new JFileChooser();
@@ -245,13 +245,13 @@ public class NguoiQuanLyImpl implements NguoiQuanLy {
                 XSSFSheet bangTP = excelFile.getSheetAt(0);
                 XSSFSheet bangDM = excelFile.getSheetAt(1);
                 XSSFSheet bangSS = excelFile.getSheetAt(2);
-                if(nhuCau == 0){
+                if (nhuCau == 0) {
                     xoaAll();
                 }
                 layDuLieuTP(bangTP);
                 layDuLieuDM(bangDM);
                 layDuLieuSS(bangSS);
-                
+
                 excelFile.close();
                 tongTonKho();
             } catch (IOException e) {
@@ -274,7 +274,7 @@ public class NguoiQuanLyImpl implements NguoiQuanLy {
             java.util.Date temp2 = row.getCell(6).getDateCellValue();
             Date ngayHH = new java.sql.Date(temp2.getTime());
             String nhaCC = row.getCell(7).getStringCellValue();
-            if(checkMaHH(maHH)) {
+            if (checkMaHH(maHH)) {
                 themHH(1, new HangThucPham(maHH, tenHH, slTon, donGia, ngaySX, ngayHH, nhaCC));
             }
         }
@@ -290,7 +290,7 @@ public class NguoiQuanLyImpl implements NguoiQuanLy {
             Double donGia = row.getCell(3).getNumericCellValue();
             String ThoiGianBH = row.getCell(5).getStringCellValue();
             String CongSuat = row.getCell(6).getStringCellValue();
-            if(checkMaHH(maHH)) {
+            if (checkMaHH(maHH)) {
                 themHH(2, new HangDienMay(maHH, tenHH, slTon, donGia, ThoiGianBH, CongSuat));
             }
         }
@@ -300,23 +300,24 @@ public class NguoiQuanLyImpl implements NguoiQuanLy {
         for (int i = 1; i < sheet.getPhysicalNumberOfRows(); i++) {
             XSSFRow row = sheet.getRow(i);
             String maHH = row.getCell(0).getStringCellValue();
-            String tenHH = row.getCell(1).getStringCellValue();;
+            String tenHH = row.getCell(1).getStringCellValue();
+            ;
             String[] temp = Double.toString(row.getCell(2).getNumericCellValue()).split("");
             int slTon = Integer.parseInt(temp[0]);
             Double donGia = row.getCell(3).getNumericCellValue();
             java.util.Date temp1 = row.getCell(5).getDateCellValue();
             Date ngayNK = new java.sql.Date(temp1.getTime());
             String NhaSX = row.getCell(6).getStringCellValue();
-            if(checkMaHH(maHH)) {
+            if (checkMaHH(maHH)) {
                 themHH(3, new HangSanhSu(maHH, tenHH, slTon, donGia, ngayNK, NhaSX));
             }
         }
     }
 
     private boolean checkMaHH(String maHH) {
-        if(xemThongTin1HH(maHH) == null) {
+        if (xemThongTin1HH(maHH) == null) {
             return true;
-        } else{
+        } else {
             JOptionPane.showMessageDialog(null, "Mã hàng hóa '" + maHH + "' đã tồn tại");
             return false;
         }

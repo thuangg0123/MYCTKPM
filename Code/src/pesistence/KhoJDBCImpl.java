@@ -14,7 +14,7 @@ public class KhoJDBCImpl implements KhoJDBC {
         // String DB_NAME = "test_db";
         String DB_URL = "jdbc:mysql://localhost:3306/";
         String USER_NAME = "root";
-        String PASSWORD = "123456789";
+        String PASSWORD = "t1132456";
         try {
             connection = DriverManager.getConnection(DB_URL + DB_NAME, USER_NAME, PASSWORD);
         } catch (SQLException e) {
@@ -55,9 +55,11 @@ public class KhoJDBCImpl implements KhoJDBC {
                 statement.setString(7, hanghoa.getMaHH());
                 int rowsUpdated = statement.executeUpdate();
                 if (rowsUpdated > 0) {
-                    JOptionPane.showMessageDialog(null, "Cập nhật mặt thành công", "Thông báo", JOptionPane.INFORMATION_MESSAGE);
+                    JOptionPane.showMessageDialog(null, "Cập nhật mặt thành công", "Thông báo",
+                            JOptionPane.INFORMATION_MESSAGE);
                 } else {
-                    JOptionPane.showMessageDialog(null, "Không tìm thấy mặt hàng có mã tương ứng", "Thông báo", JOptionPane.ERROR_MESSAGE);
+                    JOptionPane.showMessageDialog(null, "Không tìm thấy mặt hàng có mã tương ứng", "Thông báo",
+                            JOptionPane.ERROR_MESSAGE);
                 }
             }
         } catch (Throwable throwable) {
@@ -81,9 +83,11 @@ public class KhoJDBCImpl implements KhoJDBC {
             statement.setString(6, hanghoa.getMaHH());
 
             if (statement.executeUpdate() > 0) {
-                JOptionPane.showMessageDialog(null, "Cập nhật mặt hàng thành công", "Thông báo", JOptionPane.INFORMATION_MESSAGE);
+                JOptionPane.showMessageDialog(null, "Cập nhật mặt hàng thành công", "Thông báo",
+                        JOptionPane.INFORMATION_MESSAGE);
             } else {
-                JOptionPane.showMessageDialog(null, "Cập nhật mặt hàng không thành công", "Thông báo", JOptionPane.ERROR_MESSAGE);
+                JOptionPane.showMessageDialog(null, "Cập nhật mặt hàng không thành công", "Thông báo",
+                        JOptionPane.ERROR_MESSAGE);
             }
         } catch (SQLException e) {
             e.printStackTrace();
@@ -120,9 +124,11 @@ public class KhoJDBCImpl implements KhoJDBC {
             statement.setDate(6, new Date(hanghoa.getNgayHH().getTime()));
             statement.setString(7, hanghoa.getNhaCC());
             if (statement.executeUpdate() > 0) {
-                JOptionPane.showMessageDialog(null, "Thêm mặt hàng thành công", "Thông báo", JOptionPane.INFORMATION_MESSAGE);
+                JOptionPane.showMessageDialog(null, "Thêm mặt hàng thành công", "Thông báo",
+                        JOptionPane.INFORMATION_MESSAGE);
             } else {
-                JOptionPane.showMessageDialog(null, "Thêm mặt hàng không thành công", "Thông báo", JOptionPane.ERROR_MESSAGE);
+                JOptionPane.showMessageDialog(null, "Thêm mặt hàng không thành công", "Thông báo",
+                        JOptionPane.ERROR_MESSAGE);
             }
         } catch (SQLException e) {
             e.printStackTrace();
@@ -196,7 +202,8 @@ public class KhoJDBCImpl implements KhoJDBC {
                 String NhaSX = resultSet.getString("NhaSX");
 
                 if (NhaCungCap != null && !NhaCungCap.isEmpty()) {
-                    hanghoaList.add(new HangThucPham(maHang, tenHang, slTonKho, DonGia, NgaySX, NgayHetHan, NhaCungCap));
+                    hanghoaList
+                            .add(new HangThucPham(maHang, tenHang, slTonKho, DonGia, NgaySX, NgayHetHan, NhaCungCap));
                 } else if (CongSuat != null && !CongSuat.isEmpty()) {
                     hanghoaList.add(new HangDienMay(maHang, tenHang, slTonKho, DonGia, ThoiGianBH, CongSuat));
                 } else if (NhaSX != null && !NhaSX.isEmpty()) {
@@ -342,5 +349,5 @@ public class KhoJDBCImpl implements KhoJDBC {
         } catch (SQLException e) {
             e.printStackTrace();
         }
-    }    
+    }
 }
