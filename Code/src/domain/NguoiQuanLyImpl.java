@@ -323,21 +323,36 @@ public class NguoiQuanLyImpl implements NguoiQuanLy {
     }
 
     @Override
-    public void sapXepHH(String tieuchi) {
+    public void sapXepHH(String tieuchi, boolean isTangDan) {
         Collections.sort(dsHangHoa, new Comparator<HangHoa>() {
             @Override
             public int compare(HangHoa hh1, HangHoa hh2) {
-                if (tieuchi.equals("maHH")) {
-                    return hh1.getMaHH().compareTo(hh2.getMaHH());
-                } else if (tieuchi.equals("tenHH")) {
-                    return hh1.getTenHH().compareTo(hh2.getTenHH());
-                } else if (tieuchi.equals("slTon")) {
-                    return Integer.compare(hh1.getSlTon(), hh2.getSlTon());
-                } else if (tieuchi.equals("donGia")) {
-                    return Double.compare(hh1.getDonGia(), hh2.getDonGia());
+                if(isTangDan) {
+                    if (tieuchi.equals("maHH")) {
+                        return hh1.getMaHH().compareTo(hh2.getMaHH());
+                    } else if (tieuchi.equals("tenHH")) {
+                        return hh1.getTenHH().compareTo(hh2.getTenHH());
+                    } else if (tieuchi.equals("slTon")) {
+                        return Integer.compare(hh1.getSlTon(), hh2.getSlTon());
+                    } else if (tieuchi.equals("donGia")) {
+                        return Double.compare(hh1.getDonGia(), hh2.getDonGia());
+                    } else {
+                        return hh1.getMaHH().compareTo(hh2.getMaHH());
+                    }
                 } else {
-                    return hh1.getMaHH().compareTo(hh2.getMaHH());
+                    if (tieuchi.equals("maHH")) {
+                        return hh2.getMaHH().compareTo(hh1.getMaHH());
+                    } else if (tieuchi.equals("tenHH")) {
+                        return hh2.getTenHH().compareTo(hh1.getTenHH());
+                    } else if (tieuchi.equals("slTon")) {
+                        return Integer.compare(hh2.getSlTon(), hh1.getSlTon());
+                    } else if (tieuchi.equals("donGia")) {
+                        return Double.compare(hh2.getDonGia(), hh1.getDonGia());
+                    } else {
+                        return hh2.getMaHH().compareTo(hh1.getMaHH());
+                    }
                 }
+
             }
         });
         notifySubscribers();

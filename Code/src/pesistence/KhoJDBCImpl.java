@@ -11,14 +11,10 @@ public class KhoJDBCImpl implements KhoJDBC {
 
     public KhoJDBCImpl() {
         String DB_NAME = "jdbc_db";
-<<<<<<< HEAD:Code/src/pesistence/KhoGatewayImpl.java
-        String DB_URL = "jdbc:mysql://127.0.0.1:3306/";
-=======
         // String DB_NAME = "test_db";
         String DB_URL = "jdbc:mysql://localhost:3306/";
->>>>>>> ac12c0850373aa679ab9ca9f9779b2ba6b81c472:Code/src/pesistence/KhoJDBCImpl.java
         String USER_NAME = "root";
-        String PASSWORD = "dan123456789.";
+        String PASSWORD = "123456789";
         try {
             connection = DriverManager.getConnection(DB_URL + DB_NAME, USER_NAME, PASSWORD);
         } catch (SQLException e) {

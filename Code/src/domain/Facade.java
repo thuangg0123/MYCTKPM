@@ -53,8 +53,8 @@ public class Facade {
         modelRemote.xemDSHetHan();
     }
 
-    public void sapXepHH(String tieuchi) {
-        modelRemote.sapXepHH(tieuchi);
+    public void sapXepHH(String tieuchi, Boolean isTangDan) {
+        modelRemote.sapXepHH(tieuchi, isTangDan);
     }
 
     public void xuatFile() {

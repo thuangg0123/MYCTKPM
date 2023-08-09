@@ -39,6 +39,7 @@ public class HangSanhSuGUI extends JFrame {
             setTitle("Cập nhật lại thông tin hàng sành sứ");
 
         }
+
         maHangTextField = new JTextField();
         tenHangTextField = new JTextField();
         slTonTextField = new JTextField();
