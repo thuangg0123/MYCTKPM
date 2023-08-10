@@ -1,4 +1,4 @@
-<mxfile host="app.diagrams.net" modified="2023-08-09T15:21:48.825Z" agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/115.0.0.0 Safari/537.36" etag="HRWxypTk5QDxIe8EDEwr" version="21.6.7" type="device" pages="10">
+<mxfile host="app.diagrams.net" modified="2023-08-10T11:02:58.698Z" agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/115.0.0.0 Safari/537.36" etag="jBNs1rIjAR-xVUXz9qwb" version="21.6.7" type="device" pages="10">
   <diagram name="Three-Layer" id="IvYK-KhbxR4ruoPBqwkT">
     <mxGraphModel dx="2261" dy="-1556" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
       <root>
@@ -140,7 +140,7 @@
     </mxGraphModel>
   </diagram>
   <diagram id="UJFOswfq7eEm789lFowT" name="Tổng">
-    <mxGraphModel dx="1103" dy="2522" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1200" pageHeight="1920" math="0" shadow="0">
+    <mxGraphModel dx="1147" dy="2546" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1200" pageHeight="1920" math="0" shadow="0">
       <root>
         <mxCell id="0" />
         <mxCell id="1" parent="0" />
@@ -415,12 +415,6 @@
             <mxPoint y="6" as="offset" />
           </mxGeometry>
         </mxCell>
-        <mxCell id="z9AXC7mnvqE29VglFTxk-11" value="Use" style="endArrow=open;endSize=12;dashed=1;html=1;rounded=0;verticalAlign=middle;" parent="1" source="F5Bj7c-AnEMVMyxfxV7S-20" target="Ysb8wiWJhfAwENJXgaoD-5" edge="1">
-          <mxGeometry width="160" relative="1" as="geometry">
-            <mxPoint x="429.5" y="-1192" as="sourcePoint" />
-            <mxPoint x="601.477272727273" y="-490" as="targetPoint" />
-          </mxGeometry>
-        </mxCell>
         <mxCell id="z9AXC7mnvqE29VglFTxk-12" value="" style="endArrow=diamondThin;endFill=1;endSize=24;html=1;rounded=0;" parent="1" source="8vO1NKAjE3a7ExH4MAR0-20" target="Ysb8wiWJhfAwENJXgaoD-8" edge="1">
           <mxGeometry width="160" relative="1" as="geometry">
             <mxPoint x="550" y="-790" as="sourcePoint" />
@@ -626,7 +620,7 @@
         <mxCell id="Ysb8wiWJhfAwENJXgaoD-8" value="+&amp;nbsp;getInstance(): Facade&lt;br&gt;+ themHH(loaiHang: int, hanghoa: HangHoa): void&lt;br style=&quot;border-color: var(--border-color);&quot;&gt;+ capnhatHH(loaiHang: int, hanghoa: HangHoa): void&lt;br style=&quot;border-color: var(--border-color);&quot;&gt;+ xoaHH(maHang: String): void&lt;br style=&quot;border-color: var(--border-color);&quot;&gt;+&amp;nbsp;xemThongTin1HH(maHang: String): HangHoa&lt;br style=&quot;border-color: var(--border-color);&quot;&gt;+ xemTTAllHH(): List&amp;lt;HangHoa&amp;gt;&lt;br style=&quot;border-color: var(--border-color);&quot;&gt;+ timTTHH(): void&lt;br style=&quot;border-color: var(--border-color);&quot;&gt;+ tinhVAT(hanghoa: HangHoa): Double&lt;br style=&quot;border-color: var(--border-color);&quot;&gt;+&amp;nbsp;tongTonKho(): void&lt;br style=&quot;border-color: var(--border-color);&quot;&gt;+&amp;nbsp;xemDSHetHan(): void&lt;br style=&quot;border-color: var(--border-color);&quot;&gt;+&amp;nbsp;sapXepHH(tieuchi: String, isTangDan: Boolean): void&lt;br style=&quot;border-color: var(--border-color);&quot;&gt;+ xuatFile(): void&lt;br style=&quot;border-color: var(--border-color);&quot;&gt;+ nhapFile(nhucau: int): void&lt;br style=&quot;border-color: var(--border-color);&quot;&gt;+ xoaAll(): void&lt;br&gt;+&amp;nbsp;subscribe(subscriber: Subscriber): void&lt;br style=&quot;border-color: var(--border-color);&quot;&gt;+ unsubscribe(subscriber: Subscriber): void" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;" parent="Ysb8wiWJhfAwENJXgaoD-5" vertex="1">
           <mxGeometry y="78" width="310" height="242" as="geometry" />
         </mxCell>
-        <mxCell id="Ysb8wiWJhfAwENJXgaoD-9" value="Use" style="endArrow=open;endSize=12;dashed=1;html=1;rounded=0;verticalAlign=middle;" parent="1" source="Ysb8wiWJhfAwENJXgaoD-5" target="F5Bj7c-AnEMVMyxfxV7S-1" edge="1">
+        <mxCell id="Ysb8wiWJhfAwENJXgaoD-9" value="Use" style="endArrow=open;endSize=12;dashed=1;html=1;rounded=0;verticalAlign=middle;" parent="1" source="F5Bj7c-AnEMVMyxfxV7S-1" target="Ysb8wiWJhfAwENJXgaoD-5" edge="1">
           <mxGeometry x="-0.6" width="160" relative="1" as="geometry">
             <mxPoint x="894" y="-950" as="sourcePoint" />
             <mxPoint x="692" y="-680" as="targetPoint" />
@@ -687,11 +681,17 @@
         <mxCell id="vC1JZcTiqI9jQouAomHw-2" value="- thucphamButton: JButton&lt;br&gt;- dienmayButton: JButton&lt;br&gt;- sanhsuButton: JButton&lt;br&gt;- panel:&amp;nbsp;JPanel&lt;br&gt;- hangHoa: HangHoa&lt;br&gt;- int: loaiHangHoa" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;" parent="vC1JZcTiqI9jQouAomHw-1" vertex="1">
           <mxGeometry y="68" width="160" height="94" as="geometry" />
         </mxCell>
+        <mxCell id="NUnA9AsR2zdjnfHmPupU-2" value="" style="endArrow=diamondThin;endFill=0;endSize=24;html=1;rounded=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="1" source="Ysb8wiWJhfAwENJXgaoD-5" target="F5Bj7c-AnEMVMyxfxV7S-23">
+          <mxGeometry width="160" relative="1" as="geometry">
+            <mxPoint x="720" y="-788" as="sourcePoint" />
+            <mxPoint x="770" y="-900" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
       </root>
     </mxGraphModel>
   </diagram>
   <diagram id="LIjR1pFVun2-21fVON1k" name="Presentation">
-    <mxGraphModel dx="3585" dy="3875" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1200" pageHeight="1920" math="0" shadow="0">
+    <mxGraphModel dx="1195" dy="2572" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1200" pageHeight="1920" math="0" shadow="0">
       <root>
         <mxCell id="0" />
         <mxCell id="1" parent="0" />

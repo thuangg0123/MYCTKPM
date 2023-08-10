@@ -34,7 +34,6 @@ import presentation.Command.XuatFile;
 //View
 public class QuanLyKhoGUI extends JFrame implements Subscriber {
     private QuanLyKhoController controllerRemote;
-    private Facade facadeRemote;
     private DefaultTableModel tableModel;
     private JTable table;
     private JButton themButton, capnhatButton, xoaButton, timkiemButton, hethanButton, xemAllButton, sapXepButton;
@@ -52,8 +51,7 @@ public class QuanLyKhoGUI extends JFrame implements Subscriber {
         setDefaultCloseOperation(EXIT_ON_CLOSE);
         setLayout(new BorderLayout());
 
-        facadeRemote = Facade.getInstance();
-        facadeRemote.subscribe(this);
+        Facade.getInstance().subscribe(this);
         controllerRemote = new QuanLyKhoController();
 
         JMenuBar menuBar = new JMenuBar();
@@ -251,7 +249,7 @@ public class QuanLyKhoGUI extends JFrame implements Subscriber {
     }
 
     public void xemDSHangHoa() {
-        facadeRemote.xemTTAllHH();
+        Facade.getInstance().xemTTAllHH();
     }
 
     public void themHangHoa() {
@@ -332,15 +330,15 @@ public class QuanLyKhoGUI extends JFrame implements Subscriber {
     }
 
     public HangHoa xemThongTin1HH(String maHang) {
-        return facadeRemote.xemThongTin1HH(maHang);
+        return Facade.getInstance().xemThongTin1HH(maHang);
     }
 
     private void loadTongTonKho() {
-        facadeRemote.tongTonKho();
+        Facade.getInstance().tongTonKho();
     }
 
     public void xemDSHetHan() {
-        facadeRemote.xemDSHetHan();
+        Facade.getInstance().xemDSHetHan();
     }
 
     public void sapXepHH() {
@@ -359,6 +357,6 @@ public class QuanLyKhoGUI extends JFrame implements Subscriber {
 
     
     public double tinhVAT(HangHoa hanghoa) {
-        return facadeRemote.tinhVAT(hanghoa);
+        return Facade.getInstance().tinhVAT(hanghoa);
     }
 }

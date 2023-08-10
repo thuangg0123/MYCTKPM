@@ -37,7 +37,6 @@ public class HangSanhSuGUI extends JFrame {
         } else {
             inputPanel = new JPanel(new GridLayout(8, 2));
             setTitle("Cập nhật lại thông tin hàng sành sứ");
-
         }
 
         maHangTextField = new JTextField();
